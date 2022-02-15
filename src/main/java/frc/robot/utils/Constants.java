@@ -16,21 +16,19 @@ public final class Constants {
   public static final double AUTO_DRIVE_BACK_DISTANCE = 150; // TODO find value
 
   // Drivetrain
+  public static final int drivetrainEncoderResolution = 1; // TODO find value
   public static final double drivetrainRateLimNUM = 0.5; // TODO find best value
   public static final double drivetrainMaxSpeed = 0.5; // TODO find best value
   public static final double drivetrainMaxTurn = 0.5; // TODO find best value
   public static final double drivetrainGearRatio = 1; // TODO find value
-  public static final int drivetrainEncoderResolution = 1; // TODO find value
   public static final double drivetrainWheelDiameter = 1; // TODO find value
   public static final double drivetrainWheelCircumference =  drivetrainWheelDiameter * Math.PI;
   public static final double drivetrainDistancePerPulse = drivetrainWheelCircumference / drivetrainGearRatio / drivetrainEncoderResolution;
 
-  // Intake
-
   // Shooter
-  public static final double shooterRateLimNUM = 0.5; // TODO find best value
   public static final int shooterForwardChannel = 0; // TODO find value
   public static final int shooterBackwardChannel = 1; // TODO find value
+  public static final double shooterRateLimNUM = 0.5; // TODO find best value
 
   // Motor IDs
   public static final int drivetrainLeft1ID = 0; // TODO find value
@@ -53,19 +51,19 @@ public final class Constants {
   public static final int shooterEncoderChannelB = 0; // TODO find value
 
   // Pneumatics
-  public static final PneumaticsModuleType pneumaticsModuleType = PneumaticsModuleType.CTREPCM;
   public static final int drivetrainLeftForwardChannel = 0; // TODO find value
   public static final int drivetrainLeftBackwardChannel = 0; // TODO find value
   public static final int drivetrainRightForwardChannel = 0; // TODO find value
   public static final int drivetrainRightBackwardChannel = 0; // TODO find value
-  public static final Value drivetrainLowGearValue = Value.kForward; // TODO find value
-  public static final Value drivetrainHighGearValue = Value.kReverse; // TODO find value
   public static final int intakeShifter1ForwardID = 0; // TODO find value
   public static final int intakeShifter1BackwardID = 0; // TODO find value
   public static final int intakeShifter2ForwardID = 0; // TODO find value
   public static final int intakeShifter2BackwardID = 0; // TODO find value
   public static final Value intakeExtendedValue = Value.kForward; // TODO find value
   public static final Value intakeRetractedValue = Value.kReverse; // TODO find value
+  public static final Value drivetrainLowGearValue = Value.kForward; // TODO find value
+  public static final Value drivetrainHighGearValue = Value.kReverse; // TODO find value
+  public static final PneumaticsModuleType pneumaticsModuleType = PneumaticsModuleType.CTREPCM;
 
   private Constants() { }
 }

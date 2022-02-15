@@ -5,7 +5,7 @@ import frc.robot.subsystems.Magazine;
 import frc.robot.subsystems.Shooter;
 
 public class ShootLowGoal extends ParallelCommandGroup {
-    public ShootLowGoal(Shooter shooter, Magazine magazine){
-        addRequirements(shooter, magazine);
-    }
+  public ShootLowGoal(Shooter shooter, Magazine magazine){
+    addRequirements(shooter, magazine);
+  }
 }
