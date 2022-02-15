@@ -59,6 +59,9 @@ public class RobotContainer {
   // Controls
   private final ControlBoard m_controlBoard;
 
+  //TODO change speed
+  // private final Command auto = new DriveBackAuto(m_DriveTrainSub, Constants.DRIVE_AUTO_SPEED, Constants.AUTO_DRIVE_BACK_DISTANCE);
+
   public enum Axis {
     kLeftX(0),
     kRightX(4),
@@ -112,7 +115,7 @@ public class RobotContainer {
     m_DriveTrainCommand = m_DriveTrainSub.isPresent() ? new DrivetrainCommand(m_DriveTrainSub.get(), () -> { return getMove(); }, () -> { return getTurn(); }) : null;
     m_intakeCommand = m_IntakeSub.isPresent() ? new IntakeCommand(m_IntakeSub.get(), () -> getIntake()) : null;
     m_revShooter = m_shooter.isPresent() ? new RevShooter(m_shooter.get(), 0) : null;
-    m_runFlywheel = m_shooter.isPresent() ? new RunFlywheel(m_shooter.get()) : null;
+    m_runFlywheel = m_shooter.isPresent() ? new RunFlywheel(m_shooter.get(), () -> 1) : null;
     m_runMag = m_magazine.isPresent() ? new RunMag(m_magazine.get(), () -> 0) : null;
     m_shootLowGoal = null; // TODO: idk what this is
 
