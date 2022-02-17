@@ -27,9 +27,9 @@ public class ButtonBox {
       middleRed = new JoystickButton(m_joystick, 4);
       bottomWhite = new JoystickButton(m_joystick, 5);
       bottomRed = new JoystickButton(m_joystick, 16);
-      green = new JoystickButton(m_joystick, 7);
-      yellow = new JoystickButton(m_joystick, 15);
       bigWhite = new JoystickButton(m_joystick, 3);
       bigRed = new JoystickButton(m_joystick, 14);
+      green = new JoystickButton(m_joystick, 7);
+      yellow = new JoystickButton(m_joystick, 15);
     }
 }
