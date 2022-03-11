@@ -23,9 +23,9 @@ public class CompresserManager  extends NTSubsystem {
     m_closedLoopControlEntry = m_networkTable.getEntry("closed loop control");
   }
     
-  public void periodic() {
-    Logger.getGlobal().info("Switch: " + (m_compressor.getPressureSwitchValue() ? "low" : "high"));
-  }
+  // public void periodic() {
+  //   Logger.getGlobal().info("Switch: " + (m_compressor.getPressureSwitchValue() ? "low" : "high"));
+  // }
       
   public void setClosedLoopControl(boolean wantsClosedLoopControl) {
     // m_compressor.setClosedLoopControl(wantsClosedLoopControl);

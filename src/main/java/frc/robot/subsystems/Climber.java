@@ -1,5 +1,7 @@
 package frc.robot.subsystems;
 
+import java.util.logging.Level;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
@@ -29,15 +31,17 @@ public class Climber extends NTSubsystem {
   public void setClimbSpeed(double speed){ 
     if(toplimitSwitch.get() == true && speed < 0){
       m_rightMotor.set(ControlMode.PercentOutput, 0);
+      m_logger.log(Level.ALL, "limit switch triped while going up");
     } else if (bottomlimitSwitch.get() == false && speed > 0) {
       m_rightMotor.set(ControlMode.PercentOutput, 0);
+      m_logger.log(Level.ALL, "limit switch tried while trying to go down");
     } else {
       m_rightMotor.set(ControlMode.PercentOutput, speed);
-      m_logger.fine("setclimbspeed: " + speed);
-    }
+      m_logger.fine("setclimbspeed: " + speed); 
+      m_logger.log(Level.ALL, "" + speed );
     
   }
-    
+}
     
 }
 

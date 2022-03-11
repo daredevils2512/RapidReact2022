@@ -134,7 +134,7 @@ public class RobotContainer {
     // m_auto = m_drivetrainSub.isPresent() ? new Autonomous(m_drivetrainSub.get(), Constants.DRIVE_AUTO_SPEED, Constants.AUTO_DRIVE_BACK_DISTANCE, m_runFlywheel, m_runMag, 234) : null; //TODO change shooter value 
     
     m_autoDriveBackAndShoot = m_drivetrainSub.isPresent() && m_shooter.isPresent() && m_magazine.isPresent() ?
-      new RevShooterAutoCommand(m_shooter.get()).withTimeout(6).andThen(new RunMagCommand(m_magazine.get(),()-> 1).withTimeout(5).alongWith(new IntakeCommand(m_intakeSub.get(), ()-> 1)).withTimeout(5)).andThen( new DriveBackAutoCommand(m_drivetrainSub.get(), Constants.DRIVE_AUTO_SPEED, Constants.AUTO_DRIVE_BACK_DISTANCE).withTimeout(3)) : null;  
+      new RevShooterAutoCommand(m_shooter.get()).withTimeout(5).andThen(new RunMagCommand(m_magazine.get(),()-> 1).withTimeout(2).alongWith(new IntakeCommand(m_intakeSub.get(), ()-> 1)).withTimeout(2)).andThen(new DriveShiftCommand(m_drivetrainSub.get() )).andThen( new DriveBackAutoCommand(m_drivetrainSub.get(), Constants.DRIVE_AUTO_SPEED, Constants.AUTO_DRIVE_BACK_DISTANCE)) : null;  
    
       m_autoDriveBack = m_drivetrainSub.isPresent() ? new DriveBackAutoCommand(m_drivetrainSub.get(), Constants.DRIVE_AUTO_SPEED, Constants.AUTO_DRIVE_BACK_DISTANCE) : null;
     m_intakeCommand = m_intakeSub.isPresent() ? new IntakeCommand(m_intakeSub.get(), ()-> 1) : null;
