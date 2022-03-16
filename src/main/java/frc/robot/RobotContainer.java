@@ -73,9 +73,10 @@ public class RobotContainer {
   private final Command m_revShooter2;
   // private final Command m_runFlywheel;
   private Command m_runMag;
+  private Command m_runMagBack;
   private final Command m_shootLowGoal;
 
-  // private final Command m_aim;
+   private final Command m_aim;
   // private final Command m_FindRange;
 
   private final Limelight m_limelight;
@@ -138,13 +139,15 @@ public class RobotContainer {
    
       m_autoDriveBack = m_drivetrainSub.isPresent() ? new DriveBackAutoCommand(m_drivetrainSub.get(), Constants.DRIVE_AUTO_SPEED, Constants.AUTO_DRIVE_BACK_DISTANCE) : null;
     m_intakeCommand = m_intakeSub.isPresent() ? new IntakeCommand(m_intakeSub.get(), ()-> 1) : null;
-    m_revShooter = m_shooter.isPresent() ? new RevShooterCommand(m_shooter.get(), .75) : null;
+    m_revShooter = m_shooter.isPresent() ? new RevShooterCommand(m_shooter.get(), .90) : null;
     m_revShooter2 = m_shooter.isPresent()?new RevShooterCommand(m_shooter.get(), .25):null;
     // m_runFlywheel = m_shooter.isPresent() ? new RunFlywheel(m_shooter.get()) : null;
     m_runMag = m_magazine.isPresent() ? new RunMagCommand(m_magazine.get(), () -> 1) : null;
+    m_runMagBack = m_magazine.isPresent() ? new RunMagCommand(m_magazine.get(), () -> -1) :null;
+   
     m_shootLowGoal = null; // TODO: idk what this is
 
-    // m_aim = m_drivetrainSub.isPresent() ? new Aim(m_drivetrainSub.get(), m_limelight):null;
+     m_aim = m_drivetrainSub.isPresent() ? new Aim(m_drivetrainSub.get(), m_limelight):null;
     // m_FindRange = m_drivetrainSub.isPresent() ? new FindRange(m_drivetrainSub.get()) :null;
 
     // m_runFlywheel = m_shooter.isPresent() ? new RunFlywheelCommand(m_shooter.get()) : null;
@@ -193,9 +196,10 @@ public class RobotContainer {
     if (m_shooter.isPresent()) m_controlBoard.extreme.sideButton.whileHeld(m_revShooter);
     if (m_shooter.isPresent()) m_controlBoard.extreme.baseBackLeft.whileHeld(m_revShooter2);
     // if (m_shooter.isPresent()) m_controlBoard.buttonBox.topWhite.whileHeld(m_runFlywheel);
+    if (m_magazine.isPresent()) m_controlBoard.extreme.baseBackRight.whileHeld(m_runMagBack);
     if (m_magazine.isPresent()) m_controlBoard.extreme.trigger.whileHeld(m_runMag);
 
-    // if (m_drivetrainSub.isPresent()) m_controlBoard.extreme.joystickBottomLeft.whileHeld(m_aim);
+    if (m_drivetrainSub.isPresent()) m_controlBoard.extreme.joystickBottomLeft.whileHeld(m_aim);
     // if (m_drivetrainSub.isPresent()) m_controlBoard.extreme.joystickBottomRight.whileHeld(m_FindRange); 
   }
 

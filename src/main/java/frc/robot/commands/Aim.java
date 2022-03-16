@@ -39,7 +39,7 @@ public class Aim extends CommandBase{
   @Override
   public void execute() {
     
-    double m_aimAjust = Kp * m_tx.getDouble(0); 
+    double m_aimAjust = Kp * m_limelight.tx(); 
    m_drivetrain.arcadeDrive(0, m_aimAjust);
   }
 
