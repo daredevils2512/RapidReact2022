@@ -3,8 +3,7 @@ package frc.robot.utils;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
-/**
- * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
+/** The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants. This class should not be used for any other purpose. All constants should be declared
  * globally (i.e. public static). Do not put anything functional in this class.
  *
@@ -87,22 +86,20 @@ public final class Constants {
   public static final int DRIVETRAIN_LEFT_ENCODER_B = 2; 
   public static final int DRIVETRAIN_RIGHT_ENCODER_A = 3;
   public static final int DRIVETRAIN_RIGHT_ENCODER_B = 4;
-  // public static final int shooterEncoderChannelA = 0; // TODO find value
-  // public static final int shooterEncoderChannelB = 0; // TODO find value
 
   // Pneumatics
-  public static final int DRIVETRAIN_LEFT_FORWARD_CHANNEL = 0; // TODO find value
-  public static final int DRIVETRAIN_LEFT_BACKWARD_CHANNEL = 1; // TODO find value
-  public static final int DRIVETRAIN_RIGHT_FORWARD_CHANNEL = 2; // TODO find value
-  public static final int DRIVETRAIN_RIGHT_BACKWARD_CHANNEL = 3; // TODO find value
-  public static final int INTAKE_SHIFTER_FORWARD_ID1 = 4; // TODO find value
-  public static final int INTAKE_SHIFTER_BACKWARD_ID1 = 5; // TODO find value
+  public static final int DRIVETRAIN_LEFT_FORWARD_CHANNEL = 0; 
+  public static final int DRIVETRAIN_LEFT_BACKWARD_CHANNEL = 1; 
+  public static final int DRIVETRAIN_RIGHT_FORWARD_CHANNEL = 2; 
+  public static final int DRIVETRAIN_RIGHT_BACKWARD_CHANNEL = 3;
+  public static final int INTAKE_SHIFTER_FORWARD_ID1 = 4; 
+  public static final int INTAKE_SHIFTER_BACKWARD_ID1 = 5;
   public static final int INTAKE_SHIFTER_FORWARD_ID2= 0; // TODO find value
   public static final int INTAKE_SHIFTER_BACKWARD_ID2 = 0; // TODO find value
-  public static final Value INTAKE_EXTENDED_VALUE = Value.kForward; // TODO find value
-  public static final Value INTAKE_RETRACTED_VALUE = Value.kReverse; // TODO find value
-  public static final Value DRIVETRAIN_LOW_GEAR_VALUE = Value.kForward; // TODO find value
-  public static final Value DRIVETRAIN_HIGH_GEAR_VALUE = Value.kReverse; // TODO find value
+  public static final Value INTAKE_EXTENDED_VALUE = Value.kForward; 
+  public static final Value INTAKE_RETRACTED_VALUE = Value.kReverse;
+  public static final Value DRIVETRAIN_LOW_GEAR_VALUE = Value.kForward; 
+  public static final Value DRIVETRAIN_HIGH_GEAR_VALUE = Value.kReverse;
   public static final PneumaticsModuleType PNEUMATICS_MODULE_TYPE = PneumaticsModuleType.CTREPCM;
 
   // LEDs

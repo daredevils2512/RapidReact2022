@@ -70,7 +70,7 @@ public class RobotContainer {
 
   // Commands
     // Autos
-  private final Command m_autoDriveBack;
+  private final Command m_autoDrive;
   private final Command m_autoShoot;
   private final Command m_autoFull;
     // Climber
@@ -141,7 +141,7 @@ public class RobotContainer {
 
     // Commands
       // Autos
-    m_autoDriveBack = AutoCommands.autoDriveBack(m_drivetrain, Constants.DRIVE_AUTO_SPEED, Constants.AUTO_DRIVE_BACK_TIME);
+    m_autoDrive = AutoCommands.autoDriveBack(m_drivetrain, Constants.DRIVE_AUTO_SPEED, Constants.AUTO_DRIVE_BACK_TIME);
     m_autoShoot = AutoCommands.autoShoot(m_shooter, m_magazine, m_intake, Constants.SHOOT_AUTO_SPEED);
     m_autoFull = AutoCommands.fullAuto(m_drivetrain, Constants.DRIVE_AUTO_SPEED, Constants.AUTO_DRIVE_BACK_TIME, m_shooter, m_magazine, m_intake, Constants.SHOOT_AUTO_SPEED);
       // Compressor
