@@ -3,6 +3,7 @@ package frc.robot;
 import java.util.logging.Level;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.XboxController;
@@ -11,6 +12,9 @@ import frc.robot.Vision.Limelight;
 import frc.robot.Vision.PhysicalLimelight;
 import frc.robot.Vision.Pipeline;
 import frc.robot.io.NTButton;
+import frc.robot.sensors.DareDigitalInput;
+import frc.robot.sensors.DummyDigitalInput;
+import frc.robot.sensors.PhysicalDigitalInput;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.CompresserManager;
 import frc.robot.subsystems.Drivetrain;
@@ -54,6 +58,9 @@ public class RobotContainer {
 
   // Logging
   private final LoggingManager m_logManager;
+
+  // Sensors
+  private final DareDigitalInput m_photoEye;
 
   // Subsystems
   private final Drivetrain m_drivetrainSub;
@@ -122,6 +129,7 @@ public class RobotContainer {
     m_shooter = Constants.SHOOTER_ENABLED ? new PhysicalShooter() : new DummyShooter();
     m_limelight = Constants.LIMELIGHT_ENABLED ? new PhysicalLimelight(Pipeline.N_E_D) : new DummyLimelight();
     m_compressor = Constants.COMPRESSOR_ENABLED ? new PhysicalCompressor() : new DummyCompressor();
+    m_photoEye = Constants.PHOTO_EYE_ENABLED ? new PhysicalDigitalInput(Constants.PHOTO_EYE_PORT) : new DummyDigitalInput();
 
     // Define Commands
     m_driveShift = Commands.driveShifters(m_drivetrainSub);
