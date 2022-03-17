@@ -1,8 +1,9 @@
 package frc.robot.subsystems.interfaces;
 
 import edu.wpi.first.wpilibj.util.Color;
+import edu.wpi.first.wpilibj2.command.Subsystem;
 
-public interface LEDManager {
+public interface LEDManager extends Subsystem {
   /** @return The color value of the LEDs */
   Color getColor();
 

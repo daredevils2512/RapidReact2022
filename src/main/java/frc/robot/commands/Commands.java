@@ -77,6 +77,6 @@ public final class Commands {
   }
 
   public static Command toggleLEDs(LEDManager LED) {
-    return new RunCommand(() -> LED.toggleLEDs());
+    return new RunCommand(() -> LED.toggleLEDs(), LED);
   }
 }
