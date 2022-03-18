@@ -76,6 +76,10 @@ public final class Commands {
     return new RunCommand(() -> mag.moveBalls(speed.getAsDouble()));
   }
 
+  /** Toggles the LEDs on and off
+   * @param LED The LED subsystem to use
+   * @return The command to be used when called.
+   */
   public static Command toggleLEDs(LEDManager LED) {
     return new RunCommand(() -> LED.toggleLEDs(), LED);
   }
