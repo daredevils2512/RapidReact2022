@@ -6,8 +6,9 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
 
 public class NTSubsystem extends LoggingSubsystem {
-
+  // THE Network Table
   protected NetworkTable m_table;
+
   /** Creates a new NTsubsystem.
    * @param name sets name of table
    * @param logLevel set level for subsystem to display logs at (default: WARNING)
@@ -26,7 +27,6 @@ public class NTSubsystem extends LoggingSubsystem {
   }
 
   @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-  }
+  /** Runs code periodically */
+  public void periodic() { }
 }

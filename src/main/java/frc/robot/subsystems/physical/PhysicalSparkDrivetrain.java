@@ -9,8 +9,8 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
-import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.NTSubsystem;
+import frc.robot.subsystems.interfaces.Drivetrain;
 import frc.robot.utils.Constants;
 
 public class PhysicalSparkDrivetrain extends NTSubsystem implements Drivetrain {
@@ -40,7 +40,6 @@ public class PhysicalSparkDrivetrain extends NTSubsystem implements Drivetrain {
   // Rate limiter
   private final SlewRateLimiter m_rateLim;
   private final SlewRateLimiter m_rateLimTurn;
-
 
   public PhysicalSparkDrivetrain() {
     super("Drivetrain");
@@ -82,7 +81,6 @@ public class PhysicalSparkDrivetrain extends NTSubsystem implements Drivetrain {
     move = m_rateLim.calculate(move);
     turn = m_rateLimTurn.calculate(turn);
     m_drive.arcadeDrive((move) * Constants.DRIVETRAIN_MAX_SPEED, (turn) * Constants.DRIVETRAIN_MAX_TURN);
-    
   }
 
   @Override
@@ -90,13 +88,11 @@ public class PhysicalSparkDrivetrain extends NTSubsystem implements Drivetrain {
     m_leftShifter.set(wantsLowGear ? Constants.DRIVETRAIN_LOW_GEAR_VALUE : Constants.DRIVETRAIN_HIGH_GEAR_VALUE);
     m_rightShifter.set(wantsLowGear ? Constants.DRIVETRAIN_LOW_GEAR_VALUE : Constants.DRIVETRAIN_HIGH_GEAR_VALUE);
     m_logger.fine("set low gear: " + wantsLowGear);
-    
   }
 
   @Override
   public void toggleShifters() {
     setLowGear(!getLowGear());
-    
   }
 
   @Override
@@ -137,21 +133,8 @@ public class PhysicalSparkDrivetrain extends NTSubsystem implements Drivetrain {
   }
 
   @Override
-  public double getDistance() {
-    // TODO Auto-generated method stub
+  public double getDistance() { 
     return 0;
-  }
-
-  @Override
-  public void aimLeft(double speed) {
-    // TODO Auto-generated method stub
-    
-  }
-
-  @Override
-  public void aimRight(double speed) {
-    // TODO Auto-generated method stub
-    
   }
   
 }

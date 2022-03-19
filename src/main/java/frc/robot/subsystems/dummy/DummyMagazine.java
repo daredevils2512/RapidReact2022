@@ -1,13 +1,10 @@
 package frc.robot.subsystems.dummy;
 
-import frc.robot.subsystems.Magazine;
+import frc.robot.subsystems.interfaces.Magazine;
 
 public class DummyMagazine implements Magazine {
 
   @Override
-  public void moveBalls(double speed) {
-    // TODO Auto-generated method stub
-    
-  }
+  public void moveBalls(double speed) { }
   
 }

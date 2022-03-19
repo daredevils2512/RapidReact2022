@@ -10,8 +10,8 @@ public class LoggingSubsystem extends SubsystemBase {
   public String name;
 
   /** Creates a new LoggingSubsystem. 
-   * @param name sets name of logger
-   * @param logLevel set level for subsystem to display logs at (default: WARNING)
+   * @param name Sets name of logger
+   * @param logLevel Set level for subsystem to display logs at (default: WARNING)
   */
   public LoggingSubsystem(String name, Level logLevel) {
     this.name = name;
@@ -23,7 +23,7 @@ public class LoggingSubsystem extends SubsystemBase {
   }
   
   /** Creates a new LoggingSubsystem. 
-   * @param name sets name of logger
+   * @param name Sets name of logger
   */
   public LoggingSubsystem(String name) {
     this.name = name;
@@ -39,7 +39,6 @@ public class LoggingSubsystem extends SubsystemBase {
   }
 
   @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-  }
+  /** Periodically runs code */
+  public void periodic() { }
 }

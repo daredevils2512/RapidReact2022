@@ -2,10 +2,9 @@ package frc.robot.subsystems.physical;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-
 import edu.wpi.first.wpilibj.DigitalInput;
-import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.NTSubsystem;
+import frc.robot.subsystems.interfaces.Climber;
 import frc.robot.utils.Constants;
 
 public class PhysicalClimber extends NTSubsystem implements Climber {
@@ -15,7 +14,7 @@ public class PhysicalClimber extends NTSubsystem implements Climber {
   DigitalInput toplimitSwitch = new DigitalInput(7);
   DigitalInput bottomlimitSwitch = new DigitalInput(6);
 
-  public PhysicalClimber (){
+  public PhysicalClimber() {
     super("ClimberSubsystem");
 
     // Make Motors
@@ -25,11 +24,9 @@ public class PhysicalClimber extends NTSubsystem implements Climber {
     m_leftMotor.setInverted(true);
   }
 
-  /** Sets the speed of the climbing motors
-   * @param speed The speed of the motors
-   */
+  @Override
   public void setClimbSpeed(double speed){ 
-    if(toplimitSwitch.get() == true && speed < 0){
+    if (toplimitSwitch.get() == true && speed < 0){
       m_rightMotor.set(ControlMode.PercentOutput, 0);
     } else if (bottomlimitSwitch.get() == false && speed > 0) {
       m_rightMotor.set(ControlMode.PercentOutput, 0);
