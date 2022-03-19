@@ -65,7 +65,7 @@ public final class Commands {
    * @return The command to be used when called.
    */
   public static Command revShooter(Shooter shooter, double speed) {
-    return new FunctionalCommand(() -> { }, () -> shooter.setRPM(speed), (interrupted) -> shooter.setRPM(0.0), () -> false, shooter);
+    return new FunctionalCommand(() -> { }, () -> shooter.spitBalls(speed), (interrupted) -> shooter.setRPM(0.0), () -> false, shooter);
   }
 
   /** Runs the magazine motors
