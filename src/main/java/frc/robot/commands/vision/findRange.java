@@ -5,13 +5,10 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.interfaces.Drivetrain;
 import frc.robot.utils.Constants;
-import frc.robot.vision.Limelight;
-import frc.robot.vision.LimelightLEDMode;
 
 public class findRange extends CommandBase {
   private final NetworkTable m_limelightTable;
 
-  private final Limelight m_limelight;
   private final Drivetrain m_drivetrain;
 
   private double m_ty;
@@ -21,10 +18,9 @@ public class findRange extends CommandBase {
   private double m_distanceVariation;
   private double m_driveAjust;
   
-  public findRange(Limelight limelight, Drivetrain drivetrain) {
+  public findRange(Drivetrain drivetrain) {
     m_limelightTable = NetworkTableInstance.getDefault().getTable("limelight");
 
-    m_limelight = limelight;
     m_drivetrain = drivetrain;
   }
 
@@ -40,8 +36,6 @@ public class findRange extends CommandBase {
 
   @Override
   public void execute() {
-    m_limelight.setLEDMode(LimelightLEDMode.ON);
-
     m_drivetrain.arcadeDrive(m_driveAjust, 0.0);
   }
 
@@ -49,7 +43,6 @@ public class findRange extends CommandBase {
   public void end(boolean interrupted) {
     if (interrupted) {
       m_drivetrain.arcadeDrive(0.0, 0.0);
-      m_limelight.setLEDMode(LimelightLEDMode.OFF);
     }
   }
 
