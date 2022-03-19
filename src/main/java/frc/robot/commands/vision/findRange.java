@@ -30,8 +30,6 @@ public class findRange extends CommandBase {
 
   @Override
   public void initialize() {
-    m_limelight.setLEDMode(LimelightLEDMode.ON);
-
     m_ty = m_limelightTable.getEntry("ty").getDouble(0);
     m_angleToGoalDegrees = Constants.LIMELIGHT_MOUNT_ANGLE_DEGREES + m_ty;
     m_angleToGoalRadians = m_angleToGoalDegrees * (3.14159 / 180.0);
@@ -42,6 +40,8 @@ public class findRange extends CommandBase {
 
   @Override
   public void execute() {
+    m_limelight.setLEDMode(LimelightLEDMode.ON);
+
     m_drivetrain.arcadeDrive(m_driveAjust, 0.0);
   }
 

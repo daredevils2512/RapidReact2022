@@ -26,14 +26,14 @@ public class aim extends CommandBase {
 
   @Override
   public void initialize() {
-    m_limelight.setLEDMode(LimelightLEDMode.ON);
-
     m_tx = m_limelightTable.getEntry("tx").getDouble(0);
     m_aim = m_tx * Constants.K_P;
   }
 
   @Override
   public void execute() {
+    m_limelight.setLEDMode(LimelightLEDMode.ON);
+    
     m_drivetrain.arcadeDrive(0.0, m_aim);
   }
 
