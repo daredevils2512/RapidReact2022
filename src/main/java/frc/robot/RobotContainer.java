@@ -12,7 +12,10 @@ import frc.robot.subsystems.CompresserManager;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Intake;
 import frc.robot.commands.Commands;
-import frc.robot.commands.VisionCommands;
+import frc.robot.commands.auto.autoDriveBack;
+import frc.robot.commands.auto.autoShoot;
+import frc.robot.commands.vision.aim;
+import frc.robot.commands.vision.findRange;
 import frc.robot.commands.AutoCommands;
 import frc.robot.subsystems.Magazine;
 import frc.robot.subsystems.Shooter;
@@ -138,12 +141,12 @@ public class RobotContainer {
     m_revShooterFast = Commands.revShooter(m_shooter, Constants.SHOOTER_FAST_SPEED);
     m_revShooterSlow = Commands.revShooter(m_shooter, Constants.SHOOTER_SLOW_SPEED);
 
-    m_autoDriveBack = AutoCommands.autoDriveBack(m_drivetrainSub, Constants.DRIVE_AUTO_SPEED, Constants.AUTO_DRIVE_BACK_TIME);
-    m_autoShoot = AutoCommands.autoShoot(m_shooter, m_magazine, m_intakeSub, Constants.SHOOT_AUTO_SPEED);
-    m_autoDriveBackAndShoot = AutoCommands.fullAuto(m_drivetrainSub, Constants.DRIVE_AUTO_SPEED, Constants.AUTO_DRIVE_BACK_TIME, m_shooter, m_magazine, m_intakeSub, Constants.SHOOT_AUTO_SPEED);
+    m_autoDriveBack = new autoDriveBack(m_drivetrainSub, Constants.DRIVE_AUTO_SPEED, Constants.AUTO_DRIVE_BACK_DISTANCE);
+    m_autoShoot = new autoShoot(m_shooter, m_magazine, m_intakeSub, Constants.SHOOT_AUTO_SPEED);
+    m_autoDriveBackAndShoot = AutoCommands.fullAuto(m_drivetrainSub, Constants.DRIVE_AUTO_SPEED, Constants.AUTO_DRIVE_BACK_DISTANCE, m_shooter, m_magazine, m_intakeSub, Constants.SHOOT_AUTO_SPEED);
 
-    m_aim = VisionCommands.Aim(m_drivetrainSub, m_limelight);
-    m_FindRange = VisionCommands.findRange(m_drivetrainSub, m_limelight);
+    m_aim = new aim(m_limelight, m_drivetrainSub);
+    m_FindRange = new findRange(m_limelight, m_drivetrainSub);
 
     // Define
     m_logManager = new LoggingManager();
