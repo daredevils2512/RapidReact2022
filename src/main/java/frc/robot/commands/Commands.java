@@ -20,7 +20,7 @@ public final class Commands {
    * @return The command to be used when called.
    */
   public static Command intakeShifters(Intake intake) {
-    return new RunCommand(() -> intake.toggleExtended());
+    return new InstantCommand(() -> intake.toggleExtended());
   }
 
   /** Runs the intake motors
