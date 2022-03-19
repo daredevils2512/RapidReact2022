@@ -1,4 +1,4 @@
-package frc.robot.Vision;
+package frc.robot.vision;
 
 public enum Pipeline {
   N_E_D(0);

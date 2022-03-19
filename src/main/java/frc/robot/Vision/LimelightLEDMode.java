@@ -1,4 +1,4 @@
-package frc.robot.Vision;
+package frc.robot.vision;
 
 import java.util.EnumSet;
 import java.util.HashMap;
