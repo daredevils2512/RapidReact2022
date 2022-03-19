@@ -1,5 +1,8 @@
 package frc.robot.subsystems.interfaces;
 
+import javax.measure.Quantity;
+import javax.measure.quantity.Length;
+
 import edu.wpi.first.wpilibj2.command.Subsystem;
 
 public interface Drivetrain extends Subsystem {
@@ -17,29 +20,21 @@ public interface Drivetrain extends Subsystem {
   /** Toggles the shifters */
   void toggleShifters();
 
-  /** 
-   * @return Left encoder
-  */
+  /** @return Left encoder */
   int getLeftEncoder();
 
-  /** 
-   * @return Right encoder
-  */
+  /** @return Right encoder */
   int getRightEncoder();
 
-  /** 
-   * @return Right distance
-   */
-  double getRightDistance();
+  /** @return Right distance */
+  Quantity<Length> getRightDistance();
 
-  /** 
-   * @return Left distance
-   */
-  double getLeftDistance();
+  /** @return Left distance */
+  Quantity<Length> getLeftDistance();
 
   /** @return True if shifter are in low gear */
   boolean getLowGear();
 
   /** @return Distance that the drivetrain has moved */
-  double getDistance();
+  Quantity<Length> getDistance();
 }

@@ -1,7 +1,15 @@
 package frc.robot.utils;
 
+import javax.measure.Quantity;
+import javax.measure.quantity.Angle;
+import javax.measure.quantity.Length;
+import javax.measure.quantity.Time;
+
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import si.uom.SI;
+import systems.uom.common.USCustomary;
+import tech.units.indriya.quantity.Quantities;
 
 /** The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants. This class should not be used for any other purpose. All constants should be declared
@@ -26,18 +34,18 @@ public final class Constants {
   // Auto
   public static final double DRIVE_AUTO_SPEED = 0.5; // TODO: Find value
   public static final double SHOOT_AUTO_SPEED = 1; // TODO: Find value
-  public static final double AUTO_DRIVE_BACK_DISTANCE = 150; // Inches // TODO: No longer used
-  public static final double AUTO_DRIVE_BACK_TIME = 0; // TODO: calculate time based on distance and speed!!!!!!!!!
+  public static final Quantity<Length> AUTO_DRIVE_BACK_DISTANCE = Quantities.getQuantity(150, SI.METRE); // Inches // TODO: No longer used
+  public static final Quantity<Time> AUTO_DRIVE_BACK_TIME = Quantities.getQuantity(0, SI.SECOND); // TODO: calculate time based on distance and speed!!!!!!!!!
 
   // Drivetrain
   public static final int DRIVETRAIN_ENCODER_RESOLUTION = 1; // TODO find value
   public static final double DRIVETRAIN_RATELIM_VALUE = 15;
   public static final double DRIVETRAIN_MAX_SPEED = .75; 
   public static final double DRIVETRAIN_MAX_TURN = .75; 
-  public static final double DRIVETRAIN_GEAR_RATIO = 1; // TODO find vale
-  public static final double DRIVETRAIN_WHEEL_DIAMETER = 6;
-  public static final double DRIVETRAIN_WHEEL_CIRCUMFERENCE =  DRIVETRAIN_WHEEL_DIAMETER * Math.PI;
-  public static final double DRIVETRAIN_DISTANCE_PER_PULSE = DRIVETRAIN_WHEEL_CIRCUMFERENCE / DRIVETRAIN_GEAR_RATIO / DRIVETRAIN_ENCODER_RESOLUTION;
+  public static final double DRIVETRAIN_GEAR_RATIO = 1; // TODO find value
+  public static final Quantity<Length> DRIVETRAIN_WHEEL_DIAMETER = Quantities.getQuantity(6, USCustomary.INCH);
+  public static final Quantity<Length> DRIVETRAIN_WHEEL_CIRCUMFERENCE =  DRIVETRAIN_WHEEL_DIAMETER.multiply(Math.PI);
+  public static final Quantity<Length> DRIVETRAIN_DISTANCE_PER_PULSE = DRIVETRAIN_WHEEL_CIRCUMFERENCE.divide(DRIVETRAIN_GEAR_RATIO).divide(DRIVETRAIN_ENCODER_RESOLUTION);
 
   // Shooter
   public static final int SHOOTER_ENCODER_RESOLUTION = 0; // TODO: find value
@@ -51,7 +59,6 @@ public final class Constants {
   public static final double SHOOTER_P = 0; // TODO: Find value
   public static final double SHOOTER_I = 0; // TODO: Find value
   public static final double SHOOTER_D = 0; // TODO: Find value
-  
 
   // climber
   public static final double CLIMBER_SPEED = 1;
@@ -71,14 +78,14 @@ public final class Constants {
   public static final int SHOOTER_ID = 9; 
 
   // Vision, Baby! 
-  // how many degrees back is your limelight rotated from perfectly vertical? TODO:FIX THIS STUFF
-  public static final double LIMELIGHT_MOUNT_ANGLE_DEGREES = 26.39;
+  // how many degrees back is your limelight rotated from perfectly vertical? TODO: FIX THIS STUFF
+  public static final Quantity<Angle> LIMELIGHT_MOUNT_ANGLE = Quantities.getQuantity(26.39, USCustomary.DEGREE_ANGLE);
   // distance from the center of the Limelight lens to the floor TODO: THIS STUFF WACK
-  public static final double LIMELIGHT_LENS_HEIGHT = 26; // inches
+  public static final Quantity<Length> LIMELIGHT_LENS_HEIGHT = Quantities.getQuantity(26, USCustomary.INCH);
   // distance from the target to the floor
-  public static final double GOAL_HEIGHT = 104; // inches
+  public static final Quantity<Length> GOAL_HEIGHT = Quantities.getQuantity(104, USCustomary.INCH); 
   //desired distance from the target
-  public static final double DESIRED_DISTANCE = 66.;
+  public static final Quantity<Length> DESIRED_DISTANCE = Quantities.getQuantity(66, USCustomary.INCH);
   public static final double K_P = 0.2;
 
   // Encoder IDs

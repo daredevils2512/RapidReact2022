@@ -1,5 +1,8 @@
 package frc.robot.subsystems.dummy;
 
+import javax.measure.Quantity;
+import javax.measure.quantity.Length;
+
 import frc.robot.subsystems.interfaces.Drivetrain;
 
 public class DummyDrivetrain implements Drivetrain {
@@ -14,10 +17,10 @@ public class DummyDrivetrain implements Drivetrain {
   public void toggleShifters() { }
 
   @Override
-  public double getRightDistance() {return 0; }
+  public Quantity<Length> getRightDistance() { return null; }
 
   @Override
-  public double getLeftDistance() { return 0; }
+  public Quantity<Length> getLeftDistance() { return null; }
 
   @Override
   public boolean getLowGear() { return false; }
@@ -29,6 +32,6 @@ public class DummyDrivetrain implements Drivetrain {
   public int getRightEncoder() { return 0; }
 
   @Override
-  public double getDistance() { return 0; }
+  public Quantity<Length> getDistance() { return null; }
   
 }

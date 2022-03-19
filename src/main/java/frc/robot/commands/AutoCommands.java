@@ -1,11 +1,15 @@
 package frc.robot.commands;
 
+import javax.measure.Quantity;
+import javax.measure.quantity.Time;
+
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import frc.robot.subsystems.interfaces.Drivetrain;
 import frc.robot.subsystems.interfaces.Intake;
 import frc.robot.subsystems.interfaces.Magazine;
 import frc.robot.subsystems.interfaces.Shooter;
+import si.uom.SI;
 
 public final class AutoCommands {
   private AutoCommands() {}
@@ -16,8 +20,8 @@ public final class AutoCommands {
    * @param driveTime The amount of time to drive backwards. It should be calculated based off of the length to go and the speed to go there.
    * @return The command to be used when called.
    */
-  public static Command autoDriveBack(Drivetrain drivetrain, double speed, double driveTime) {
-    return new RunCommand(() -> Commands.drive(drivetrain, () -> speed, () -> 0.0).withTimeout(driveTime).andThen(Commands.drive(drivetrain, () -> 0, () -> 0)));
+  public static Command autoDriveBack(Drivetrain drivetrain, double speed, Quantity<Time> driveTime) {
+    return new RunCommand(() -> Commands.drive(drivetrain, () -> speed, () -> 0.0).withTimeout(driveTime.to(SI.SECOND).getValue().doubleValue()).andThen(Commands.drive(drivetrain, () -> 0, () -> 0)));
   }
 
   /** Auto command that only shoots.
@@ -41,7 +45,7 @@ public final class AutoCommands {
    * @param shootSpeed The speed to shoot the balls
    * @return The command to be used when called.
    */
-  public static Command fullAuto(Drivetrain drivetrain, double driveSpeed, double driveTime, Shooter shooter, Magazine mag, Intake intake, double shootSpeed) {
+  public static Command fullAuto(Drivetrain drivetrain, double driveSpeed, Quantity<Time> driveTime, Shooter shooter, Magazine mag, Intake intake, double shootSpeed) {
     return autoDriveBack(drivetrain, driveSpeed, driveTime).andThen(autoShoot(shooter, mag, intake, shootSpeed));
   }
 }

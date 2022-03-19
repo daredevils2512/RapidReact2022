@@ -1,5 +1,8 @@
 package frc.robot.subsystems.physical;
 
+import javax.measure.Quantity;
+import javax.measure.quantity.Length;
+
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.networktables.NetworkTable;
@@ -12,6 +15,8 @@ import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import frc.robot.subsystems.NTSubsystem;
 import frc.robot.subsystems.interfaces.Drivetrain;
 import frc.robot.utils.Constants;
+import si.uom.SI;
+import tech.units.indriya.quantity.Quantities;
 
 public class PhysicalDrivetrain extends NTSubsystem implements Drivetrain {
   // Motor stuff
@@ -43,6 +48,8 @@ public class PhysicalDrivetrain extends NTSubsystem implements Drivetrain {
 
   public PhysicalDrivetrain() {
     super("DrivetrainSub");
+
+    // Network table
     m_table = NetworkTableInstance.getDefault().getTable("Drive Train");
 
     // Motor stuff
@@ -60,9 +67,9 @@ public class PhysicalDrivetrain extends NTSubsystem implements Drivetrain {
     m_rightEncoder = new Encoder(Constants.DRIVETRAIN_RIGHT_ENCODER_A, Constants.DRIVETRAIN_RIGHT_ENCODER_B);
     m_leftEncoderEntry = m_table.getEntry("Left encoder distance"); 
     m_rightEncoderEntry = m_table.getEntry("Right encoder distance");
-    m_leftEncoder.setDistancePerPulse(Constants.DRIVETRAIN_DISTANCE_PER_PULSE);
+    m_leftEncoder.setDistancePerPulse(Constants.DRIVETRAIN_DISTANCE_PER_PULSE.to(SI.METRE).getValue().doubleValue());
     m_leftEncoder.setReverseDirection(true);
-    m_rightEncoder.setDistancePerPulse(Constants.DRIVETRAIN_DISTANCE_PER_PULSE);
+    m_rightEncoder.setDistancePerPulse(Constants.DRIVETRAIN_DISTANCE_PER_PULSE.to(SI.METRE).getValue().doubleValue());
     m_leftDistanceEntry = m_table.getEntry("Left distance entry"); 
     m_rightDistanceEntry = m_table.getEntry("Right distance entry"); 
     m_getLowGearEntry = m_table.getEntry("Low gear entry");
@@ -94,25 +101,25 @@ public class PhysicalDrivetrain extends NTSubsystem implements Drivetrain {
   }
 
   @Override
-  public double getLeftDistance() { 
-    return m_leftEncoder.getDistance();
+  public Quantity<Length> getLeftDistance() { 
+    return Quantities.getQuantity(m_leftEncoder.getDistance(), SI.METRE);
   }
 
   @Override
-  public double getRightDistance() { 
-    return m_rightEncoder.getDistance();
+  public Quantity<Length> getRightDistance() { 
+    return Quantities.getQuantity(m_rightEncoder.getDistance(), SI.METRE);
   }
 
   @Override
   public void setLowGear(boolean wantsLowGear) {
     m_leftShifter.set(wantsLowGear ? Constants.DRIVETRAIN_LOW_GEAR_VALUE : Constants.DRIVETRAIN_HIGH_GEAR_VALUE);
     m_rightShifter.set(wantsLowGear ? Constants.DRIVETRAIN_LOW_GEAR_VALUE : Constants.DRIVETRAIN_HIGH_GEAR_VALUE);
-    m_logger.fine("set low gear: " + wantsLowGear);
+    m_logger.fine("set low gear to: " + wantsLowGear);
   }
 
   @Override
   public boolean getLowGear() {
-    m_logger.fine("get low gear: " + (m_leftShifter.get() == Constants.DRIVETRAIN_LOW_GEAR_VALUE));
+    m_logger.fine("Low Gear Enabled: " + (m_leftShifter.get() == Constants.DRIVETRAIN_LOW_GEAR_VALUE));
     return m_leftShifter.get() == Constants.DRIVETRAIN_LOW_GEAR_VALUE;
   }
 
@@ -122,8 +129,8 @@ public class PhysicalDrivetrain extends NTSubsystem implements Drivetrain {
   }
   
   @Override
-  public double getDistance() {
-    return (getLeftDistance() + getRightDistance()) / 2;
+  public Quantity<Length> getDistance() {
+    return (getLeftDistance().add(getRightDistance())).divide(2);
   }
   
   @Override
@@ -131,8 +138,8 @@ public class PhysicalDrivetrain extends NTSubsystem implements Drivetrain {
     m_leftEncoderEntry.setNumber(getLeftEncoder());
     m_rightEncoderEntry.setNumber(getRightEncoder());
 
-    m_leftDistanceEntry.setNumber(getLeftDistance());
-    m_rightDistanceEntry.setNumber(getRightDistance());
+    m_leftDistanceEntry.setNumber(getLeftDistance().to(SI.METRE).getValue());
+    m_rightDistanceEntry.setNumber(getRightDistance().to(SI.METRE).getValue());
 
     m_getLowGearEntry.setBoolean(getLowGear());
   }
