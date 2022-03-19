@@ -2,10 +2,9 @@ package frc.robot.commands.auto;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.commands.Commands;
-import frc.robot.subsystems.Drivetrain;
-import frc.robot.subsystems.Intake;
-import frc.robot.subsystems.Magazine;
-import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.interfaces.Intake;
+import frc.robot.subsystems.interfaces.Magazine;
+import frc.robot.subsystems.interfaces.Shooter;
 
 public class autoShoot extends CommandBase {
   private final Shooter m_shooter;

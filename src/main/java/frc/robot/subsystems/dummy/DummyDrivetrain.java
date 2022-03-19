@@ -1,73 +1,34 @@
 package frc.robot.subsystems.dummy;
 
-import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.interfaces.Drivetrain;
 
 public class DummyDrivetrain implements Drivetrain {
 
   @Override
-  public void arcadeDrive(double move, double turn) {
-    // TODO Auto-generated method stub
-    
-  }
+  public void arcadeDrive(double move, double turn) { }
 
   @Override
-  public void setLowGear(boolean wantsLowGear) {
-    // TODO Auto-generated method stub
-    
-  }
+  public void setLowGear(boolean wantsLowGear) { }
 
   @Override
-  public void toggleShifters() {
-    // TODO Auto-generated method stub
-    
-  }
+  public void toggleShifters() { }
 
   @Override
-  public double getRightDistance() {
-    // TODO Auto-generated method stub
-    return 0;
-  }
+  public double getRightDistance() {return 0; }
 
   @Override
-  public double getLeftDistance() {
-    // TODO Auto-generated method stub
-    return 0;
-  }
+  public double getLeftDistance() { return 0; }
 
   @Override
-  public boolean getLowGear() {
-    // TODO Auto-generated method stub
-    return false;
-  }
+  public boolean getLowGear() { return false; }
 
   @Override
-  public int getLeftEncoder() {
-    // TODO Auto-generated method stub
-    return 0;
-  }
+  public int getLeftEncoder() { return 0; }
 
   @Override
-  public int getRightEncoder() {
-    // TODO Auto-generated method stub
-    return 0;
-  }
+  public int getRightEncoder() { return 0; }
 
   @Override
-  public double getDistance() {
-    // TODO Auto-generated method stub
-    return 0;
-  }
-
-  @Override
-  public void aimLeft(double speed) {
-    // TODO Auto-generated method stub
-    
-  }
-
-  @Override
-  public void aimRight(double speed) {
-    // TODO Auto-generated method stub
-    
-  }
+  public double getDistance() { return 0; }
   
 }

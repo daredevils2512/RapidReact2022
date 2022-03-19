@@ -1,31 +1,19 @@
 package frc.robot.subsystems.dummy;
 
-import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.interfaces.Intake;
 
 public class DummyIntake implements Intake {
 
   @Override
-  public void setExtended(boolean wantsExtended) {
-    // TODO Auto-generated method stub
-    
-  }
+  public void setExtended(boolean wantsExtended) { }
 
   @Override
-  public void toggleExtended() {
-    // TODO Auto-generated method stub
-    
-  }
+  public void toggleExtended() { }
 
   @Override
-  public void setIntake(double speed) {
-    // TODO Auto-generated method stub
-    
-  }
+  public void setIntake(double speed) { }
 
   @Override
-  public boolean getExtended() {
-    // TODO Auto-generated method stub
-    return false;
-  }
+  public boolean getExtended() { return false; }
   
 }
