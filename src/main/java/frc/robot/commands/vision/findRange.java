@@ -8,10 +8,10 @@ import frc.robot.utils.Constants;
 import frc.robot.vision.Limelight;
 import frc.robot.vision.LimelightLEDMode;
 
+
 public class findRange extends CommandBase {
   private final NetworkTable m_limelightTable;
 
-  private final Limelight m_limelight;
   private final Drivetrain m_drivetrain;
 
   private double m_ty;
@@ -20,27 +20,29 @@ public class findRange extends CommandBase {
   private double m_currentDistance;
   private double m_distanceVariation;
   private double m_driveAjust;
+  private Limelight m_limelight;
   
-  public findRange(Limelight limelight, Drivetrain drivetrain) {
+  public findRange(Drivetrain drivetrain) {
     m_limelightTable = NetworkTableInstance.getDefault().getTable("limelight");
-
-    m_limelight = limelight;
+    
     m_drivetrain = drivetrain;
   }
 
   @Override
   public void initialize() {
-    m_ty = m_limelightTable.getEntry("ty").getDouble(0);
+    m_limelight.setLEDMode(LimelightLEDMode.ON);
+  }
+
+  @Override
+  public void execute() {
+   
+     m_ty = m_limelightTable.getEntry("ty").getDouble(0);
     m_angleToGoalDegrees = Constants.LIMELIGHT_MOUNT_ANGLE_DEGREES + m_ty;
     m_angleToGoalRadians = m_angleToGoalDegrees * (3.14159 / 180.0);
     m_currentDistance = (Constants.GOAL_HEIGHT - Constants.LIMELIGHT_LENS_HEIGHT) / Math.tan(m_angleToGoalRadians);
     m_distanceVariation = Constants.DESIRED_DISTANCE - m_currentDistance;
     m_driveAjust = Constants.K_P * m_distanceVariation;
-  }
-
-  @Override
-  public void execute() {
-    m_limelight.setLEDMode(LimelightLEDMode.ON);
+    
 
     m_drivetrain.arcadeDrive(m_driveAjust, 0.0);
   }
@@ -48,8 +50,8 @@ public class findRange extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     if (interrupted) {
-      m_drivetrain.arcadeDrive(0.0, 0.0);
       m_limelight.setLEDMode(LimelightLEDMode.OFF);
+      m_drivetrain.arcadeDrive(0.0, 0.0);
     }
   }
 

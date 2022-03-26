@@ -20,6 +20,8 @@ import frc.robot.commands.auto.autoDriveBack;
 import frc.robot.commands.auto.autoShoot;
 import frc.robot.commands.vision.aim;
 import frc.robot.commands.vision.findRange;
+import frc.robot.commands.vision.limelightOff;
+import frc.robot.commands.vision.limelightOn;
 import frc.robot.commands.AutoCommands;
 import frc.robot.subsystems.dummy.DummyDrivetrain;
 import frc.robot.subsystems.dummy.DummyIntake;
@@ -96,6 +98,9 @@ public class RobotContainer {
   private final Command m_revShooterFast;
   private final Command m_revShooterSlow;
 
+  private final Command m_limelightOn;
+  private final Command m_limelightOff;
+
   // Controls
   private final ControlBoard m_controlBoard;
 
@@ -156,8 +161,8 @@ public class RobotContainer {
     m_takeBalls = Commands.runIntake(m_intake, () -> 1);
     m_intakeShift = Commands.intakeShifters(m_intake);
       // Vision
-    m_aim = new aim(m_drivetrain, m_limelight);
-    m_FindRange = new findRange(m_limelight, m_drivetrain);
+    m_aim = new aim(m_drivetrain);
+    m_FindRange = new findRange(m_drivetrain);
       // LEDs
     m_LEDToggle = Commands.toggleLEDs(m_LED);
       // Magazine
@@ -165,6 +170,9 @@ public class RobotContainer {
       // Shooter
     m_revShooterFast = Commands.revShooter(m_shooter, Constants.SHOOTER_FAST_SPEED);
     m_revShooterSlow = Commands.revShooter(m_shooter, Constants.SHOOTER_SLOW_SPEED);
+
+    m_limelightOn = new limelightOn(m_limelight);
+    m_limelightOff = new limelightOff(m_limelight);
 
     // Other Stuff
     m_logManager = new LoggingManager();
@@ -204,11 +212,15 @@ public class RobotContainer {
     m_controlBoard.extreme.baseMiddleRight.whileHeld(m_takeBalls);
     m_controlBoard.extreme.baseMiddleLeft.whenPressed(m_intakeShift);
       // Aim
+    m_controlBoard.extreme.joystickBottomLeft.whenPressed(m_limelightOn);
     m_controlBoard.extreme.joystickBottomLeft.whileHeld(m_aim);
+    m_controlBoard.extreme.joystickBottomLeft.whenReleased(m_limelightOff);
       // LEDs
     m_controlBoard.extreme.baseBackRight.whenPressed(m_LEDToggle);
       // Find Range
+    m_controlBoard.extreme.joystickBottomRight.whenPressed(m_limelightOn);
     m_controlBoard.extreme.joystickBottomRight.whileHeld(m_FindRange);
+    m_controlBoard.extreme.joystickBottomRight.whenReleased(m_limelightOff);
       // Magazine
     m_controlBoard.extreme.trigger.whileHeld(m_runMag);
       // Shooter
