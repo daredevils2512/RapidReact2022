@@ -25,7 +25,7 @@ public final class Constants {
 
   // Auto
   public static final double DRIVE_AUTO_SPEED = 0.5; // TODO: Find value
-  public static final double SHOOT_AUTO_SPEED = 1; // TODO: Find value
+  public static final double SHOOT_AUTO_SPEED = .7; // TODO: Find value
   public static final double AUTO_DRIVE_BACK_DISTANCE = 150; // Inches 
 
   // Drivetrain
@@ -53,7 +53,7 @@ public final class Constants {
   
 
   // climber
-  public static final double CLIMBER_SPEED = 1;
+  public static final double CLIMBER_SPEED = .85;
 
   // Motor IDs
   public static final int DRIVETRAIN_LEFT_ID1 = 10; 

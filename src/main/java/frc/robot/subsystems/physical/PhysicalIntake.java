@@ -51,7 +51,7 @@ public class PhysicalIntake extends NTSubsystem implements Intake {
     
   @Override
   public void setIntake(double speed) {
-    m_intake1.set(speed);
+    m_intake1.set(- speed);
     m_logger.fine("set intake speed: " + speed);
   }
 }

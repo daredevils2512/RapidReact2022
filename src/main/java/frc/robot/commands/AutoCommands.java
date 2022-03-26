@@ -22,6 +22,6 @@ public final class AutoCommands {
    * @return The command to be used when called.
    */
   public static Command fullAuto(Drivetrain drivetrain, double driveSpeed, double driveTime, Shooter shooter, Magazine mag, Intake intake, double shootSpeed) {
-    return new autoDriveBack(drivetrain, driveSpeed, driveTime).andThen(new autoShoot(shooter, mag, intake, shootSpeed));
+    return new autoShoot(shooter, mag, intake, shootSpeed).andThen(new autoDriveBack(drivetrain, driveSpeed, driveTime).withTimeout(3));
   }
 }
