@@ -81,6 +81,7 @@ public class RobotContainer {
     // Climber
   private final Command m_climberUp;
   private final Command m_climberDown;
+  private final Command m_toggleClimberShifters;
     // Drive
   private final Command m_drive;
   private final Command m_driveShift;
@@ -155,6 +156,7 @@ public class RobotContainer {
       // Climber
     m_climberUp = Commands.runClimber(m_climber, Constants.CLIMBER_SPEED);
     m_climberDown = Commands.runClimber(m_climber, -Constants.CLIMBER_SPEED);
+    m_toggleClimberShifters = Commands.climbingShifters(m_climber);
       // Drive
     m_drive = Commands.drive(m_drivetrain, () -> getMove(), () -> getTurn());
     m_driveShift = Commands.driveShifters(m_drivetrain);
@@ -207,6 +209,7 @@ public class RobotContainer {
       // Climbers
     m_controlBoard.extreme.joystickTopLeft.whileHeld(m_climberUp);
     m_controlBoard.extreme.joystickTopRight.whileHeld(m_climberDown);
+    m_controlBoard.extreme.baseFrontLeft.whenPressed(m_toggleClimberShifters);
       // Drive
     m_drivetrain.setDefaultCommand(m_drive);
     m_controlBoard.xboxController.rightBumper.whenPressed(m_driveShift);
