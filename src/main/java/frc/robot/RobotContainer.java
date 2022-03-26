@@ -94,6 +94,7 @@ public class RobotContainer {
   private final Command m_LEDToggle;
     // Magazine
   private final Command m_runMag;
+  private final Command m_runMagBack;
     // Shooter
   private final Command m_revShooterFast;
   private final Command m_revShooterSlow;
@@ -167,6 +168,7 @@ public class RobotContainer {
     m_LEDToggle = Commands.toggleLEDs(m_LED);
       // Magazine
     m_runMag = Commands.runMag(m_magazine, () -> 1);
+    m_runMagBack = Commands.runMag(m_magazine, () -> -1);
       // Shooter
     m_revShooterFast = Commands.revShooter(m_shooter, Constants.SHOOTER_FAST_SPEED);
     m_revShooterSlow = Commands.revShooter(m_shooter, Constants.SHOOTER_SLOW_SPEED);
@@ -223,6 +225,7 @@ public class RobotContainer {
     m_controlBoard.extreme.joystickBottomRight.whenReleased(m_limelightOff);
       // Magazine
     m_controlBoard.extreme.trigger.whileHeld(m_runMag);
+    m_controlBoard.extreme.baseBackRight.whileHeld(m_runMagBack);
       // Shooter
     m_controlBoard.extreme.sideButton.whileHeld(m_revShooterFast);
     m_controlBoard.extreme.baseBackLeft.whileHeld(m_revShooterSlow);
