@@ -5,8 +5,8 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Vision.Limelight;
-import frc.robot.Vision.LimelightLEDMode;
+import frc.robot.vision.Limelight;
+import frc.robot.vision.LimelightLEDMode;
 import frc.robot.subsystems.Drivetrain;
 
 public class Aim extends CommandBase{
@@ -21,7 +21,7 @@ public class Aim extends CommandBase{
 
   public Aim(Drivetrain drivetrain, Limelight limelight){
     m_drivetrain = drivetrain; 
-    Kp = 0.2;
+    Kp = 0.2; 
     m_limelightTable = NetworkTableInstance.getDefault().getTable("limelight");
     m_tx = m_limelightTable.getEntry("tx");
     m_limelight = limelight;
@@ -44,7 +44,7 @@ public class Aim extends CommandBase{
   }
 
   /** Called once the command ends or is interrupted. */
-  @Override
+  @Override 
   public void end(boolean interrupted) {
     m_drivetrain.arcadeDrive(0,0);
     m_limelight.setLEDMode(LimelightLEDMode.OFF);

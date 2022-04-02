@@ -1,4 +1,4 @@
-package frc.robot.Vision;
+package frc.robot.vision;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
