@@ -156,7 +156,7 @@ public class RobotContainer {
       // Climber
     m_climberUp = Commands.runClimber(m_climber, Constants.CLIMBER_SPEED);
     m_climberDown = Commands.runClimber(m_climber, -Constants.CLIMBER_SPEED);
-    m_toggleClimberShifters = Commands.climbingShifters(m_climber);
+    m_toggleClimberShifters = Constants.CLIMBER_TRAVERSAL_ENABLED ? Commands.climbingShifters(m_climber) : null;
       // Drive
     m_drive = Commands.drive(m_drivetrain, () -> getMove(), () -> getTurn());
     m_driveShift = Commands.driveShifters(m_drivetrain);

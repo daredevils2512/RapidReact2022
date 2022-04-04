@@ -22,6 +22,7 @@ public final class Constants {
   public static final boolean COMPRESSOR_ENABLED = true;
   public static final boolean LIMELIGHT_ENABLED = false;
   public static final boolean LED_ENABLED = false;
+  public static final boolean CLIMBER_TRAVERSAL_ENABLED = false;
 
   // Auto
   public static final double DRIVE_AUTO_SPEED = 0.5; // TODO: Find value
