@@ -16,7 +16,12 @@ import frc.robot.vision.Limelight;
 import frc.robot.vision.PhysicalLimelight;
 import frc.robot.vision.Pipeline;
 import frc.robot.commands.Commands;
-import frc.robot.commands.VisionCommands;
+import frc.robot.commands.auto.autoDriveBack;
+import frc.robot.commands.auto.autoShoot;
+import frc.robot.commands.vision.aim;
+import frc.robot.commands.vision.findRange;
+import frc.robot.commands.vision.limelightOff;
+import frc.robot.commands.vision.limelightOn;
 import frc.robot.commands.AutoCommands;
 import frc.robot.subsystems.dummy.DummyDrivetrain;
 import frc.robot.subsystems.dummy.DummyIntake;
@@ -76,6 +81,7 @@ public class RobotContainer {
     // Climber
   private final Command m_climberUp;
   private final Command m_climberDown;
+  private final Command m_toggleClimberShifters;
     // Drive
   private final Command m_drive;
   private final Command m_driveShift;
@@ -87,14 +93,15 @@ public class RobotContainer {
   private final Command m_FindRange;
     // LEDs
   private final Command m_LEDToggle;
-    // Limelight
-  private final Command m_turnOnLimelight;
-  private final Command m_turnOffLimelight;
     // Magazine
   private final Command m_runMag;
+  private final Command m_runMagBack;
     // Shooter
   private final Command m_revShooterFast;
   private final Command m_revShooterSlow;
+
+  private final Command m_limelightOn;
+  private final Command m_limelightOff;
 
   // Controls
   private final ControlBoard m_controlBoard;
@@ -141,14 +148,15 @@ public class RobotContainer {
 
     // Commands
       // Autos
-    m_autoDrive = AutoCommands.autoDriveBack(m_drivetrain, Constants.DRIVE_AUTO_SPEED, Constants.AUTO_DRIVE_BACK_TIME);
-    m_autoShoot = AutoCommands.autoShoot(m_shooter, m_magazine, m_intake, Constants.SHOOT_AUTO_SPEED);
-    m_autoFull = AutoCommands.fullAuto(m_drivetrain, Constants.DRIVE_AUTO_SPEED, Constants.AUTO_DRIVE_BACK_TIME, m_shooter, m_magazine, m_intake, Constants.SHOOT_AUTO_SPEED);
+    m_autoDrive = new autoDriveBack(m_drivetrain, Constants.DRIVE_AUTO_SPEED, Constants.AUTO_DRIVE_BACK_DISTANCE);
+    m_autoShoot = new autoShoot(m_shooter, m_magazine, m_intake, Constants.SHOOT_AUTO_SPEED);
+    m_autoFull = AutoCommands.fullAuto(m_drivetrain, Constants.DRIVE_AUTO_SPEED, Constants.AUTO_DRIVE_BACK_DISTANCE, m_shooter, m_magazine, m_intake, Constants.SHOOT_AUTO_SPEED);
       // Compressor
     m_compressor.setClosedLoopControl(true);
       // Climber
     m_climberUp = Commands.runClimber(m_climber, Constants.CLIMBER_SPEED);
     m_climberDown = Commands.runClimber(m_climber, -Constants.CLIMBER_SPEED);
+    m_toggleClimberShifters = Commands.climbingShifters(m_climber);
       // Drive
     m_drive = Commands.drive(m_drivetrain, () -> getMove(), () -> getTurn());
     m_driveShift = Commands.driveShifters(m_drivetrain);
@@ -156,17 +164,19 @@ public class RobotContainer {
     m_takeBalls = Commands.runIntake(m_intake, () -> 1);
     m_intakeShift = Commands.intakeShifters(m_intake);
       // Vision
-    m_aim = VisionCommands.Aim(m_drivetrain);
-    m_FindRange = VisionCommands.findRange(m_drivetrain);
-    m_turnOnLimelight = VisionCommands.turnOnLimelight(m_limelight);
-    m_turnOffLimelight = VisionCommands.turnOffLimelight(m_limelight);
+    m_aim = new aim(m_drivetrain);
+    m_FindRange = new findRange(m_drivetrain);
       // LEDs
     m_LEDToggle = Commands.toggleLEDs(m_LED);
       // Magazine
     m_runMag = Commands.runMag(m_magazine, () -> 1);
+    m_runMagBack = Commands.runMag(m_magazine, () -> -1);
       // Shooter
     m_revShooterFast = Commands.revShooter(m_shooter, Constants.SHOOTER_FAST_SPEED);
     m_revShooterSlow = Commands.revShooter(m_shooter, Constants.SHOOTER_SLOW_SPEED);
+
+    m_limelightOn = new limelightOn(m_limelight);
+    m_limelightOff = new limelightOff(m_limelight);
 
     // Other Stuff
     m_logManager = new LoggingManager();
@@ -199,6 +209,7 @@ public class RobotContainer {
       // Climbers
     m_controlBoard.extreme.joystickTopLeft.whileHeld(m_climberUp);
     m_controlBoard.extreme.joystickTopRight.whileHeld(m_climberDown);
+    m_controlBoard.extreme.baseFrontLeft.whenPressed(m_toggleClimberShifters);
       // Drive
     m_drivetrain.setDefaultCommand(m_drive);
     m_controlBoard.xboxController.rightBumper.whenPressed(m_driveShift);
@@ -206,17 +217,18 @@ public class RobotContainer {
     m_controlBoard.extreme.baseMiddleRight.whileHeld(m_takeBalls);
     m_controlBoard.extreme.baseMiddleLeft.whenPressed(m_intakeShift);
       // Aim
-    m_controlBoard.extreme.joystickBottomLeft.whenPressed(m_turnOnLimelight);
+    m_controlBoard.extreme.joystickBottomLeft.whenPressed(m_limelightOn);
     m_controlBoard.extreme.joystickBottomLeft.whileHeld(m_aim);
-    m_controlBoard.extreme.joystickBottomLeft.whenReleased(m_turnOffLimelight);
+    m_controlBoard.extreme.joystickBottomLeft.whenReleased(m_limelightOff);
       // LEDs
     m_controlBoard.extreme.baseBackRight.whenPressed(m_LEDToggle);
       // Find Range
-    m_controlBoard.extreme.joystickBottomRight.whenPressed(m_turnOnLimelight);
+    m_controlBoard.extreme.joystickBottomRight.whenPressed(m_limelightOn);
     m_controlBoard.extreme.joystickBottomRight.whileHeld(m_FindRange);
-    m_controlBoard.extreme.joystickBottomRight.whenReleased(m_turnOffLimelight);
+    m_controlBoard.extreme.joystickBottomRight.whenReleased(m_limelightOff);
       // Magazine
     m_controlBoard.extreme.trigger.whileHeld(m_runMag);
+    m_controlBoard.extreme.baseBackRight.whileHeld(m_runMagBack);
       // Shooter
     m_controlBoard.extreme.sideButton.whileHeld(m_revShooterFast);
     m_controlBoard.extreme.baseBackLeft.whileHeld(m_revShooterSlow);

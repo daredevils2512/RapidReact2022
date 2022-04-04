@@ -85,7 +85,7 @@ public class PhysicalSparkDrivetrain extends NTSubsystem implements Drivetrain {
   public void arcadeDrive(double move, double turn) {
     move = m_rateLim.calculate(move);
     turn = m_rateLimTurn.calculate(turn);
-    m_drive.arcadeDrive((move) * Constants.DRIVETRAIN_MAX_SPEED, (turn) * Constants.DRIVETRAIN_MAX_TURN);
+    m_drive.arcadeDrive((-move) * Constants.DRIVETRAIN_MAX_SPEED, (turn) * Constants.DRIVETRAIN_MAX_TURN);
   }
 
   @Override

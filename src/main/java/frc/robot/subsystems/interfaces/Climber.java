@@ -7,5 +7,16 @@ public interface Climber extends Subsystem {
    * @param speed The speed to set the motors
    */
   void setClimbSpeed(double speed);
+
+  /** @return If the climbers are extended */
+  boolean getExtended();
+
+  /** Sets the shifters to the value you want
+   * @param wantsExtended Whether you want the shifters extended or retracted
+   */
+  void setExtended(boolean wantsExtended);
+
+  /** Toggle the shifters to be extended/retracted */
+  void toggleExtended();
 }
 

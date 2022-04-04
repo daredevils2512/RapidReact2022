@@ -24,12 +24,12 @@ public final class Constants {
   public static final boolean SHOOTER_ENABLED = true;
   public static final boolean MAGAZINE_ENABLED = true;
   public static final boolean INTAKE_ENABLED = true;
-  public static final boolean CLIMBER_ENABLED = true;
+  public static final boolean CLIMBER_ENABLED = false;
   public static final boolean DRIVETRAIN_ENABLED = true;
   public static final boolean SPARK_DRIVETRAIN_ENABLED = false;
   public static final boolean COMPRESSOR_ENABLED = true;
   public static final boolean LIMELIGHT_ENABLED = false;
-  public static final boolean LED_ENABLED = true;
+  public static final boolean LED_ENABLED = false;
 
   // Auto
   public static final double DRIVE_AUTO_SPEED = 0.5; // TODO: Find value
@@ -61,7 +61,7 @@ public final class Constants {
   public static final double SHOOTER_D = 0; // TODO: Find value
 
   // climber
-  public static final double CLIMBER_SPEED = 1;
+  public static final double CLIMBER_SPEED = .85;
 
   // Motor IDs
   public static final int DRIVETRAIN_LEFT_ID1 = 10; 
@@ -99,14 +99,23 @@ public final class Constants {
   public static final int DRIVETRAIN_LEFT_BACKWARD_CHANNEL = 1; 
   public static final int DRIVETRAIN_RIGHT_FORWARD_CHANNEL = 2; 
   public static final int DRIVETRAIN_RIGHT_BACKWARD_CHANNEL = 3;
+
+  public static final int CLIMBER_LEFT_FORWARD_CHANNEL = 0; // TODO: Find the correct channel!
+  public static final int CLIMBER_LEFT_BACKWARD_CHANNEL = 0; // TODO: Find the correct channel!
+  public static final int CLIMBER_RIGHT_FORWARD_CHANNEL = 0; // TODO: Find the correct channel!
+  public static final int CLIMBER_RIGHT_BACKWARD_CHANNEL = 0; // TODO: Find the correct channel!
+  
   public static final int INTAKE_SHIFTER_FORWARD_ID1 = 4; 
   public static final int INTAKE_SHIFTER_BACKWARD_ID1 = 5;
-  public static final int INTAKE_SHIFTER_FORWARD_ID2= 0; // TODO find value
-  public static final int INTAKE_SHIFTER_BACKWARD_ID2 = 0; // TODO find value
+  public static final int INTAKE_SHIFTER_FORWARD_ID2 = 0;
+  public static final int INTAKE_SHIFTER_BACKWARD_ID2 = 0;
   public static final Value INTAKE_EXTENDED_VALUE = Value.kForward; 
   public static final Value INTAKE_RETRACTED_VALUE = Value.kReverse;
   public static final Value DRIVETRAIN_LOW_GEAR_VALUE = Value.kForward; 
   public static final Value DRIVETRAIN_HIGH_GEAR_VALUE = Value.kReverse;
+
+  public static final Value CLIMBER_EXTENDED_VALUE = Value.kForward; // TODO: Make sure this is correct!
+  public static final Value CLIMBER_RETRACTED_VALUE = Value.kReverse; // TODO: Make sure this is correct!
   public static final PneumaticsModuleType PNEUMATICS_MODULE_TYPE = PneumaticsModuleType.CTREPCM;
 
   // LEDs
