@@ -13,9 +13,10 @@ public final class AutoCommands {
   private AutoCommands() {}
 
   public static Command autoShoot(Shooter shooter, Magazine magazine, Intake intake, double shootSpeed) {
-    return Commands.revShooter(shooter, shootSpeed)
-    .alongWith(Commands.runMag(magazine, () -> 1.0))
-    .alongWith(Commands.runIntake(intake, () -> 1.0));
+    return Commands.runIntake(intake, () -> 1.0)
+    .withTimeout(3)
+    .andThen(Commands.revShooter(shooter, shootSpeed))
+    .alongWith(Commands.runMag(magazine, () -> 1.0));
   }
 
   /** Auto comamnd that drives back and then shoots.
