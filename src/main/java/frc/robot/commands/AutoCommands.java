@@ -1,6 +1,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.FunctionalCommand;
 import frc.robot.commands.auto.autoDriveBack;
 import frc.robot.commands.auto.autoShoot;
 import frc.robot.subsystems.interfaces.Drivetrain;
@@ -10,6 +11,12 @@ import frc.robot.subsystems.interfaces.Shooter;
 
 public final class AutoCommands {
   private AutoCommands() {}
+
+  public static Command autoShoot(Shooter shooter, Magazine magazine, Intake intake, double shootSpeed) {
+    return Commands.revShooter(shooter, shootSpeed)
+    .alongWith(Commands.runMag(magazine, () -> 1.0))
+    .alongWith(Commands.runIntake(intake, () -> 1.0));
+  }
 
   /** Auto comamnd that drives back and then shoots.
    * @param drivetrain Drivetrain subsystem to use.
@@ -22,6 +29,9 @@ public final class AutoCommands {
    * @return The command to be used when called.
    */
   public static Command fullAuto(Drivetrain drivetrain, double driveSpeed, double driveTime, Shooter shooter, Magazine mag, Intake intake, double shootSpeed) {
-    return new autoShoot(shooter, mag, intake, shootSpeed).andThen(new autoDriveBack(drivetrain, driveSpeed, driveTime).withTimeout(3));
+    return autoShoot(shooter, mag, intake, shootSpeed)
+    .withTimeout(6)
+    .andThen(new autoDriveBack(drivetrain, driveSpeed, driveTime)
+    .withTimeout(3));
   }
 }
