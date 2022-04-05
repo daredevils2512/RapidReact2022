@@ -32,7 +32,6 @@ public final class AutoCommands {
    */
   public static Command fullAuto(Drivetrain drivetrain, double driveSpeed, double driveTime, Shooter shooter, Magazine mag, Intake intake, double shootSpeed) {
     return autoShoot(shooter, mag, intake, shootSpeed)
-    .withTimeout(6)
     .andThen(new autoDriveBack(drivetrain, driveSpeed, driveTime)
     .withTimeout(3));
   }
