@@ -17,6 +17,7 @@ public class autoShoot extends CommandBase {
 		m_mag = mag;
 		m_intake = intake;
     m_speed = speed;
+    addRequirements(shooter, mag, intake);
   }
 
   @Override

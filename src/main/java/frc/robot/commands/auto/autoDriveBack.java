@@ -14,6 +14,7 @@ public class autoDriveBack extends CommandBase {
     m_drivetrain = drivetrain;
     m_speed = speed;
     m_distance = distance;
+    addRequirements(drivetrain);
   }
 
   @Override
