@@ -3,6 +3,7 @@ package frc.robot.subsystems.physical;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import frc.robot.subsystems.NTSubsystem;
 import frc.robot.subsystems.interfaces.Climber;
 import frc.robot.utils.Constants;
@@ -14,6 +15,10 @@ public class PhysicalClimber extends NTSubsystem implements Climber {
   DigitalInput toplimitSwitch = new DigitalInput(7);
   DigitalInput bottomlimitSwitch = new DigitalInput(6);
 
+  // Shifters
+  private final DoubleSolenoid m_leftShifter;
+  private final DoubleSolenoid m_rightShifter;
+
   public PhysicalClimber() {
     super("ClimberSubsystem");
 
@@ -22,10 +27,14 @@ public class PhysicalClimber extends NTSubsystem implements Climber {
     m_leftMotor = new TalonSRX(Constants.CLIMBER_2ID);
     m_leftMotor.follow(m_rightMotor);
     m_leftMotor.setInverted(true);
+
+    // Shifters
+    m_leftShifter = new DoubleSolenoid(Constants.PNEUMATICS_MODULE_TYPE, Constants.CLIMBER_LEFT_FORWARD_CHANNEL, Constants.CLIMBER_LEFT_BACKWARD_CHANNEL);
+    m_rightShifter = new DoubleSolenoid(Constants.PNEUMATICS_MODULE_TYPE, Constants.CLIMBER_RIGHT_FORWARD_CHANNEL, Constants.CLIMBER_RIGHT_BACKWARD_CHANNEL);
   }
 
   @Override
-  public void setClimbSpeed(double speed){ 
+  public void setClimbSpeed(double speed) { 
     if (toplimitSwitch.get() == true && speed < 0){
       m_rightMotor.set(ControlMode.PercentOutput, 0);
     } else if (bottomlimitSwitch.get() == false && speed > 0) {
@@ -34,6 +43,21 @@ public class PhysicalClimber extends NTSubsystem implements Climber {
       m_rightMotor.set(ControlMode.PercentOutput, speed);
       m_logger.fine("setclimbspeed: " + speed);
     }
-    
+  }
+
+  @Override 
+  public boolean getExtended() {
+    return m_leftShifter.get() == Constants.CLIMBER_EXTENDED_VALUE;
+  }
+
+  @Override
+  public void setExtended(boolean wantsExtended) {
+    m_leftShifter.set(wantsExtended ? Constants.CLIMBER_EXTENDED_VALUE : Constants.CLIMBER_RETRACTED_VALUE);
+    m_rightShifter.set(wantsExtended ? Constants.CLIMBER_EXTENDED_VALUE : Constants.CLIMBER_RETRACTED_VALUE);
+  }
+
+  @Override
+  public void toggleExtended() {
+    setExtended(!getExtended());
   }
 }

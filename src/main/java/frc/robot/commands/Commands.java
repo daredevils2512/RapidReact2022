@@ -19,7 +19,7 @@ public final class Commands {
    * @return The command to be used when called.
    */
   public static Command intakeShifters(Intake intake) {
-    return new InstantCommand(() -> intake.toggleExtended());
+    return new InstantCommand(() -> intake.toggleExtended(), intake);
   }
 
   /** Runs the intake motors
@@ -28,16 +28,24 @@ public final class Commands {
    * @return The command to be used when called.
    */
   public static Command runIntake(Intake intake, DoubleSupplier speed) {
-    return new RunCommand(() -> intake.setIntake(speed.getAsDouble()));
+    return new RunCommand(() -> intake.setIntake(speed.getAsDouble()), intake);
+  }
+
+  /** Toggles the climber shifters
+   * @param climber The climber subsystem to use.
+   * @return The command to be used when called.
+   */
+  public static Command climbingShifters(Climber climber) {
+    return new InstantCommand(() -> climber.toggleExtended(), climber);
   }
 
   /** Runs the climber
-   * @param climber The climbing subsystem to use
+   * @param climber The climbing subsystem to use.
    * @param speed the speed to run the climber. Positive for up, negative for down.
    * @return The command to be used when called.
    */
   public static Command runClimber(Climber climber, double speed) {
-    return new RunCommand(() -> climber.setClimbSpeed(speed));
+    return new RunCommand(() -> climber.setClimbSpeed(speed), climber);
   }
 
   /** Runs the driving shifters
@@ -45,37 +53,41 @@ public final class Commands {
    * @return The command to be used when called.
    */
   public static Command driveShifters(Drivetrain drivetrain) {
-    return new InstantCommand(() -> drivetrain.toggleShifters());
+    return new InstantCommand(() -> drivetrain.toggleShifters(), drivetrain);
   }
 
   /** Drives the robot
    * @param drivetrain The drivetrain subsystem to use.
-   * @param move The speed to move the robot forwards (positive) and backwards (negative)
-   * @param turn The speed to turn the robot left and right
+   * @param move The speed to move the robot forwards (positive) and backwards (negative).
+   * @param turn The speed to turn the robot left and right.
    * @return The command to be used when called.
    */
   public static Command drive(Drivetrain drivetrain, DoubleSupplier move, DoubleSupplier turn) {
-    return new RunCommand(() -> drivetrain.arcadeDrive(move.getAsDouble(), turn.getAsDouble()));
+    return new RunCommand(() -> drivetrain.arcadeDrive(move.getAsDouble(), turn.getAsDouble()), drivetrain);
   }
 
   /** Revs the shooter (and shoots balls)
-   * @param shooter The shooter subsystem to use
-   * @param speed The speed to move the motor
+   * @param shooter The shooter subsystem to use.
+   * @param speed The speed to move the motor.
    * @return The command to be used when called.
    */
   public static Command revShooter(Shooter shooter, double speed) {
-    return new RunCommand(() -> shooter.setRPMPID(speed));
+    return new RunCommand(() -> shooter.setRPMPID(speed), shooter);
   }
 
   /** Runs the magazine motors
-   * @param mag The magazine subsystem to use
-   * @param speed The speed to move the magazine motors
+   * @param mag The magazine subsystem to use.
+   * @param speed The speed to move the magazine motors.
    * @return The command to be used when called.
    */
   public static Command runMag(Magazine mag, DoubleSupplier speed) {
-    return new RunCommand(() -> mag.moveBalls(speed.getAsDouble()));
+    return new RunCommand(() -> mag.moveBalls(speed.getAsDouble()), mag);
   }
 
+  /** Toggles the LEDs on and off
+   * @param LED The LED subsystem to use.
+   * @return The command to be used when called.
+   */
   public static Command toggleLEDs(LEDManager LED) {
     return new RunCommand(() -> LED.toggleLEDs(), LED);
   }
