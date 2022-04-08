@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
  */
 public final class Constants {
 
-  // 
+  // Things are enabled
   public static final boolean SHOOTER_ENABLED = true;
   public static final boolean MAGAZINE_ENABLED = true;
   public static final boolean INTAKE_ENABLED = true;
@@ -23,6 +23,9 @@ public final class Constants {
   public static final boolean LIMELIGHT_ENABLED = false;
   public static final boolean LED_ENABLED = false;
   public static final boolean CLIMBER_TRAVERSAL_ENABLED = false;
+  public static final boolean PHOTO_EYE_ENABLED = true;
+  
+  public static final int PHOTO_EYE_PORT = 5;
 
   // Auto
   public static final double DRIVE_AUTO_SPEED = 0.5; // TODO: Find value
