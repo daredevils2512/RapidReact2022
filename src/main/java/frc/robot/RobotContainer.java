@@ -1,6 +1,11 @@
 package frc.robot;
 
 import java.util.logging.Level;
+
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.cscore.CvSink;
+import edu.wpi.first.cscore.CvSource;
+import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.GenericHID;
@@ -174,6 +179,10 @@ public class RobotContainer {
 
     // Configure the button bindings
     if (RobotBase.isSimulation()) m_logManager.robotLogger.setLevel(Level.FINER);
+
+    // start camera server
+    UsbCamera camera = CameraServer.startAutomaticCapture();
+    camera.setResolution(640, 480);
     
     configureButtonBindings();
 

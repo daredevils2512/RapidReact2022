@@ -1,5 +1,7 @@
 package frc.robot.subsystems.physical;
 
+import java.util.function.Function;
+
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.networktables.NetworkTable;
