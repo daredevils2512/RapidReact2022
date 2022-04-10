@@ -13,7 +13,7 @@ import frc.robot.subsystems.interfaces.Magazine;
 import frc.robot.subsystems.interfaces.Shooter;
 
 public final class Commands {
-  private Commands() {}
+  private Commands() { }
   
   /** Runs the intake shifters
    * @param intake The intake subsystem to use.

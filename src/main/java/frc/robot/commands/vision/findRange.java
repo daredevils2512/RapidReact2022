@@ -9,7 +9,7 @@ import frc.robot.vision.Limelight;
 import frc.robot.vision.LimelightLEDMode;
 
 
-public class findRange extends CommandBase {
+public class FindRange extends CommandBase {
   private final NetworkTable m_limelightTable;
 
   private final Drivetrain m_drivetrain;
@@ -22,7 +22,7 @@ public class findRange extends CommandBase {
   private double m_driveAjust;
   private Limelight m_limelight;
   
-  public findRange(Drivetrain drivetrain) {
+  public FindRange(Drivetrain drivetrain) {
     m_limelightTable = NetworkTableInstance.getDefault().getTable("limelight");
     
     m_drivetrain = drivetrain;

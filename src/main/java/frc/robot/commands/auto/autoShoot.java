@@ -6,13 +6,13 @@ import frc.robot.subsystems.interfaces.Intake;
 import frc.robot.subsystems.interfaces.Magazine;
 import frc.robot.subsystems.interfaces.Shooter;
 
-public class autoShoot extends CommandBase {
+public class AutoShoot extends CommandBase {
   private final Shooter m_shooter;
   private final Magazine m_mag;
 	private final Intake m_intake;
   private final double m_speed;
 
-  public autoShoot(Shooter shooter, Magazine mag, Intake intake, double speed) {
+  public AutoShoot(Shooter shooter, Magazine mag, Intake intake, double speed) {
     m_shooter = shooter;
 		m_mag = mag;
 		m_intake = intake;
@@ -25,7 +25,12 @@ public class autoShoot extends CommandBase {
 
   @Override
   public void execute() {
-    Commands.revShooter(m_shooter, m_speed).withTimeout(6).andThen(Commands.runMag(m_mag, () -> m_speed).withTimeout(5).alongWith(Commands.runIntake(m_intake, () -> m_speed).withTimeout(5))).andThen(Commands.revShooter(m_shooter, 0));
+    // Commands.revShooter(m_shooter, m_speed).withTimeout(6).andThen(Commands.runMag(m_mag, () -> m_speed).withTimeout(5).alongWith(Commands.runIntake(m_intake, () -> m_speed).withTimeout(5))).andThen(Commands.revShooter(m_shooter, 0));
+    Commands.revShooter(m_shooter, m_speed)
+    .withTimeout(3)
+    .andThen(Commands.revShooter(m_shooter, m_speed))
+    .alongWith(Commands.runMag(m_mag, () -> 1.0))
+    .withTimeout(6);
   }
 
   @Override
