@@ -2,6 +2,7 @@ package frc.robot.utils;
 
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 
 /** The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants. This class should not be used for any other purpose. All constants should be declared
@@ -116,6 +117,68 @@ public final class Constants {
   public static final int LED_LENGTH = 15; // TODO: find value
   public static final int LED_MIN_S = 0;
   public static final int LED_MAX_S = 255;
+
+  // Control Board
+  public static final int XBOX_CONTROLLER_PORT = 0;
+  public static final int EXTREME_PORT = 1;
+  public static final int BUTTON_BOX_PORT = 2;
+
+  // Xbox Controller
+  public static final int XBOX_A_BUTTON_PORT = 0;
+  public static final int XBOX_B_BUTTON_PORT = 1;
+  public static final int XBOX_X_BUTTON_PORT = 2;
+  public static final int XBOX_Y_BUTTON_PORT = 3;
+  public static final int XBOX_LEFT_BUMPER_PORT = 4;
+  public static final int XBOX_RIGHT_BUMPER_PORT = 5;
+  public static final int XBOX_BACK_ARROW_PORT = 6;
+  public static final int XBOX_START_ARROW_PORT = 7;
+  public static final int XBOX_LEFT_STICK_BUTTON_PORT = 8;
+  public static final int XBOX_RIGHT_STICK_BUTTON_PORT = 9;
+  public static final int XBOX_X_AXIS_LEFT_PORT = 0;
+  public static final int XBOX_Y_AXIS_LEFT_PORT = 1;
+  public static final int XBOX_X_AXIS_RIGHT_PORT = 4;
+  public static final int XBOX_Y_AXIS_RIGHT_PORT = 5;
+  public static final int XBOX_LEFT_TRIGGER_PORT = 2;
+  public static final int XBOX_RIGHT_TRIGGER_PORT = 3;
+  public static final int XBOX_POV_UP_DEGREES = 0;
+  public static final int XBOX_POV_UP_RIGHT_DEGREES = 45;
+  public static final int XBOX_POV_RIGHT_DEGREES = 90;
+  public static final int XBOX_POV_DOWN_RIGHT_DEGREES = 135;
+  public static final int XBOX_POV_DOWN_DEGREES = 180;
+  public static final int XBOX_POV_DOWN_LEFT_DEGREES = 225;
+  public static final int XBOX_POV_LEFT_DEGREES = 270;
+  public static final int XBOX_POV_UP_LEFT_DEGREES = 315;
+  public static final RumbleType XBOX_LEFT_RUMBLE = RumbleType.kLeftRumble;
+  public static final RumbleType XBOX_RIGHT_RUMBLE = RumbleType.kRightRumble;
+
+  // Extreme
+  public static final int EXTREME_TRIGGER_PORT = 1;
+  public static final int EXTREME_SIDE_BUTTON_PORT = 2;
+  public static final int EXTREME_JOYSTICK_BOTTOM_LEFT_PORT = 3;
+  public static final int EXTREME_JOYSTICK_BOTTOM_RIGHT_PORT = 4;
+  public static final int EXTREME_JOYSTICK_TOP_LEFT_PORT = 5;
+  public static final int EXTREME_JOYSTICK_TOP_RIGHT_PORT = 6;
+  public static final int EXTREME_BASE_FRONT_LEFT_PORT = 7;
+  public static final int EXTREME_BASE_FRONT_RIGHT_PORT = 8;
+  public static final int EXTREME_BASE_MIDDLE_LEFT_PORT = 9;
+  public static final int EXTREME_BASE_MIDDLE_RIGHT_PORT = 10;
+  public static final int EXTREME_BASE_BACK_LEFT_PORT = 11;
+  public static final int EXTREME_BASE_BACK_RIGHT_PORT = 12;
+  public static final int EXTREME_STICK_X_AXIS_ID = 0;
+  public static final int EXTREME_STICK_Y_AXIS_ID = 1;
+  public static final int EXTREME_STICK_Z_AXIS_ID = 2;
+  public static final int EXTREME_SLIDER_AXIS_ID = 3;
+  public static final int EXTREME_POV_UP_DEGREES = 0;
+  public static final int EXTREME_POV_UP_RIGHT_DEGREES = 45;
+  public static final int EXTREME_POV_RIGHT_DEGREES = 90;
+  public static final int EXTREME_POV_DOWN_RIGHT_DEGREES = 135;
+  public static final int EXTREME_POV_DOWN_DEGREES = 180;
+  public static final int EXTREME_POV_DOWN_LEFT_DEGREES = 225;
+  public static final int EXTREME_POV_LEFT_DEGREES = 270;
+  public static final int EXTREME_POV_UP_LEFT_DEGREES = 315;
+
+  // Button Box
+  // Button Box goes here, but a new one is being made so I'm not doing it right now.
 
   private Constants() { }
 }
