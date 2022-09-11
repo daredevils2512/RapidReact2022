@@ -104,22 +104,6 @@ public class RobotContainer {
   // Controls
   private final ControlBoard m_controlBoard;
 
-  public enum Axis {
-    kLeftX(0),
-    kRightX(4),
-    kLeftY(1),
-    kRightY(5),
-    kLeftTrigger(2),
-    kRightTrigger(3);
-
-    @SuppressWarnings("MemberName")
-    public final int value;
-
-    Axis(int value) {
-      this.value = value;
-    }
-  }
-
   /** @return Left Stick y-Axis */
   public double getMove() {
     return m_controlBoard.xboxController.getYAxisLeft();

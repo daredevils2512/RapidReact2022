@@ -9,7 +9,7 @@ package frc.robot.vision;
  */
 public interface Limelight {
 
-  public Pipeline getDefaultPipeline();
+  public Pipeline getDefaultPipeline(); // Modifier 'public' is redundant for interface members
   public void setPipeline(Pipeline pipeline);
   public void setLEDMode(LimelightLEDMode ledMode);
   public LimelightLEDMode getLEDMode();
