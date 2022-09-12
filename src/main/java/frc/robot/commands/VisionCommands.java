@@ -52,7 +52,7 @@ public final class VisionCommands {
    * @return The command to be used when called.
    */
   public static Command turnOnLimelight(Limelight limelight) {
-    return new RunCommand(() -> limelight.setLEDMode(LimelightLEDMode.ON));
+    return new RunCommand(() -> limelight.setLEDMode(LimelightLEDMode.ON)); // TODO This should only run once so consider replacing with InstantCommand
   }
 
   /** Command that turns the limelight off
@@ -60,6 +60,6 @@ public final class VisionCommands {
    * @return The command to be used when called.
    */
   public static Command turnOffLimelight(Limelight limelight) {
-    return new RunCommand(() -> limelight.setLEDMode(LimelightLEDMode.OFF));
+    return new RunCommand(() -> limelight.setLEDMode(LimelightLEDMode.OFF)); // TODO Should replace with InstantCommand
   }
 }

@@ -1,6 +1,9 @@
 package frc.robot;
 
 import java.util.logging.Level;
+
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.GenericHID;
@@ -106,6 +109,7 @@ public class RobotContainer {
   // Controls
   private final ControlBoard m_controlBoard;
 
+  // TODO remove this if it's not going to be used and if it is it doesn't belong in this class
   public enum Axis {
     kLeftX(0),
     kRightX(4),
@@ -156,7 +160,7 @@ public class RobotContainer {
       // Climber
     m_climberUp = Commands.runClimber(m_climber, Constants.CLIMBER_SPEED);
     m_climberDown = Commands.runClimber(m_climber, -Constants.CLIMBER_SPEED);
-    m_toggleClimberShifters = Commands.climbingShifters(m_climber);
+    m_toggleClimberShifters = Constants.CLIMBER_TRAVERSAL_ENABLED ? Commands.climbingShifters(m_climber) : null;
       // Drive
     m_drive = Commands.drive(m_drivetrain, () -> getMove(), () -> getTurn());
     m_driveShift = Commands.driveShifters(m_drivetrain);
@@ -184,6 +188,10 @@ public class RobotContainer {
 
     // Configure the button bindings
     if (RobotBase.isSimulation()) m_logManager.robotLogger.setLevel(Level.FINER);
+
+    // start camera server
+    UsbCamera camera = CameraServer.startAutomaticCapture();
+    camera.setResolution(640, 480);
     
     configureButtonBindings();
 

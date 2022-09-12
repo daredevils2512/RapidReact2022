@@ -31,7 +31,7 @@ public class PhysicalShooter extends NTSubsystem implements Shooter {
     m_motor = new WPI_TalonFX(Constants.SHOOTER_ID);
       
     m_limiter = new SlewRateLimiter(Constants.SHOOTER_RATELIM_VALUE);
-    feedforward = new SimpleMotorFeedforward(Constants.SHOOTER_FORWARD_CHANNEL, Constants.SHOOTER_BACKWARD_CHANNEL);
+    feedforward = new SimpleMotorFeedforward(Constants.SHOOTER_FORWARD_CHANNEL, Constants.SHOOTER_BACKWARD_CHANNEL); // TODO These constants are misnamed
   }
 
   @Override
@@ -61,7 +61,7 @@ public class PhysicalShooter extends NTSubsystem implements Shooter {
 
   @Override
   public double velocityToRPM(double velocity) {
-    velocity /= Constants.SHOOTER_ENCODER_RESOLUTION;
+    velocity /= Constants.SHOOTER_ENCODER_RESOLUTION; // TODO This is still a divide by zero
     return velocity * 600;
   }
   

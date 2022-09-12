@@ -12,8 +12,8 @@ public class PhysicalClimber extends NTSubsystem implements Climber {
   // Motor stuff
   private final TalonSRX m_rightMotor;
   private final TalonSRX m_leftMotor;
-  DigitalInput toplimitSwitch = new DigitalInput(7);
-  DigitalInput bottomlimitSwitch = new DigitalInput(6);
+  DigitalInput toplimitSwitch = new DigitalInput(7); // TODO Hardcoded value; also incorrect capitalization (topLimitSwitch); also member can be final
+  DigitalInput bottomlimitSwitch = new DigitalInput(6); // TODO Hardcoded value; also incorrect capitalization (bottomLimitSwitch); also member can be final
 
   // Shifters
   private final DoubleSolenoid m_leftShifter;
@@ -35,9 +35,9 @@ public class PhysicalClimber extends NTSubsystem implements Climber {
 
   @Override
   public void setClimbSpeed(double speed) { 
-    if (toplimitSwitch.get() == true && speed < 0){
+    if (toplimitSwitch.get() == true && speed < 0){ // TODO "x == true" and "x == false" are always redundant
       m_rightMotor.set(ControlMode.PercentOutput, 0);
-    } else if (bottomlimitSwitch.get() == false && speed > 0) {
+    } else if (bottomlimitSwitch.get() == false && speed > 0) { // TODO Redundant equality check
       m_rightMotor.set(ControlMode.PercentOutput, 0);
     } else {
       m_rightMotor.set(ControlMode.PercentOutput, speed);
