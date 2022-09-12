@@ -1,14 +1,11 @@
 package frc.robot.commands.vision;
 
-import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.networktables.NetworkTableEntry;
-import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.interfaces.Drivetrain;
 import frc.robot.utils.Constants;
 import frc.robot.vision.Limelight;
 
-public class aim extends CommandBase {
+public class Aim extends CommandBase {
 
 
   private final Drivetrain m_drivetrain;
@@ -18,7 +15,7 @@ public class aim extends CommandBase {
   
   
   
-  public aim(Drivetrain drivetrain) {
+  public Aim(Drivetrain drivetrain) {
     
 
     m_drivetrain = drivetrain;

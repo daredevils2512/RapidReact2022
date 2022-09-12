@@ -4,10 +4,10 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.vision.Limelight;
 import frc.robot.vision.LimelightLEDMode;
 
-public class limelightOn extends CommandBase {
+public class LimelightOn extends CommandBase {
   private final Limelight m_limelight;
 
-  public limelightOn(Limelight limelight) {
+  public LimelightOn(Limelight limelight) {
     m_limelight = limelight;
   }
 

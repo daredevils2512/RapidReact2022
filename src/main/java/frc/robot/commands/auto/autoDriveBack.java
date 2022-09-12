@@ -2,20 +2,24 @@ package frc.robot.commands.auto;
 
 
 import javax.measure.Quantity;
+import javax.measure.quantity.Length;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.interfaces.Drivetrain;
+import systems.uom.common.USCustomary;
+import tech.units.indriya.quantity.Quantities;
 
-public class autoDriveBack extends CommandBase {
+public class AutoDriveBack extends CommandBase {
   private final Drivetrain m_drivetrain;
-  private Quantity<Length> m_initialDistance = 0;
-  private final double m_distance;
+  private Quantity<Length> m_initialDistance = Quantities.getQuantity(0, USCustomary.FOOT);
+  private final Quantity<Length> m_distance;
   private final double m_speed;
 
-  public autoDriveBack(Drivetrain drivetrain, double speed, double distance) {
+  public AutoDriveBack(Drivetrain drivetrain, double speed, Quantity<Length> distance) {
     m_drivetrain = drivetrain;
     m_speed = speed;
     m_distance = distance;
+    addRequirements(drivetrain);
   }
 
   @Override
@@ -35,10 +39,10 @@ public class autoDriveBack extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    if (m_distance < 0) {
-      return m_drivetrain.getDistance() - m_initialDistance < m_distance;
+    if (m_distance.getValue().doubleValue() < 0) {
+      return (m_drivetrain.getDistance().subtract(m_initialDistance)).getValue().doubleValue() < m_distance.getValue().doubleValue();
     } else {
-      return m_drivetrain.getDistance() - m_initialDistance > m_distance;
+      return (m_drivetrain.getDistance().subtract(m_initialDistance)).getValue().doubleValue() > m_distance.getValue().doubleValue();
     }
   }
 }

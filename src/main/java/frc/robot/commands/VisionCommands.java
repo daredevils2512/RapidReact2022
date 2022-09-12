@@ -6,9 +6,10 @@ import javax.measure.quantity.Length;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.RunCommand;
+import frc.robot.commands.vision.Aim;
+import frc.robot.commands.vision.FindRange;
+import frc.robot.commands.vision.LimelightOff;
 import frc.robot.subsystems.interfaces.Drivetrain;
-import frc.robot.utils.Constants;
 import frc.robot.vision.Limelight;
 import frc.robot.vision.LimelightLEDMode;
 import si.uom.SI;
@@ -18,48 +19,38 @@ import tech.units.indriya.quantity.Quantities;
 public final class VisionCommands {
   private VisionCommands() {}
 
-  // Limelight network table
-  static NetworkTable m_limelightTable = NetworkTableInstance.getDefault().getTable("limelight");
-
-  /** Aims the robot automatically
-   * @param drivetrian The drivetrain subsystem to use.
-   * @return The command to be used when called.
+  /** Aims the robot left and right with the goal
+   * @param drivetrain The drivetrain subsystem to use.
+   * @return The command to run.
    */
-  public static Command Aim(Drivetrain drivetrain) {
-    double tx = m_limelightTable.getEntry("tx").getDouble(0);
-    double turnAdjust = Constants.K_P * tx;
-
-    return Commands.drive(drivetrain, () -> 0.0, () -> turnAdjust);
+  public static Command aim(Drivetrain drivetrain) {
+    return new Aim(drivetrain);
   }
 
   /** Automatically moves the robot to a certain distance away from the goalpost
    * <p>distanceFromGoal = (goal height - limelight lens height) / tangent of the angle to the goal
+  /** Gets the robot within range to shoot
    * @param drivetrain The drivetrain subsystem to use.
-   * @return The command to be used when called.
+   * @return The command to run.
    */
   public static Command findRange(Drivetrain drivetrain) {
-    Quantity<Angle> ty = Quantities.getQuantity(m_limelightTable.getEntry("ty").getDouble(0), USCustomary.DEGREE_ANGLE);
-    Quantity<Angle> angleToGoal = Constants.LIMELIGHT_MOUNT_ANGLE.add(ty);
-    Quantity<Length> distanceFromGoal = (Constants.GOAL_HEIGHT.subtract(Constants.LIMELIGHT_LENS_HEIGHT)).divide(Math.tan(angleToGoal.to(SI.RADIAN).getValue().doubleValue()));
-    Quantity<Length> distanceVariation = Constants.DESIRED_DISTANCE.subtract(distanceFromGoal);
-    double moveAjust = Constants.K_P * distanceVariation.to(USCustomary.INCH).getValue().doubleValue();
-
-    return Commands.drive(drivetrain, () -> moveAjust, () -> 0.0);
+    return new FindRange(drivetrain);
   }
 
-  /** Command that turns the limelight on
-   * @param limelight The limelight subsystem to use.
-   * @return The command to be used when called.
+  /** Turns the Limelight off
+   * @param limelight The limelight to use.
+   * @return The command to run.
    */
-  public static Command turnOnLimelight(Limelight limelight) {
-    return new RunCommand(() -> limelight.setLEDMode(LimelightLEDMode.ON)); // TODO This should only run once so consider replacing with InstantCommand
+  public static Command limelightOff(Limelight limelight) {
+    return new LimelightOff(limelight);
   }
 
-  /** Command that turns the limelight off
-   * @param limelight The limelight subsystem to use.
-   * @return The command to be used when called.
+  /** Turns the limelight on
+   * @param limelight The limelight to use.
+   * @return The comamnd to run.
    */
-  public static Command turnOffLimelight(Limelight limelight) {
-    return new RunCommand(() -> limelight.setLEDMode(LimelightLEDMode.OFF)); // TODO Should replace with InstantCommand
+  public static Command limelightOn(Limelight limelight) {
+    return new LimelightOff(limelight);
   }
+  
 }

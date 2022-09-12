@@ -1,11 +1,12 @@
 package frc.robot.commands;
 
 import javax.measure.Quantity;
+import javax.measure.quantity.Length;
 import javax.measure.quantity.Time;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.commands.auto.autoDriveBack;
-import frc.robot.commands.auto.autoShoot;
+import frc.robot.commands.auto.AutoDriveBack;
+import frc.robot.commands.auto.AutoShoot;
 import frc.robot.subsystems.interfaces.Drivetrain;
 import frc.robot.subsystems.interfaces.Intake;
 import frc.robot.subsystems.interfaces.Magazine;
@@ -14,6 +15,32 @@ import si.uom.SI;
 
 public final class AutoCommands {
   private AutoCommands() {}
+  
+  /** Auto command that only drives back.
+  * @param drivetrain The drivetrain subsystem to use
+  * @param speed The speed to go during autonomous (should be negative to go backwards)
+  * @param driveDistance The distance to drive backwards
+  * @return The command to be used when called.
+  */
+ public static Command autoDriveBack(Drivetrain drivetrain, double speed, Quantity<Length> driveDistance) {
+   return new AutoDriveBack(drivetrain, speed, driveDistance);
+ }
+
+ /** Auto command that only shoots.
+  * @param shooter Shooter subsystem to use.
+  * @param mag Magazine subsystem to use.
+  * @param intake Intake subsystem to use.
+  * @param speed The speed for everything.
+  * @return The command to be used when called.
+  */
+  public static Command autoShoot(Shooter shooter, Magazine mag, Intake intake, double shootSpeed) {
+    // return Commands.revShooter(shooter, shootSpeed)
+    // .withTimeout(3)
+    // .andThen(Commands.revShooter(shooter, shootSpeed))
+    // .alongWith(Commands.runMag(magazine, () -> 1.0))
+    // .withTimeout(6);
+    return new AutoShoot(shooter, mag, intake, shootSpeed);
+  }
 
   /** Auto comamnd that drives back and then shoots.
    * @param drivetrain Drivetrain subsystem to use.
@@ -25,7 +52,9 @@ public final class AutoCommands {
    * @param shootSpeed The speed to shoot the balls
    * @return The command to be used when called.
    */
-  public static Command fullAuto(Drivetrain drivetrain, double driveSpeed, double driveTime, Shooter shooter, Magazine mag, Intake intake, double shootSpeed) {
-    return new autoShoot(shooter, mag, intake, shootSpeed).andThen(new autoDriveBack(drivetrain, driveSpeed, driveTime).withTimeout(3));
+  public static Command fullAuto(Drivetrain drivetrain, double driveSpeed, Quantity<Length> driveTime, Shooter shooter, Magazine mag, Intake intake, double shootSpeed) {
+    return autoShoot(shooter, mag, intake, shootSpeed)
+    .andThen(autoDriveBack(drivetrain, driveSpeed, driveTime)
+    .withTimeout(3));
   }
 }

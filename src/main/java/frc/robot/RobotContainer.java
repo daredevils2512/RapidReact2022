@@ -19,12 +19,7 @@ import frc.robot.vision.Limelight;
 import frc.robot.vision.PhysicalLimelight;
 import frc.robot.vision.Pipeline;
 import frc.robot.commands.Commands;
-import frc.robot.commands.auto.autoDriveBack;
-import frc.robot.commands.auto.autoShoot;
-import frc.robot.commands.vision.aim;
-import frc.robot.commands.vision.findRange;
-import frc.robot.commands.vision.limelightOff;
-import frc.robot.commands.vision.limelightOn;
+import frc.robot.commands.VisionCommands;
 import frc.robot.commands.AutoCommands;
 import frc.robot.subsystems.dummy.DummyDrivetrain;
 import frc.robot.subsystems.dummy.DummyIntake;
@@ -109,23 +104,6 @@ public class RobotContainer {
   // Controls
   private final ControlBoard m_controlBoard;
 
-  // TODO remove this if it's not going to be used and if it is it doesn't belong in this class
-  public enum Axis {
-    kLeftX(0),
-    kRightX(4),
-    kLeftY(1),
-    kRightY(5),
-    kLeftTrigger(2),
-    kRightTrigger(3);
-
-    @SuppressWarnings("MemberName")
-    public final int value;
-
-    Axis(int value) {
-      this.value = value;
-    }
-  }
-
   /** @return Left Stick y-Axis */
   public double getMove() {
     return m_controlBoard.xboxController.getYAxisLeft();
@@ -152,8 +130,8 @@ public class RobotContainer {
 
     // Commands
       // Autos
-    m_autoDrive = new autoDriveBack(m_drivetrain, Constants.DRIVE_AUTO_SPEED, Constants.AUTO_DRIVE_BACK_DISTANCE);
-    m_autoShoot = new autoShoot(m_shooter, m_magazine, m_intake, Constants.SHOOT_AUTO_SPEED);
+    m_autoDrive = AutoCommands.autoDriveBack(m_drivetrain, Constants.DRIVE_AUTO_SPEED, Constants.AUTO_DRIVE_BACK_DISTANCE);
+    m_autoShoot = AutoCommands.autoShoot(m_shooter, m_magazine, m_intake, Constants.SHOOT_AUTO_SPEED);
     m_autoFull = AutoCommands.fullAuto(m_drivetrain, Constants.DRIVE_AUTO_SPEED, Constants.AUTO_DRIVE_BACK_DISTANCE, m_shooter, m_magazine, m_intake, Constants.SHOOT_AUTO_SPEED);
       // Compressor
     m_compressor.setClosedLoopControl(true);
@@ -168,8 +146,8 @@ public class RobotContainer {
     m_takeBalls = Commands.runIntake(m_intake, () -> 1);
     m_intakeShift = Commands.intakeShifters(m_intake);
       // Vision
-    m_aim = new aim(m_drivetrain);
-    m_FindRange = new findRange(m_drivetrain);
+    m_aim = VisionCommands.aim(m_drivetrain);
+    m_FindRange = VisionCommands.findRange(m_drivetrain);
       // LEDs
     m_LEDToggle = Commands.toggleLEDs(m_LED);
       // Magazine
@@ -178,9 +156,9 @@ public class RobotContainer {
       // Shooter
     m_revShooterFast = Commands.revShooter(m_shooter, Constants.SHOOTER_FAST_SPEED);
     m_revShooterSlow = Commands.revShooter(m_shooter, Constants.SHOOTER_SLOW_SPEED);
-
-    m_limelightOn = new limelightOn(m_limelight);
-    m_limelightOff = new limelightOff(m_limelight);
+      // Limelight
+    m_limelightOn = VisionCommands.limelightOn(m_limelight);
+    m_limelightOff = VisionCommands.limelightOff(m_limelight);
 
     // Other Stuff
     m_logManager = new LoggingManager();
