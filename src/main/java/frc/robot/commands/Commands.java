@@ -32,14 +32,6 @@ public final class Commands {
     return new FunctionalCommand(() -> { }, () -> intake.setIntake(speed.getAsDouble()), (interrupted) -> intake.setIntake(0.0), () -> false, intake);
   }
 
-  /** Toggles the climber shifters
-   * @param climber The climber subsystem to use.
-   * @return The command to be used when called.
-   */
-  public static Command climbingShifters(Climber climber) {
-    return new InstantCommand(climber::toggleExtended, climber);
-  }
-
   /** Runs the climber
    * @param climber The climbing subsystem to use.
    * @param speed the speed to run the climber. Positive for up, negative for down.

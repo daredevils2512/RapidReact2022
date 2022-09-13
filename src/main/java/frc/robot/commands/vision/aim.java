@@ -2,23 +2,16 @@ package frc.robot.commands.vision;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.interfaces.Drivetrain;
+import frc.robot.subsystems.interfaces.Limelight;
 import frc.robot.utils.Constants;
-import frc.robot.vision.Limelight;
 
 public class Aim extends CommandBase {
-
-
-  private final Drivetrain m_drivetrain;
+  private final Drivetrain drivetrain;
   
-  
-  private Limelight m_limelight;
-  
-  
+  private Limelight limelight;
   
   public Aim(Drivetrain drivetrain) {
-    
-
-    m_drivetrain = drivetrain;
+    this.drivetrain = drivetrain;
   }
 
   /** Called when the command is initially scheduled. */
@@ -31,15 +24,15 @@ public class Aim extends CommandBase {
   @Override
   public void execute() {
     
-    double m_aimAjust = Constants.K_P * m_limelight.tx(); 
-   m_drivetrain.arcadeDrive(0, m_aimAjust);
+    double aimAjust = Constants.K_P * limelight.tx(); 
+    drivetrain.arcadeDrive(0, aimAjust);
   }
 
   /** Called once the command ends or is interrupted. */
   @Override
   public void end(boolean interrupted) {
     if (interrupted) {
-      m_drivetrain.arcadeDrive(0.0, 0.0);
+      drivetrain.arcadeDrive(0.0, 0.0);
     }
   }
 

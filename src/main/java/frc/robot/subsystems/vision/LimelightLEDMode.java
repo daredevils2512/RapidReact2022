@@ -1,4 +1,4 @@
-package frc.robot.vision;
+package frc.robot.subsystems.vision;
 
 import java.util.EnumSet;
 import java.util.HashMap;
@@ -10,26 +10,26 @@ public enum LimelightLEDMode {
   BLINK(2),
   ON(3);
 
-  private static final Map<Integer, LimelightLEDMode> m_modeMap;
+  private static final Map<Integer, LimelightLEDMode> modeMap;
 
-  private final int m_intValue;
+  private final int intValue;
 
   static {
-    m_modeMap = new HashMap<>();
+    modeMap = new HashMap<>();
     for (LimelightLEDMode mode : EnumSet.allOf(LimelightLEDMode.class)) {
-      m_modeMap.put(mode.getIntValue(), mode);
+      modeMap.put(mode.getIntValue(), mode);
     }
   }
 
   public static LimelightLEDMode fromIntValue(int intValue) {
-    return m_modeMap.get(intValue);
+    return modeMap.get(intValue);
   }
 
   private LimelightLEDMode(int intValue) {
-    m_intValue = intValue;
+    this.intValue = intValue;
   }
 
   public int getIntValue() {
-    return m_intValue;
+    return intValue;
   }
 }

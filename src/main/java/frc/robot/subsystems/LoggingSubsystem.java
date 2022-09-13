@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class LoggingSubsystem extends SubsystemBase {
-  protected Logger m_logger;
+  protected Logger logger;
   public String name;
 
   /** Creates a new LoggingSubsystem. 
@@ -15,11 +15,15 @@ public class LoggingSubsystem extends SubsystemBase {
   */
   public LoggingSubsystem(String name, Level logLevel) {
     this.name = name;
-    m_logger = Logger.getLogger("subsystem." + name);
-    m_logger.setParent(Logger.getGlobal());
-    m_logger.log(Level.INFO, m_logger.getName() + " initialized");
-    if (RobotBase.isSimulation()) {m_logger.setLevel(logLevel);} else {m_logger.setLevel(logLevel);}
-    m_logger.log(Level.INFO, name + " logger started, level: " + m_logger.getLevel().toString());
+    logger = Logger.getLogger("subsystem." + name);
+    logger.setParent(Logger.getGlobal());
+    logger.log(Level.INFO, logger.getName() + " initialized");
+    if (RobotBase.isSimulation()) { // TODO: Redundant if statement??
+      logger.setLevel(logLevel);
+    } else {
+      logger.setLevel(logLevel);
+    }
+    logger.log(Level.INFO, name + " logger started, level: " + logger.getLevel().toString());
   }
   
   /** Creates a new LoggingSubsystem. 
@@ -27,15 +31,15 @@ public class LoggingSubsystem extends SubsystemBase {
   */
   public LoggingSubsystem(String name) {
     this.name = name;
-    m_logger = Logger.getLogger("subsystem." + name);
-    m_logger.setParent(Logger.getGlobal());
-    m_logger.log(Level.INFO, m_logger.getName() + " initialized");
+    logger = Logger.getLogger("subsystem." + name);
+    logger.setParent(Logger.getGlobal());
+    logger.log(Level.INFO, logger.getName() + " initialized");
     if (RobotBase.isSimulation()) {
-      m_logger.setLevel(Level.FINEST);
+      logger.setLevel(Level.FINEST);
     } else {
-      m_logger.setLevel(Level.WARNING);
+      logger.setLevel(Level.WARNING);
     }
-    m_logger.log(Level.INFO, name + " logger started, level: " + m_logger.getLevel().toString());
+    logger.log(Level.INFO, name + " logger started, level: " + logger.getLevel().toString());
   }
 
   @Override

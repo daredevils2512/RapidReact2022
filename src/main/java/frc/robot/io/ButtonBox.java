@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 public class ButtonBox {
-  private final Joystick m_joystick;
+  private final Joystick joystick;
 
   public final Button topWhite;
   public final Button topRed;
@@ -19,18 +19,18 @@ public class ButtonBox {
   public final Button bigRed;
   
   public ButtonBox(int port) {
-    m_joystick = new Joystick(port);
+    joystick = new Joystick(port);
 
-    topWhite = new JoystickButton(m_joystick, 2);
-    bigWhite = new JoystickButton(m_joystick, 3);
-    middleRed = new JoystickButton(m_joystick, 4);
-    bottomWhite = new JoystickButton(m_joystick, 5);
-    topRed = new JoystickButton(m_joystick, 6);
-    green = new JoystickButton(m_joystick, 7);
-    middleWhite = new JoystickButton(m_joystick, 8);
-    bigRed = new JoystickButton(m_joystick, 14);
-    yellow = new JoystickButton(m_joystick, 15);
-    bottomRed = new JoystickButton(m_joystick, 16);
+    topWhite = new JoystickButton(joystick, 2);
+    bigWhite = new JoystickButton(joystick, 3);
+    middleRed = new JoystickButton(joystick, 4);
+    bottomWhite = new JoystickButton(joystick, 5);
+    topRed = new JoystickButton(joystick, 6);
+    green = new JoystickButton(joystick, 7);
+    middleWhite = new JoystickButton(joystick, 8);
+    bigRed = new JoystickButton(joystick, 14);
+    yellow = new JoystickButton(joystick, 15);
+    bottomRed = new JoystickButton(joystick, 16);
   }
 
 }

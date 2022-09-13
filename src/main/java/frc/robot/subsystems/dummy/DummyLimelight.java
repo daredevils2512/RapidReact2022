@@ -1,10 +1,13 @@
-package frc.robot.vision;
+package frc.robot.subsystems.dummy;
 
+import frc.robot.subsystems.interfaces.Limelight;
+import frc.robot.subsystems.vision.LimelightLEDMode;
+import frc.robot.subsystems.vision.Pipeline;
 
-public class DummyLimelight implements frc.robot.vision.Limelight {
+public class DummyLimelight implements frc.robot.subsystems.interfaces.Limelight {
 
   @Override
-  public Pipeline getDefaultPipeline() { return null; }
+  public Pipeline getDefaultPipeline() { return null; } // TODO: WTF WHO DID THIS THEY SHOULD BE KICKED OFF THE TEAM
 
   @Override
   public void setPipeline(Pipeline pipeline) { }
@@ -13,7 +16,7 @@ public class DummyLimelight implements frc.robot.vision.Limelight {
   public void setLEDMode(LimelightLEDMode ledMode) { }
 
   @Override
-  public LimelightLEDMode getLEDMode() { return null; }
+  public LimelightLEDMode getLEDMode() { return null; } // TODO: WTF WHO DID THIS THEY SHOULD BE KICKED OFF THE TEAM
 
   @Override
   public boolean hasTarget() { return false; }

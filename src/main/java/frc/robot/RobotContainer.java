@@ -1,7 +1,6 @@
 package frc.robot;
 
 import java.util.logging.Level;
-
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.networktables.NetworkTableEntry;
@@ -14,16 +13,13 @@ import frc.robot.io.ControlBoard;
 import frc.robot.io.NTButton;
 import frc.robot.utils.Constants;
 import frc.robot.utils.LoggingManager;
-import frc.robot.vision.DummyLimelight;
-import frc.robot.vision.Limelight;
-import frc.robot.vision.PhysicalLimelight;
-import frc.robot.vision.Pipeline;
 import frc.robot.commands.Commands;
 import frc.robot.commands.VisionCommands;
 import frc.robot.commands.AutoCommands;
 import frc.robot.subsystems.dummy.DummyDrivetrain;
 import frc.robot.subsystems.dummy.DummyIntake;
 import frc.robot.subsystems.dummy.DummyLEDManager;
+import frc.robot.subsystems.dummy.DummyLimelight;
 import frc.robot.subsystems.dummy.DummyMagazine;
 import frc.robot.subsystems.dummy.DummyShooter;
 import frc.robot.subsystems.interfaces.Climber;
@@ -31,18 +27,20 @@ import frc.robot.subsystems.interfaces.CompresserManager;
 import frc.robot.subsystems.interfaces.Drivetrain;
 import frc.robot.subsystems.interfaces.Intake;
 import frc.robot.subsystems.interfaces.LEDManager;
+import frc.robot.subsystems.interfaces.Limelight;
 import frc.robot.subsystems.interfaces.Magazine;
 import frc.robot.subsystems.interfaces.Shooter;
 import frc.robot.subsystems.dummy.DummyClimber;
 import frc.robot.subsystems.dummy.DummyCompressor;
 import frc.robot.subsystems.physical.PhysicalLEDManager;
+import frc.robot.subsystems.physical.PhysicalLimelight;
 import frc.robot.subsystems.physical.PhysicalClimber;
 import frc.robot.subsystems.physical.PhysicalCompressor;
 import frc.robot.subsystems.physical.PhysicalDrivetrain;
 import frc.robot.subsystems.physical.PhysicalIntake;
 import frc.robot.subsystems.physical.PhysicalMagazine;
 import frc.robot.subsystems.physical.PhysicalShooter;
-import frc.robot.subsystems.physical.PhysicalSparkDrivetrain;
+import frc.robot.subsystems.vision.Pipeline;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -55,63 +53,62 @@ import frc.robot.subsystems.physical.PhysicalSparkDrivetrain;
  */
 public class RobotContainer {
   // Network table stuff
-  private final NetworkTableEntry m_useNTShooterControlEntry;
-  private final NetworkTableEntry m_shooterSpeedEntry;
+  private final NetworkTableEntry useNTShooterControlEntry;
+  private final NetworkTableEntry shooterSpeedEntry;
 
   // Logging
-  private final LoggingManager m_logManager;
+  private final LoggingManager logManager;
 
   // Subsystems
-  private final Climber m_climber;
-  private final CompresserManager m_compressor;
-  private final Drivetrain m_drivetrain;
-  private final Intake m_intake;
-  private final LEDManager m_LED;
-  private final Limelight m_limelight;
-  private final Magazine m_magazine;
-  private final Shooter m_shooter;
+  private final Climber climber;
+  private final CompresserManager compressor;
+  private final Drivetrain drivetrain;
+  private final Intake intake;
+  private final LEDManager LED;
+  private final Limelight limelight;
+  private final Magazine magazine;
+  private final Shooter shooter;
 
   // Commands
     // Autos
-  private final Command m_autoDrive;
-  private final Command m_autoShoot;
-  private final Command m_autoFull;
+  private final Command autoDrive;
+  private final Command autoShoot;
+  private final Command autoFull;
     // Climber
-  private final Command m_climberUp;
-  private final Command m_climberDown;
-  private final Command m_toggleClimberShifters;
+  private final Command climberUp;
+  private final Command climberDown;
     // Drive
-  private final Command m_drive;
-  private final Command m_driveShift;
+  private final Command drive;
+  private final Command driveShift;
     // Intake
-  private final Command m_takeBalls;
-  private final Command m_intakeShift;
+  private final Command takeBalls;
+  private final Command intakeShift;
     // Vision
-  private final Command m_aim;
-  private final Command m_FindRange;
+  private final Command aim;
+  private final Command FindRange;
     // LEDs
-  private final Command m_LEDToggle;
+  private final Command LEDToggle;
     // Magazine
-  private final Command m_runMag;
-  private final Command m_runMagBack;
+  private final Command runMag;
+  private final Command runMagBack;
     // Shooter
-  private final Command m_revShooterFast;
-  private final Command m_revShooterSlow;
+  private final Command revShooterFast;
+  private final Command revShooterSlow;
 
-  private final Command m_limelightOn;
-  private final Command m_limelightOff;
+  private final Command limelightOn;
+  private final Command limelightOff;
 
   // Controls
-  private final ControlBoard m_controlBoard;
+  private final ControlBoard controlBoard;
 
   /** @return Left Stick y-Axis */
   public double getMove() {
-    return m_controlBoard.xboxController.getYAxisLeft();
+    return controlBoard.xboxController.getYAxisLeft();
   }
   
   /** @return Right Stick x-Axis */
   public double getTurn() {
-    return m_controlBoard.xboxController.getXAxisRight();
+    return controlBoard.xboxController.getXAxisRight();
   }
 
   /**
@@ -119,53 +116,52 @@ public class RobotContainer {
    */
   public RobotContainer() {
     // Define Subsystems
-    m_LED = Constants.LED_ENABLED ? new PhysicalLEDManager() : new DummyLEDManager();
-    m_climber = Constants.CLIMBER_ENABLED ? new PhysicalClimber() : new DummyClimber();
-    m_compressor = Constants.COMPRESSOR_ENABLED ? new PhysicalCompressor() : new DummyCompressor();
-    m_drivetrain = Constants.DRIVETRAIN_ENABLED ? (Constants.SPARK_DRIVETRAIN_ENABLED ? new PhysicalSparkDrivetrain() : new PhysicalDrivetrain()) : new DummyDrivetrain();
-    m_intake = Constants.INTAKE_ENABLED ? new PhysicalIntake() : new DummyIntake();
-    m_limelight = Constants.LIMELIGHT_ENABLED ? new PhysicalLimelight(Pipeline.N_E_D) : new DummyLimelight();
-    m_magazine = Constants.MAGAZINE_ENABLED ? new PhysicalMagazine() : new DummyMagazine();
-    m_shooter = Constants.SHOOTER_ENABLED ? new PhysicalShooter() : new DummyShooter();
+    LED = Constants.LED_ENABLED ? new PhysicalLEDManager() : new DummyLEDManager();
+    climber = Constants.CLIMBER_ENABLED ? new PhysicalClimber() : new DummyClimber();
+    compressor = Constants.COMPRESSOR_ENABLED ? new PhysicalCompressor() : new DummyCompressor();
+    drivetrain = Constants.DRIVETRAIN_ENABLED ? new PhysicalDrivetrain() : new DummyDrivetrain();
+    intake = Constants.INTAKE_ENABLED ? new PhysicalIntake() : new DummyIntake();
+    limelight = Constants.LIMELIGHT_ENABLED ? new PhysicalLimelight(Pipeline.N_E_D) : new DummyLimelight();
+    magazine = Constants.MAGAZINE_ENABLED ? new PhysicalMagazine() : new DummyMagazine();
+    shooter = Constants.SHOOTER_ENABLED ? new PhysicalShooter() : new DummyShooter();
 
     // Commands
       // Autos
-    m_autoDrive = AutoCommands.autoDriveBack(m_drivetrain, Constants.DRIVE_AUTO_SPEED, Constants.AUTO_DRIVE_BACK_DISTANCE);
-    m_autoShoot = AutoCommands.autoShoot(m_shooter, m_magazine, m_intake, Constants.SHOOT_AUTO_SPEED);
-    m_autoFull = AutoCommands.fullAuto(m_drivetrain, Constants.DRIVE_AUTO_SPEED, Constants.AUTO_DRIVE_BACK_DISTANCE, m_shooter, m_magazine, m_intake, Constants.SHOOT_AUTO_SPEED);
+    autoDrive = AutoCommands.autoDriveBack(drivetrain, Constants.DRIVE_AUTO_SPEED, Constants.AUTO_DRIVE_BACK_DISTANCE);
+    autoShoot = AutoCommands.autoShoot(shooter, magazine, intake, Constants.SHOOT_AUTO_SPEED);
+    autoFull = AutoCommands.fullAuto(drivetrain, Constants.DRIVE_AUTO_SPEED, Constants.AUTO_DRIVE_BACK_DISTANCE, shooter, magazine, intake, Constants.SHOOT_AUTO_SPEED);
       // Compressor
-    m_compressor.setClosedLoopControl(true);
+    compressor.setClosedLoopControl(true);
       // Climber
-    m_climberUp = Commands.runClimber(m_climber, Constants.CLIMBER_SPEED);
-    m_climberDown = Commands.runClimber(m_climber, -Constants.CLIMBER_SPEED);
-    m_toggleClimberShifters = Constants.CLIMBER_TRAVERSAL_ENABLED ? Commands.climbingShifters(m_climber) : null;
+    climberUp = Commands.runClimber(climber, Constants.CLIMBER_SPEED);
+    climberDown = Commands.runClimber(climber, -Constants.CLIMBER_SPEED);
       // Drive
-    m_drive = Commands.drive(m_drivetrain, () -> getMove(), () -> getTurn());
-    m_driveShift = Commands.driveShifters(m_drivetrain);
+    drive = Commands.drive(drivetrain, () -> getMove(), () -> getTurn());
+    driveShift = Commands.driveShifters(drivetrain);
       // Intake
-    m_takeBalls = Commands.runIntake(m_intake, () -> 1);
-    m_intakeShift = Commands.intakeShifters(m_intake);
+    takeBalls = Commands.runIntake(intake, () -> 1);
+    intakeShift = Commands.intakeShifters(intake);
       // Vision
-    m_aim = VisionCommands.aim(m_drivetrain);
-    m_FindRange = VisionCommands.findRange(m_drivetrain);
+    aim = VisionCommands.aim(drivetrain);
+    FindRange = VisionCommands.findRange(drivetrain);
       // LEDs
-    m_LEDToggle = Commands.toggleLEDs(m_LED);
+    LEDToggle = Commands.toggleLEDs(LED);
       // Magazine
-    m_runMag = Commands.runMag(m_magazine, () -> 1);
-    m_runMagBack = Commands.runMag(m_magazine, () -> -1);
+    runMag = Commands.runMag(magazine, () -> 1);
+    runMagBack = Commands.runMag(magazine, () -> -1);
       // Shooter
-    m_revShooterFast = Commands.revShooter(m_shooter, Constants.SHOOTER_FAST_SPEED);
-    m_revShooterSlow = Commands.revShooter(m_shooter, Constants.SHOOTER_SLOW_SPEED);
+    revShooterFast = Commands.revShooter(shooter, Constants.SHOOTER_FAST_SPEED);
+    revShooterSlow = Commands.revShooter(shooter, Constants.SHOOTER_SLOW_SPEED);
       // Limelight
-    m_limelightOn = VisionCommands.limelightOn(m_limelight);
-    m_limelightOff = VisionCommands.limelightOff(m_limelight);
+    limelightOn = VisionCommands.limelightOn(limelight);
+    limelightOff = VisionCommands.limelightOff(limelight);
 
     // Other Stuff
-    m_logManager = new LoggingManager();
-    m_controlBoard = new ControlBoard();
+    logManager = new LoggingManager();
+    controlBoard = new ControlBoard();
 
     // Configure the button bindings
-    if (RobotBase.isSimulation()) m_logManager.robotLogger.setLevel(Level.FINER);
+    if (RobotBase.isSimulation()) logManager.robotLogger.setLevel(Level.FINER);
 
     // start camera server
     UsbCamera camera = CameraServer.startAutomaticCapture();
@@ -175,10 +171,10 @@ public class RobotContainer {
 
     // Network Table stuff
     NTButton.startConcurrentHandling();
-    m_useNTShooterControlEntry = NetworkTableInstance.getDefault().getEntry("Use network tables for shooter control");
-    m_shooterSpeedEntry = NetworkTableInstance.getDefault().getEntry("Shooter set speed");
-    m_useNTShooterControlEntry.setBoolean(false);
-    m_shooterSpeedEntry.setDouble(0);
+    useNTShooterControlEntry = NetworkTableInstance.getDefault().getEntry("Use network tables for shooter control");
+    shooterSpeedEntry = NetworkTableInstance.getDefault().getEntry("Shooter set speed");
+    useNTShooterControlEntry.setBoolean(false);
+    shooterSpeedEntry.setDouble(0);
 
   }
 
@@ -193,37 +189,36 @@ public class RobotContainer {
   private void configureButtonBindings() {
     // Button Bindings
       // Climbers
-    m_controlBoard.extreme.joystickTopLeft.whileHeld(m_climberUp);
-    m_controlBoard.extreme.joystickTopRight.whileHeld(m_climberDown);
-    m_controlBoard.extreme.baseFrontLeft.whenPressed(m_toggleClimberShifters);
+    controlBoard.extreme.joystickTopLeft.whileHeld(climberUp);
+    controlBoard.extreme.joystickTopRight.whileHeld(climberDown);
       // Drive
-    m_drivetrain.setDefaultCommand(m_drive);
-    m_controlBoard.xboxController.rightBumper.whenPressed(m_driveShift);
+    drivetrain.setDefaultCommand(drive);
+    controlBoard.xboxController.rightBumper.whenPressed(driveShift);
       // Intake
-    m_controlBoard.extreme.baseMiddleRight.whileHeld(m_takeBalls);
-    m_controlBoard.extreme.baseMiddleLeft.whenPressed(m_intakeShift);
+    controlBoard.extreme.baseMiddleRight.whileHeld(takeBalls);
+    controlBoard.extreme.baseMiddleLeft.whenPressed(intakeShift);
       // Aim
-    m_controlBoard.extreme.joystickBottomLeft.whenPressed(m_limelightOn);
-    m_controlBoard.extreme.joystickBottomLeft.whileHeld(m_aim);
-    m_controlBoard.extreme.joystickBottomLeft.whenReleased(m_limelightOff);
+    controlBoard.extreme.joystickBottomLeft.whenPressed(limelightOn);
+    controlBoard.extreme.joystickBottomLeft.whileHeld(aim);
+    controlBoard.extreme.joystickBottomLeft.whenReleased(limelightOff);
       // LEDs
-    m_controlBoard.extreme.baseBackRight.whenPressed(m_LEDToggle);
+    controlBoard.extreme.baseBackRight.whenPressed(LEDToggle);
       // Find Range
-    m_controlBoard.extreme.joystickBottomRight.whenPressed(m_limelightOn);
-    m_controlBoard.extreme.joystickBottomRight.whileHeld(m_FindRange);
-    m_controlBoard.extreme.joystickBottomRight.whenReleased(m_limelightOff);
+    controlBoard.extreme.joystickBottomRight.whenPressed(limelightOn);
+    controlBoard.extreme.joystickBottomRight.whileHeld(FindRange);
+    controlBoard.extreme.joystickBottomRight.whenReleased(limelightOff);
       // Magazine
-    m_controlBoard.extreme.trigger.whileHeld(m_runMag);
-    m_controlBoard.extreme.baseBackRight.whileHeld(m_runMagBack);
+    controlBoard.extreme.trigger.whileHeld(runMag);
+    controlBoard.extreme.baseBackRight.whileHeld(runMagBack);
       // Shooter
-    m_controlBoard.extreme.sideButton.whileHeld(m_revShooterFast);
-    m_controlBoard.extreme.baseBackLeft.whileHeld(m_revShooterSlow);
+    controlBoard.extreme.sideButton.whileHeld(revShooterFast);
+    controlBoard.extreme.baseBackLeft.whileHeld(revShooterSlow);
   }
 
   /** Use this to pass the autonomous command to the main {@link Robot} class.
    * @return The command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    return m_autoFull;
+    return autoFull;
   }
 } 

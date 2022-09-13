@@ -5,7 +5,7 @@ import frc.robot.commands.vision.Aim;
 import frc.robot.commands.vision.FindRange;
 import frc.robot.commands.vision.LimelightOff;
 import frc.robot.subsystems.interfaces.Drivetrain;
-import frc.robot.vision.Limelight;
+import frc.robot.subsystems.interfaces.Limelight;
 
 public final class VisionCommands {
   private VisionCommands() {}

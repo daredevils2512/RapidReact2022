@@ -1,19 +1,19 @@
 package frc.robot.commands.vision;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.vision.Limelight;
-import frc.robot.vision.LimelightLEDMode;
+import frc.robot.subsystems.interfaces.Limelight;
+import frc.robot.subsystems.vision.LimelightLEDMode;
 
 public class LimelightOn extends CommandBase {
-  private final Limelight m_limelight;
+  private final Limelight limelight;
 
   public LimelightOn(Limelight limelight) {
-    m_limelight = limelight;
+    this.limelight = limelight;
   }
 
   @Override
   public void execute() {
-    m_limelight.setLEDMode(LimelightLEDMode.ON);
+    limelight.setLEDMode(LimelightLEDMode.ON);
   }
 
 }

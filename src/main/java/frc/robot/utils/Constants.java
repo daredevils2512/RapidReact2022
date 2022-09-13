@@ -13,15 +13,15 @@ import edu.wpi.first.wpilibj.GenericHID.RumbleType;
  */
 public final class Constants {
 
-  // 
+  // Interfaces
   public static final boolean SHOOTER_ENABLED = true;
   public static final boolean MAGAZINE_ENABLED = true;
   public static final boolean INTAKE_ENABLED = true;
-  public static final boolean CLIMBER_ENABLED = false;
+  public static final boolean CLIMBER_ENABLED = true; // TODO: Climber poops and sidded and cums itself
   public static final boolean DRIVETRAIN_ENABLED = true;
   public static final boolean SPARK_DRIVETRAIN_ENABLED = false;
   public static final boolean COMPRESSOR_ENABLED = true;
-  public static final boolean LIMELIGHT_ENABLED = false;
+  public static final boolean LIMELIGHT_ENABLED = true;
   public static final boolean LED_ENABLED = false;
   public static final boolean CLIMBER_TRAVERSAL_ENABLED = false;
 
@@ -35,7 +35,7 @@ public final class Constants {
   public static final double DRIVETRAIN_RATELIM_VALUE = 15;
   public static final double DRIVETRAIN_MAX_SPEED = .75; 
   public static final double DRIVETRAIN_MAX_TURN = .75; 
-  public static final double DRIVETRAIN_GEAR_RATIO = 1; // TODO find vale
+  public static final double DRIVETRAIN_GEAR_RATIO = 1; // TODO find value
   public static final double DRIVETRAIN_WHEEL_DIAMETER = 6;
   public static final double DRIVETRAIN_WHEEL_CIRCUMFERENCE =  DRIVETRAIN_WHEEL_DIAMETER * Math.PI;
   public static final double DRIVETRAIN_DISTANCE_PER_PULSE = DRIVETRAIN_WHEEL_CIRCUMFERENCE / DRIVETRAIN_GEAR_RATIO / DRIVETRAIN_ENCODER_RESOLUTION;

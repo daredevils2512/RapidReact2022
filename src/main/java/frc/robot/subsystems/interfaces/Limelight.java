@@ -1,4 +1,7 @@
-package frc.robot.vision;
+package frc.robot.subsystems.interfaces;
+
+import frc.robot.subsystems.vision.LimelightLEDMode;
+import frc.robot.subsystems.vision.Pipeline;
 
 /**
  * returned 228 in at 208 inches
@@ -25,6 +28,7 @@ public interface Limelight {
   public int tvert();
   public double getLastPosition();
 
+  // TODO: What is this? Left over code?
   /**
    * 
    * @return distance in units of something to the tagret
