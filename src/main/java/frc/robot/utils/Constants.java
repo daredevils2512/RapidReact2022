@@ -17,7 +17,7 @@ public final class Constants {
   public static final boolean SHOOTER_ENABLED = true;
   public static final boolean MAGAZINE_ENABLED = true;
   public static final boolean INTAKE_ENABLED = true;
-  public static final boolean CLIMBER_ENABLED = true; // TODO: Climber poops and sidded and cums itself
+  public static final boolean CLIMBER_ENABLED = true;
   public static final boolean DRIVETRAIN_ENABLED = true;
   public static final boolean COMPRESSOR_ENABLED = true;
   public static final boolean LIMELIGHT_ENABLED = true;
@@ -42,8 +42,8 @@ public final class Constants {
   public static final int SHOOTER_ENCODER_RESOLUTION = 0; // TODO: find value
   public static final int SHOOTER_ENCODER_CHANNEL_A = 0; // TODO: Find value
   public static final int SHOOTER_ENCODER_CHANNEL_B = 1; // TODO: Find value
-  public static final int SHOOTER_FORWARD_CHANNEL = 0; // TODO find value
-  public static final int SHOOTER_BACKWARD_CHANNEL = 1; // TODO find value
+  public static final int SHOOTER_K_S = 0; // TODO find value
+  public static final int SHOOTER_K_V = 1; // TODO find value
   public static final double SHOOTER_RATELIM_VALUE = 0.5; // TODO find best value
   public static final double SHOOTER_FAST_SPEED = .75;
   public static final double SHOOTER_SLOW_SPEED = .25;
@@ -54,6 +54,8 @@ public final class Constants {
 
   // climber
   public static final double CLIMBER_SPEED = .85;
+  public static final int CLIMBER_TOP_LIMIT_SWITCH_PORT = 7;
+  public static final int CLIMBER_BOTTOM_LIMIT_SWITCH_PORT = 8;
 
   // Motor IDs
   public static final int DRIVETRAIN_LEFT_ID1 = 10; 
