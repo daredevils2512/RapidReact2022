@@ -101,20 +101,14 @@ public class RobotContainer {
   // Controls
   private final ControlBoard controlBoard;
 
-  /** @return Left Stick y-Axis */
-  public double getMove() {
-    return controlBoard.xboxController.getYAxisLeft();
-  }
-  
-  /** @return Right Stick x-Axis */
-  public double getTurn() {
-    return controlBoard.xboxController.getXAxisRight();
-  }
-
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
+    // Other Stuff
+    logManager = new LoggingManager();
+    controlBoard = new ControlBoard();
+
     // Define Subsystems
     LED = Constants.LED_ENABLED ? new PhysicalLEDManager() : new DummyLEDManager();
     climber = Constants.CLIMBER_ENABLED ? new PhysicalClimber() : new DummyClimber();
@@ -136,7 +130,7 @@ public class RobotContainer {
     climberUp = Commands.runClimber(climber, Constants.CLIMBER_SPEED);
     climberDown = Commands.runClimber(climber, -Constants.CLIMBER_SPEED);
       // Drive
-    drive = Commands.drive(drivetrain, () -> getMove(), () -> getTurn());
+    drive = Commands.drive(drivetrain, () -> controlBoard.xboxController.getYAxisLeft(), () -> controlBoard.xboxController.getXAxisRight());
     driveShift = Commands.driveShifters(drivetrain);
       // Intake
     takeBalls = Commands.runIntake(intake, () -> 1);
@@ -155,10 +149,6 @@ public class RobotContainer {
       // Limelight
     limelightOn = VisionCommands.limelightOn(limelight);
     limelightOff = VisionCommands.limelightOff(limelight);
-
-    // Other Stuff
-    logManager = new LoggingManager();
-    controlBoard = new ControlBoard();
 
     // Configure the button bindings
     if (RobotBase.isSimulation()) logManager.robotLogger.setLevel(Level.FINER);
