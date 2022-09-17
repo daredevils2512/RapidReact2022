@@ -28,8 +28,6 @@ public class PhysicalIntake extends NTSubsystem implements Intake {
 
     // Shifters
     shifter = new DoubleSolenoid(Constants.PNEUMATICS_MODULE_TYPE, Constants.INTAKE_SHIFTER_FORWARD_ID1, Constants.INTAKE_SHIFTER_BACKWARD_ID1);
-    // TODO: Can the second shifter be removed??
-    // m_rightShifter = new DoubleSolenoid(Constants.PNEUMATICS_MODULE_TYPE, Constants.INTAKE_SHIFTER_FORWARD_ID1, Constants.INTAKE_SHIFTER_BACKWARD_ID2);
   }
 
   @Override

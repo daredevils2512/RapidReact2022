@@ -16,6 +16,7 @@ public class PhysicalCompressor extends NTSubsystem implements CompresserManager
     super("Compressor");
     isRunningEntry = table.getEntry("Is running");
     closedLoopControlEntry = table.getEntry("closed loop control");
+    isRunningEntry.setBoolean(true);
   }
 
   @Override
@@ -29,6 +30,7 @@ public class PhysicalCompressor extends NTSubsystem implements CompresserManager
       compressor.disable();
     }
     logger.fine("Compressor closed loop control: " + getClosedLoopControl());
+    closedLoopControlEntry.setBoolean(getClosedLoopControl());
   }
     
   @Override

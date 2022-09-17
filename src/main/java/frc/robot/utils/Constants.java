@@ -13,6 +13,9 @@ import edu.wpi.first.wpilibj.GenericHID.RumbleType;
  */
 public final class Constants {
 
+  public static final double TAKE_BALLS_SPEED = 1;
+  public static final double MAG_SPEED = 1;
+
   // Interfaces
   public static final boolean SHOOTER_ENABLED = true;
   public static final boolean MAGAZINE_ENABLED = true;
@@ -20,7 +23,7 @@ public final class Constants {
   public static final boolean CLIMBER_ENABLED = true;
   public static final boolean DRIVETRAIN_ENABLED = true;
   public static final boolean COMPRESSOR_ENABLED = true;
-  public static final boolean LIMELIGHT_ENABLED = true;
+  public static final boolean LIMELIGHT_ENABLED = false;
   public static final boolean LED_ENABLED = false;
 
   // Auto
@@ -52,7 +55,7 @@ public final class Constants {
   public static final double SHOOTER_D = 0; // TODO: Find value
   
 
-  // climber
+  // Climber
   public static final double CLIMBER_SPEED = .85;
   public static final int CLIMBER_TOP_LIMIT_SWITCH_PORT = 7;
   public static final int CLIMBER_BOTTOM_LIMIT_SWITCH_PORT = 8;
@@ -79,7 +82,7 @@ public final class Constants {
   // distance from the target to the floor
   public static final double GOAL_HEIGHT = 104; // inches
   //desired distance from the target
-  public static final double DESIRED_DISTANCE = 66.;
+  public static final double DESIRED_DISTANCE = 66;
   public static final double K_P = 0.2;
 
   // Encoder IDs
@@ -124,16 +127,16 @@ public final class Constants {
   public static final int BUTTON_BOX_PORT = 2;
 
   // Xbox Controller
-  public static final int XBOX_A_BUTTON_PORT = 0;
-  public static final int XBOX_B_BUTTON_PORT = 1;
-  public static final int XBOX_X_BUTTON_PORT = 2;
-  public static final int XBOX_Y_BUTTON_PORT = 3;
-  public static final int XBOX_LEFT_BUMPER_PORT = 4;
-  public static final int XBOX_RIGHT_BUMPER_PORT = 5;
-  public static final int XBOX_BACK_ARROW_PORT = 6;
-  public static final int XBOX_START_ARROW_PORT = 7;
-  public static final int XBOX_LEFT_STICK_BUTTON_PORT = 8;
-  public static final int XBOX_RIGHT_STICK_BUTTON_PORT = 9;
+  public static final int XBOX_A_BUTTON_PORT = 1;
+  public static final int XBOX_B_BUTTON_PORT = 2;
+  public static final int XBOX_X_BUTTON_PORT = 3;
+  public static final int XBOX_Y_BUTTON_PORT = 4;
+  public static final int XBOX_LEFT_BUMPER_PORT = 5;
+  public static final int XBOX_RIGHT_BUMPER_PORT = 6;
+  public static final int XBOX_BACK_ARROW_PORT = 7;
+  public static final int XBOX_START_ARROW_PORT = 8;
+  public static final int XBOX_LEFT_STICK_BUTTON_PORT = 9;
+  public static final int XBOX_RIGHT_STICK_BUTTON_PORT = 10;
   public static final int XBOX_X_AXIS_LEFT_PORT = 0;
   public static final int XBOX_Y_AXIS_LEFT_PORT = 1;
   public static final int XBOX_X_AXIS_RIGHT_PORT = 4;
@@ -178,7 +181,16 @@ public final class Constants {
   public static final int EXTREME_POV_UP_LEFT_DEGREES = 315;
 
   // Button Box
-  // Button Box goes here, but a new one is being made so I'm not doing it right now.
+  public static final int BUTTON_BOX_TOP_WHITE_PORT = 2;
+  public static final int BUTTON_BOX_BIG_WHITE_PORT = 3;
+  public static final int BUTTON_BOX_MIDDLE_RED_PORT = 4;
+  public static final int BUTTON_BOX_BOTTOM_WHITE_PORT = 5;
+  public static final int BUTTON_BOX_TOP_RED_PORT = 6;
+  public static final int BUTTON_BOX_GREEN_PORT = 7;
+  public static final int BUTTON_BOX_MIDDLE_WHITE_PORT = 8;
+  public static final int BUTTON_BOX_BIG_RED_PORT = 14;
+  public static final int BUTTON_BOX_YELLOW_PORT = 15;
+  public static final int BUTTON_BOX_BOTTOM_RED_PORT = 16;
 
   private Constants() { }
 }

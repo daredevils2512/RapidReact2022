@@ -27,7 +27,7 @@ public class LoggingSubsystem extends SubsystemBase {
   }
   
   /** Creates a new LoggingSubsystem. 
-   * @param name Sets name of logger
+   * @param name Sets name of logger.
   */
   public LoggingSubsystem(String name) {
     this.name = name;

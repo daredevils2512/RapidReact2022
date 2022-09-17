@@ -11,12 +11,8 @@ public class PhysicalClimber extends NTSubsystem implements Climber {
   // Motor stuff
   private final TalonSRX rightMotor;
   private final TalonSRX leftMotor;
-  private final DigitalInput topLimitSwitch = new DigitalInput(7); // TODO Hardcoded value; also incorrect capitalization (topLimitSwitch); also member can be final
-  private final DigitalInput bottomLimitSwitch = new DigitalInput(6); // TODO Hardcoded value; also incorrect capitalization (bottomLimitSwitch); also member can be final
-
-  // Shifters
-  // private final DoubleSolenoid m_leftShifter;
-  // private final DoubleSolenoid m_rightShifter;
+  private final DigitalInput topLimitSwitch = new DigitalInput(Constants.CLIMBER_TOP_LIMIT_SWITCH_PORT);
+  private final DigitalInput bottomLimitSwitch = new DigitalInput(Constants.CLIMBER_BOTTOM_LIMIT_SWITCH_PORT);
 
   public PhysicalClimber() {
     super("ClimberSubsystem");
@@ -26,10 +22,6 @@ public class PhysicalClimber extends NTSubsystem implements Climber {
     leftMotor = new TalonSRX(Constants.CLIMBER_2ID);
     leftMotor.follow(rightMotor);
     leftMotor.setInverted(true);
-
-    // Shifters
-    // m_leftShifter = new DoubleSolenoid(Constants.PNEUMATICS_MODULE_TYPE, Constants.CLIMBER_LEFT_FORWARD_CHANNEL, Constants.CLIMBER_LEFT_BACKWARD_CHANNEL);
-    // m_rightShifter = new DoubleSolenoid(Constants.PNEUMATICS_MODULE_TYPE, Constants.CLIMBER_RIGHT_FORWARD_CHANNEL, Constants.CLIMBER_RIGHT_BACKWARD_CHANNEL);
   }
 
   @Override

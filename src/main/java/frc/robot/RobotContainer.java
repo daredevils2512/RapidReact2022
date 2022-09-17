@@ -98,16 +98,12 @@ public class RobotContainer {
   private final Command limelightOn;
   private final Command limelightOff;
 
-  // Controls
-  private final ControlBoard controlBoard;
-
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
     // Other Stuff
     logManager = new LoggingManager();
-    controlBoard = new ControlBoard();
 
     // Define Subsystems
     LED = Constants.LED_ENABLED ? new PhysicalLEDManager() : new DummyLEDManager();
@@ -122,18 +118,18 @@ public class RobotContainer {
     // Commands
       // Autos
     autoDrive = AutoCommands.autoDriveBack(drivetrain, Constants.DRIVE_AUTO_SPEED, Constants.AUTO_DRIVE_BACK_DISTANCE);
-    autoShoot = AutoCommands.autoShoot(shooter, magazine, intake, Constants.SHOOT_AUTO_SPEED);
-    autoFull = AutoCommands.fullAuto(drivetrain, Constants.DRIVE_AUTO_SPEED, Constants.AUTO_DRIVE_BACK_DISTANCE, shooter, magazine, intake, Constants.SHOOT_AUTO_SPEED);
+    autoShoot = AutoCommands.autoShoot(shooter, magazine, Constants.SHOOT_AUTO_SPEED);
+    autoFull = AutoCommands.fullAuto(drivetrain, Constants.DRIVE_AUTO_SPEED, Constants.AUTO_DRIVE_BACK_DISTANCE, shooter, magazine, Constants.SHOOT_AUTO_SPEED);
       // Compressor
     compressor.setClosedLoopControl(true);
       // Climber
-    climberUp = Commands.runClimber(climber, Constants.CLIMBER_SPEED);
-    climberDown = Commands.runClimber(climber, -Constants.CLIMBER_SPEED);
+    climberUp = Commands.runClimber(climber, -Constants.CLIMBER_SPEED);
+    climberDown = Commands.runClimber(climber, Constants.CLIMBER_SPEED);
       // Drive
-    drive = Commands.drive(drivetrain, () -> controlBoard.xboxController.getYAxisLeft(), () -> controlBoard.xboxController.getXAxisRight());
+    drive = Commands.drive(drivetrain, () -> ControlBoard.xboxController.getYAxisLeft(), () -> ControlBoard.xboxController.getXAxisRight());
     driveShift = Commands.driveShifters(drivetrain);
       // Intake
-    takeBalls = Commands.runIntake(intake, () -> 1);
+    takeBalls = Commands.runIntake(intake, () -> Constants.TAKE_BALLS_SPEED);
     intakeShift = Commands.intakeShifters(intake);
       // Vision
     aim = VisionCommands.aim(drivetrain);
@@ -141,8 +137,8 @@ public class RobotContainer {
       // LEDs
     LEDToggle = Commands.toggleLEDs(LED);
       // Magazine
-    runMag = Commands.runMag(magazine, () -> 1);
-    runMagBack = Commands.runMag(magazine, () -> -1);
+    runMag = Commands.runMag(magazine, () -> Constants.MAG_SPEED);
+    runMagBack = Commands.runMag(magazine, () -> -Constants.MAG_SPEED);
       // Shooter
     revShooterFast = Commands.revShooter(shooter, Constants.SHOOTER_FAST_SPEED);
     revShooterSlow = Commands.revShooter(shooter, Constants.SHOOTER_SLOW_SPEED);
@@ -179,30 +175,30 @@ public class RobotContainer {
   private void configureButtonBindings() {
     // Button Bindings
       // Climbers
-    controlBoard.extreme.joystickTopLeft.whileHeld(climberUp);
-    controlBoard.extreme.joystickTopRight.whileHeld(climberDown);
+    ControlBoard.extreme.joystickTopLeft.whileHeld(climberUp);
+    ControlBoard.extreme.joystickTopRight.whileHeld(climberDown);
       // Drive
     drivetrain.setDefaultCommand(drive);
-    controlBoard.xboxController.rightBumper.whenPressed(driveShift);
+    ControlBoard.xboxController.rightBumper.whenPressed(driveShift);
       // Intake
-    controlBoard.extreme.baseMiddleRight.whileHeld(takeBalls);
-    controlBoard.extreme.baseMiddleLeft.whenPressed(intakeShift);
+    ControlBoard.extreme.baseMiddleRight.whileHeld(takeBalls);
+    ControlBoard.extreme.baseMiddleLeft.whenPressed(intakeShift);
       // Aim
-    controlBoard.extreme.joystickBottomLeft.whenPressed(limelightOn);
-    controlBoard.extreme.joystickBottomLeft.whileHeld(aim);
-    controlBoard.extreme.joystickBottomLeft.whenReleased(limelightOff);
+    ControlBoard.extreme.joystickBottomLeft.whenPressed(limelightOn);
+    ControlBoard.extreme.joystickBottomLeft.whileHeld(aim);
+    ControlBoard.extreme.joystickBottomLeft.whenReleased(limelightOff);
       // LEDs
-    controlBoard.extreme.baseBackRight.whenPressed(LEDToggle);
+      ControlBoard.extreme.baseFrontLeft.whenPressed(LEDToggle);
       // Find Range
-    controlBoard.extreme.joystickBottomRight.whenPressed(limelightOn);
-    controlBoard.extreme.joystickBottomRight.whileHeld(FindRange);
-    controlBoard.extreme.joystickBottomRight.whenReleased(limelightOff);
+    ControlBoard.extreme.joystickBottomRight.whenPressed(limelightOn);
+    ControlBoard.extreme.joystickBottomRight.whileHeld(FindRange);
+    ControlBoard.extreme.joystickBottomRight.whenReleased(limelightOff);
       // Magazine
-    controlBoard.extreme.trigger.whileHeld(runMag);
-    controlBoard.extreme.baseBackRight.whileHeld(runMagBack);
+    ControlBoard.extreme.trigger.whileHeld(runMag);
+    ControlBoard.extreme.baseBackRight.whileHeld(runMagBack);
       // Shooter
-    controlBoard.extreme.sideButton.whileHeld(revShooterFast);
-    controlBoard.extreme.baseBackLeft.whileHeld(revShooterSlow);
+    ControlBoard.extreme.sideButton.whileHeld(revShooterFast);
+    ControlBoard.extreme.baseBackLeft.whileHeld(revShooterSlow);
   }
 
   /** Use this to pass the autonomous command to the main {@link Robot} class.

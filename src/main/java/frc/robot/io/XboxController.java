@@ -100,6 +100,14 @@ public class XboxController {
     controller.setRumble(Constants.XBOX_RIGHT_RUMBLE, amount);
   }
 
+  /** Sets the right and left rumble
+   * @param amount The amount to rumble between 0 (inclusive) and 1 (inclusive)
+   */
+  public void setRumble(double amount) {
+    setLeftRumble(amount);
+    setRightRumble(amount);
+  }
+
   /** Stops left rumble */
   public void stopLeftRumble() {
     controller.setRumble(Constants.XBOX_LEFT_RUMBLE, 0.0);
@@ -116,52 +124,62 @@ public class XboxController {
     stopRightRumble();
   }
 
-  /** @return True if the DPad is being pressed on the top. */
+  /** @deprecated
+   * @return True if the DPad is being pressed on the top. */
   public boolean getDPadTop() {
     return getDPad() == 0;
   }
 
-  /** @return True if the DPad is being pressed on the top right. */
+  /** @deprecated
+   * @return True if the DPad is being pressed on the top right. */
   public boolean getDPadTopRight() {
     return getDPad() == 45;
   }
 
-  /** @return True if the DPad is being pressed on the right. */
+  /** @deprecated
+   * @return True if the DPad is being pressed on the right. */
   public boolean getDPadRight() {
     return getDPad() == 90;
   }
 
-  /** @return True if the DPad is being pressed on the bottom right. */
+  /** @deprecated
+   * @return True if the DPad is being pressed on the bottom right. */
   public boolean getDPadBottomRight() {
     return getDPad() == 135;
   }
 
-  /** @return True if the DPad is being pressed on the bottom. */
+  /** @deprecated
+   * @return True if the DPad is being pressed on the bottom. */
   public boolean getDPadBottom() {
     return getDPad() == 180;
   }
 
-  /** @return True if the DPad is being pressed on the bottom left. */
+  /** @deprecated
+   * @return True if the DPad is being pressed on the bottom left. */
   public boolean getDPadBottomLeft() {
     return getDPad() == 225;
   }
 
-  /** @return True if the DPad is being pressed on the left. */
+  /** @deprecated
+   * @return True if the DPad is being pressed on the left. */
   public boolean getDPadLeft() {
     return getDPad() == 270;
   }
 
-  /** @return True if the DPad is being pressed on the top left. */
+  /** @deprecated
+   * @return True if the DPad is being pressed on the top left. */
   public boolean getDPadTopLeft() {
     return getDPad() == 315;
   }
 
-  /** @return True if the DPad is not being pressed. */
+  /** @deprecated
+   * @return True if the DPad is not being pressed. */
   public boolean getDPadReleased() {
     return getDPad() == -1;
   }
 
-  /** @return The angle of the DPad in degrees.
+  /** @deprecated
+   * @return The angle of the DPad in degrees.
    * The angle is represented in 8 degrees (right being 90, left being 270).
    * If none are being pressed, -1 is returned.
    */

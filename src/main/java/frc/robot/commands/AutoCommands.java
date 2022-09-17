@@ -4,7 +4,6 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.auto.AutoDriveBack;
 import frc.robot.commands.auto.AutoShoot;
 import frc.robot.subsystems.interfaces.Drivetrain;
-import frc.robot.subsystems.interfaces.Intake;
 import frc.robot.subsystems.interfaces.Magazine;
 import frc.robot.subsystems.interfaces.Shooter;
 
@@ -28,13 +27,13 @@ public final class AutoCommands {
   * @param speed The speed for everything.
   * @return The command to be used when called.
   */
-  public static Command autoShoot(Shooter shooter, Magazine mag, Intake intake, double shootSpeed) {
+  public static Command autoShoot(Shooter shooter, Magazine mag, double shootSpeed) {
     // return Commands.revShooter(shooter, shootSpeed)
     // .withTimeout(3)
     // .andThen(Commands.revShooter(shooter, shootSpeed))
     // .alongWith(Commands.runMag(magazine, () -> 1.0))
     // .withTimeout(6);
-    return new AutoShoot(shooter, mag, intake, shootSpeed);
+    return new AutoShoot(shooter, mag, shootSpeed);
   }
 
   /** Auto comamnd that drives back and then shoots.
@@ -47,8 +46,8 @@ public final class AutoCommands {
    * @param shootSpeed The speed to shoot the balls
    * @return The command to be used when called.
    */
-  public static Command fullAuto(Drivetrain drivetrain, double driveSpeed, double driveTime, Shooter shooter, Magazine mag, Intake intake, double shootSpeed) {
-    return autoShoot(shooter, mag, intake, shootSpeed)
+  public static Command fullAuto(Drivetrain drivetrain, double driveSpeed, double driveTime, Shooter shooter, Magazine mag, double shootSpeed) {
+    return autoShoot(shooter, mag, shootSpeed)
     .andThen(autoDriveBack(drivetrain, driveSpeed, driveTime)
     .withTimeout(3));
   }

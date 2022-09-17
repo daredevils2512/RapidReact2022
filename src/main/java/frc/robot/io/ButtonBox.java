@@ -1,8 +1,9 @@
 package frc.robot.io;
-// TODO: Fix for new button box!!!!
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.utils.Constants;
 
 public class ButtonBox {
   private final Joystick joystick;
@@ -21,16 +22,16 @@ public class ButtonBox {
   public ButtonBox(int port) {
     joystick = new Joystick(port);
 
-    topWhite = new JoystickButton(joystick, 2);
-    bigWhite = new JoystickButton(joystick, 3);
-    middleRed = new JoystickButton(joystick, 4);
-    bottomWhite = new JoystickButton(joystick, 5);
-    topRed = new JoystickButton(joystick, 6);
-    green = new JoystickButton(joystick, 7);
-    middleWhite = new JoystickButton(joystick, 8);
-    bigRed = new JoystickButton(joystick, 14);
-    yellow = new JoystickButton(joystick, 15);
-    bottomRed = new JoystickButton(joystick, 16);
+    topWhite = new JoystickButton(joystick, Constants.BUTTON_BOX_TOP_WHITE_PORT);
+    bigWhite = new JoystickButton(joystick, Constants.BUTTON_BOX_BIG_WHITE_PORT);
+    middleRed = new JoystickButton(joystick, Constants.BUTTON_BOX_MIDDLE_RED_PORT);
+    bottomWhite = new JoystickButton(joystick, Constants.BUTTON_BOX_BOTTOM_WHITE_PORT);
+    topRed = new JoystickButton(joystick, Constants.BUTTON_BOX_TOP_RED_PORT);
+    green = new JoystickButton(joystick, Constants.BUTTON_BOX_GREEN_PORT);
+    middleWhite = new JoystickButton(joystick, Constants.BUTTON_BOX_MIDDLE_WHITE_PORT);
+    bigRed = new JoystickButton(joystick, Constants.BUTTON_BOX_BIG_RED_PORT);
+    yellow = new JoystickButton(joystick, Constants.BUTTON_BOX_YELLOW_PORT);
+    bottomRed = new JoystickButton(joystick, Constants.BUTTON_BOX_BOTTOM_RED_PORT);
   }
 
 }

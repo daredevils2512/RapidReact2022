@@ -97,11 +97,4 @@ public class PhysicalLimelight implements Limelight {
     return lastPostion;
   }
 
-  /**
-   * TODO: What is this? Code from the units branch that got here somehow??
-   * @return distance in units of something to the tagret
-   */
-  // public double getDistanceToTarget() {
-  //   return Units.inchesToMeters(m_heightOffset) / Math.tan(Math.toRadians(m_angle + this.ty()));
-  // }
 }

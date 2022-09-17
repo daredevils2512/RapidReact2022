@@ -6,7 +6,7 @@ import frc.robot.subsystems.vision.Pipeline;
 public class DummyLimelight implements frc.robot.subsystems.interfaces.Limelight {
 
   @Override
-  public Pipeline getDefaultPipeline() { return null; } // TODO: WTF WHO DID THIS THEY SHOULD BE KICKED OFF THE TEAM
+  public Pipeline getDefaultPipeline() { return Pipeline.N_E_D; } 
 
   @Override
   public void setPipeline(Pipeline pipeline) { }
@@ -15,7 +15,7 @@ public class DummyLimelight implements frc.robot.subsystems.interfaces.Limelight
   public void setLEDMode(LimelightLEDMode ledMode) { }
 
   @Override
-  public LimelightLEDMode getLEDMode() { return null; } // TODO: WTF WHO DID THIS THEY SHOULD BE KICKED OFF THE TEAM
+  public LimelightLEDMode getLEDMode() { return LimelightLEDMode.OFF; } 
 
   @Override
   public boolean hasTarget() { return false; }
