@@ -1,11 +1,12 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.commands.vision.Aim;
 import frc.robot.commands.vision.FindRange;
-import frc.robot.commands.vision.LimelightOff;
 import frc.robot.subsystems.interfaces.Drivetrain;
 import frc.robot.subsystems.interfaces.Limelight;
+import frc.robot.subsystems.vision.LimelightLEDMode;
 
 public final class VisionCommands {
   private VisionCommands() {}
@@ -31,15 +32,15 @@ public final class VisionCommands {
    * @return The command to run.
    */
   public static Command limelightOff(Limelight limelight) {
-    return new LimelightOff(limelight);
+    return new InstantCommand(() -> { limelight.setLEDMode(LimelightLEDMode.OFF); });
   }
 
   /** Turns the limelight on
    * @param limelight The limelight to use.
-   * @return The comamnd to run.
+   * @return The command to run.
    */
   public static Command limelightOn(Limelight limelight) {
-    return new LimelightOff(limelight);
+    return new InstantCommand(() -> { limelight.setLEDMode(LimelightLEDMode.ON); });
   }
   
 }

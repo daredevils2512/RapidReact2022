@@ -14,6 +14,7 @@ public class PhysicalLimelight implements Limelight {
   // Center is (0,0)
   public static final double RANGE_X_DEGREES = 29.8;
   public static final double RANGE_Y_DEGREES = 24.85;
+  // TODO: Unused variables??
   private final double angle = 20;
   private final double heightOffset = 98.25 - 19.25;
   private final Pipeline pipeline;
