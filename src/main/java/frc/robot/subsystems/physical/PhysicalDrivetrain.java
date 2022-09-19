@@ -49,10 +49,10 @@ public class PhysicalDrivetrain extends NTSubsystem implements Drivetrain {
     frontLeft = new WPI_TalonFX(Constants.DRIVETRAIN_LEFT_ID1); 
     backLeft = new WPI_TalonFX(Constants.DRIVETRAIN_LEFT_ID2);
     left = new MotorControllerGroup(frontLeft, backLeft);
-    left.setInverted(true);
     frontRight = new WPI_TalonFX(Constants.DRIVETRAIN_RIGHT_ID1);
     backRight = new WPI_TalonFX(Constants.DRIVETRAIN_RIGHT_ID2);
     right = new MotorControllerGroup(frontRight, backRight);
+    right.setInverted(true);
     drive = new DifferentialDrive(left, right);
 
     // Network table stuff
@@ -80,7 +80,7 @@ public class PhysicalDrivetrain extends NTSubsystem implements Drivetrain {
   public void arcadeDrive(double move, double turn) { 
     move = rateLim.calculate(move);
     turn = rateLimTurn.calculate(turn);
-    drive.arcadeDrive((-move) * Constants.DRIVETRAIN_MAX_SPEED, (turn) * Constants.DRIVETRAIN_MAX_TURN);
+    drive.arcadeDrive(move * Constants.DRIVETRAIN_MAX_SPEED, turn * Constants.DRIVETRAIN_MAX_TURN);
   }
 
   @Override

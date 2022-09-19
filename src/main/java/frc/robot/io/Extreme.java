@@ -53,7 +53,7 @@ public class Extreme {
     joystickDown = new POVButton(joystick, Constants.EXTREME_POV_DOWN_DEGREES);
     joystickDownLeft = new POVButton(joystick, Constants.EXTREME_POV_DOWN_LEFT_DEGREES);
     joystickLeft = new POVButton(joystick, Constants.EXTREME_POV_LEFT_DEGREES);
-    joystickUpLeft = new POVButton(joystick, Constants.EXTREME_POV_LEFT_DEGREES);
+    joystickUpLeft = new POVButton(joystick, Constants.EXTREME_POV_UP_LEFT_DEGREES);
   }
 
   /** @return StickX */

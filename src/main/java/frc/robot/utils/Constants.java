@@ -96,23 +96,14 @@ public final class Constants {
   public static final int DRIVETRAIN_LEFT_BACKWARD_CHANNEL = 1; 
   public static final int DRIVETRAIN_RIGHT_FORWARD_CHANNEL = 2; 
   public static final int DRIVETRAIN_RIGHT_BACKWARD_CHANNEL = 3;
-
-  public static final int CLIMBER_LEFT_FORWARD_CHANNEL = 0; // TODO: Find the correct channel!
-  public static final int CLIMBER_LEFT_BACKWARD_CHANNEL = 0; // TODO: Find the correct channel!
-  public static final int CLIMBER_RIGHT_FORWARD_CHANNEL = 0; // TODO: Find the correct channel!
-  public static final int CLIMBER_RIGHT_BACKWARD_CHANNEL = 0; // TODO: Find the correct channel!
   
   public static final int INTAKE_SHIFTER_FORWARD_ID1 = 4; 
   public static final int INTAKE_SHIFTER_BACKWARD_ID1 = 5;
-  public static final int INTAKE_SHIFTER_FORWARD_ID2 = 0;
-  public static final int INTAKE_SHIFTER_BACKWARD_ID2 = 0;
   public static final Value INTAKE_EXTENDED_VALUE = Value.kForward; 
   public static final Value INTAKE_RETRACTED_VALUE = Value.kReverse;
   public static final Value DRIVETRAIN_LOW_GEAR_VALUE = Value.kForward; 
   public static final Value DRIVETRAIN_HIGH_GEAR_VALUE = Value.kReverse;
 
-  public static final Value CLIMBER_EXTENDED_VALUE = Value.kForward; // TODO: Make sure this is correct!
-  public static final Value CLIMBER_RETRACTED_VALUE = Value.kReverse; // TODO: Make sure this is correct!
   public static final PneumaticsModuleType PNEUMATICS_MODULE_TYPE = PneumaticsModuleType.CTREPCM;
 
   // LEDs
@@ -127,22 +118,6 @@ public final class Constants {
   public static final int BUTTON_BOX_PORT = 2;
 
   // Xbox Controller
-  public static final int XBOX_A_BUTTON_PORT = 1;
-  public static final int XBOX_B_BUTTON_PORT = 2;
-  public static final int XBOX_X_BUTTON_PORT = 3;
-  public static final int XBOX_Y_BUTTON_PORT = 4;
-  public static final int XBOX_LEFT_BUMPER_PORT = 5;
-  public static final int XBOX_RIGHT_BUMPER_PORT = 6;
-  public static final int XBOX_BACK_ARROW_PORT = 7;
-  public static final int XBOX_START_ARROW_PORT = 8;
-  public static final int XBOX_LEFT_STICK_BUTTON_PORT = 9;
-  public static final int XBOX_RIGHT_STICK_BUTTON_PORT = 10;
-  public static final int XBOX_X_AXIS_LEFT_PORT = 0;
-  public static final int XBOX_Y_AXIS_LEFT_PORT = 1;
-  public static final int XBOX_X_AXIS_RIGHT_PORT = 4;
-  public static final int XBOX_Y_AXIS_RIGHT_PORT = 5;
-  public static final int XBOX_LEFT_TRIGGER_PORT = 2;
-  public static final int XBOX_RIGHT_TRIGGER_PORT = 3;
   public static final int XBOX_POV_UP_DEGREES = 0;
   public static final int XBOX_POV_UP_RIGHT_DEGREES = 45;
   public static final int XBOX_POV_RIGHT_DEGREES = 90;

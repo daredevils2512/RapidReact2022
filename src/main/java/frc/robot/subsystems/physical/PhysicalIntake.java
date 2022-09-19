@@ -22,8 +22,8 @@ public class PhysicalIntake extends NTSubsystem implements Intake {
     intake2 = new WPI_TalonSRX(Constants.INTAKE_2ID);
         
     // Sets up inversions, etc.
-    intake1.setInverted(false);
-    intake2.setInverted(true);
+    intake1.setInverted(true);
+    intake2.setInverted(false);
     intake2.follow(intake1);
 
     // Shifters
@@ -33,7 +33,6 @@ public class PhysicalIntake extends NTSubsystem implements Intake {
   @Override
   public void setExtended(boolean wantsExtended) {
     shifter.set(wantsExtended ? Constants.INTAKE_EXTENDED_VALUE : Constants.INTAKE_RETRACTED_VALUE);
-    //m_rightShifter.set(wantsExtended ? Constants.intakeExtendedValue : Constants.intakeRetractedValue);
     logger.info("set extended: " + wantsExtended);
   }
 
@@ -50,7 +49,7 @@ public class PhysicalIntake extends NTSubsystem implements Intake {
     
   @Override
   public void setIntake(double speed) {
-    intake1.set(-speed);
+    intake1.set(speed);
     logger.fine("set intake speed: " + speed);
   }
 }

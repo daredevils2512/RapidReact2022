@@ -1,14 +1,12 @@
 package frc.robot.io;
 
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.Button;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.utils.Constants;
 
 public class XboxController {
   // Joystick
-  private final Joystick controller;
+  private final edu.wpi.first.wpilibj.XboxController controller;
 
   // Buttons 
   public final Button aButton;
@@ -32,19 +30,19 @@ public class XboxController {
   
   public XboxController(int port) {
     // Joystick 
-    controller = new Joystick(port);
+    controller = new edu.wpi.first.wpilibj.XboxController(port);
 
     // Buttons
-    aButton = new JoystickButton(controller, Constants.XBOX_A_BUTTON_PORT);
-    bButton = new JoystickButton(controller, Constants.XBOX_B_BUTTON_PORT);
-    xButton = new JoystickButton(controller, Constants.XBOX_X_BUTTON_PORT);
-    yButton = new JoystickButton(controller, Constants.XBOX_Y_BUTTON_PORT);
-    leftBumper = new JoystickButton(controller, Constants.XBOX_LEFT_BUMPER_PORT);
-    rightBumper = new JoystickButton(controller, Constants.XBOX_RIGHT_BUMPER_PORT);
-    backArrow = new JoystickButton(controller, Constants.XBOX_BACK_ARROW_PORT);
-    startArrow = new JoystickButton(controller, Constants.XBOX_START_ARROW_PORT);
-    leftStickButton = new JoystickButton(controller, Constants.XBOX_LEFT_STICK_BUTTON_PORT);
-    rightStickButton = new JoystickButton(controller, Constants.XBOX_RIGHT_STICK_BUTTON_PORT);
+    aButton = new Button(controller::getAButton);
+    bButton = new Button(controller::getBButton);
+    xButton = new Button(controller::getXButton);
+    yButton = new Button(controller::getYButton);
+    leftBumper = new Button(controller::getLeftBumper);
+    rightBumper = new Button(controller::getRightBumper);
+    backArrow = new Button(controller::getBackButton);
+    startArrow = new Button(controller::getStartButton);
+    leftStickButton = new Button(controller::getLeftStickButton);
+    rightStickButton = new Button(controller::getRightStickButton);
     dPadUp = new POVButton(controller, Constants.XBOX_POV_UP_DEGREES);
     dPadUpRight = new POVButton(controller, Constants.XBOX_POV_UP_RIGHT_DEGREES);
     dPadRight = new POVButton(controller, Constants.XBOX_POV_RIGHT_DEGREES);
@@ -58,32 +56,32 @@ public class XboxController {
 
   /** @return XAxisLeft */
   public double getXAxisLeft() {
-    return controller.getRawAxis(Constants.XBOX_X_AXIS_LEFT_PORT);
+    return controller.getLeftX();
   }
 
   /** @return YAxisLeft */
   public double getYAxisLeft() {
-    return controller.getRawAxis(Constants.XBOX_Y_AXIS_LEFT_PORT);
+    return controller.getLeftY();
   }
 
   /** @return XAxisRight */
   public double getXAxisRight() {
-    return controller.getRawAxis(Constants.XBOX_X_AXIS_RIGHT_PORT);
+    return controller.getRightX();
   }
 
   /** @return YAxisRight */
   public double getYAxisRight() {
-    return controller.getRawAxis(Constants.XBOX_Y_AXIS_RIGHT_PORT);
+    return controller.getRightY();
   }
 
   /** @return Left Trigger */
   public double getLeftTrigger() {
-    return controller.getRawAxis(Constants.XBOX_LEFT_TRIGGER_PORT);
+    return controller.getLeftTriggerAxis();
   }
 
   /** @return Right Trigger */
   public double getRightTrigger() {
-    return controller.getRawAxis(Constants.XBOX_RIGHT_TRIGGER_PORT);
+    return controller.getRightTriggerAxis();
   }
 
   /** Sets the left rumble
