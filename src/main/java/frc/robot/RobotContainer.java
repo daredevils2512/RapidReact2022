@@ -5,6 +5,7 @@ import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.XboxController;
@@ -13,6 +14,16 @@ import frc.robot.io.ControlBoard;
 import frc.robot.io.NTButton;
 import frc.robot.utils.Constants;
 import frc.robot.utils.LoggingManager;
+<<<<<<< HEAD
+=======
+import frc.robot.vision.DummyLimelight;
+import frc.robot.vision.Limelight;
+import frc.robot.vision.PhysicalLimelight;
+import frc.robot.vision.Pipeline;
+import frc.robot.sensors.DareDigitalInput;
+import frc.robot.sensors.DummyDigitalInput;
+import frc.robot.sensors.PhysicalDigitalInput;
+>>>>>>> origin/photo-eye
 import frc.robot.commands.Commands;
 import frc.robot.commands.VisionCommands;
 import frc.robot.commands.AutoCommands;
@@ -58,6 +69,9 @@ public class RobotContainer {
 
   // Logging
   private final LoggingManager logManager;
+
+  // Sensors
+  private final DareDigitalInput m_photoEye;
 
   // Subsystems
   private final Climber climber;
@@ -106,6 +120,7 @@ public class RobotContainer {
     logManager = new LoggingManager();
 
     // Define Subsystems
+<<<<<<< HEAD
     LED = Constants.LED_ENABLED ? new PhysicalLEDManager() : new DummyLEDManager();
     climber = Constants.CLIMBER_ENABLED ? new PhysicalClimber() : new DummyClimber();
     compressor = Constants.COMPRESSOR_ENABLED ? new PhysicalCompressor() : new DummyCompressor();
@@ -114,6 +129,17 @@ public class RobotContainer {
     limelight = Constants.LIMELIGHT_ENABLED ? new PhysicalLimelight(Pipeline.N_E_D) : new DummyLimelight();
     magazine = Constants.MAGAZINE_ENABLED ? new PhysicalMagazine() : new DummyMagazine();
     shooter = Constants.SHOOTER_ENABLED ? new PhysicalShooter() : new DummyShooter();
+=======
+    m_LED = Constants.LED_ENABLED ? new PhysicalLEDManager() : new DummyLEDManager();
+    m_climber = Constants.CLIMBER_ENABLED ? new PhysicalClimber() : new DummyClimber();
+    m_compressor = Constants.COMPRESSOR_ENABLED ? new PhysicalCompressor() : new DummyCompressor();
+    m_drivetrain = Constants.DRIVETRAIN_ENABLED ? (Constants.SPARK_DRIVETRAIN_ENABLED ? new PhysicalSparkDrivetrain() : new PhysicalDrivetrain()) : new DummyDrivetrain();
+    m_intake = Constants.INTAKE_ENABLED ? new PhysicalIntake() : new DummyIntake();
+    m_limelight = Constants.LIMELIGHT_ENABLED ? new PhysicalLimelight(Pipeline.N_E_D) : new DummyLimelight();
+    m_magazine = Constants.MAGAZINE_ENABLED ? new PhysicalMagazine() : new DummyMagazine();
+    m_shooter = Constants.SHOOTER_ENABLED ? new PhysicalShooter() : new DummyShooter();
+    m_photoEye = Constants.PHOTO_EYE_ENABLED ? new PhysicalDigitalInput(Constants.PHOTO_EYE_PORT) : new DummyDigitalInput();
+>>>>>>> origin/photo-eye
 
     // Commands
       // Autos
