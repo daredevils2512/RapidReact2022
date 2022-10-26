@@ -80,7 +80,7 @@ public class PhysicalDrivetrain extends NTSubsystem implements Drivetrain {
   public void arcadeDrive(double move, double turn) { 
     move = rateLim.calculate(move);
     turn = rateLimTurn.calculate(turn);
-    drive.arcadeDrive(move * Constants.DRIVETRAIN_MAX_SPEED, turn * Constants.DRIVETRAIN_MAX_TURN);
+    drive.arcadeDrive((move * Constants.DRIVETRAIN_MOVE_REVERSED) * Constants.DRIVETRAIN_MAX_SPEED, (turn * Constants.DRIVETRAIN_TURN_REVERSED) * Constants.DRIVETRAIN_MAX_TURN);
   }
 
   @Override

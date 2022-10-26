@@ -8,9 +8,11 @@ import frc.robot.subsystems.interfaces.Climber;
 import frc.robot.utils.Constants;
 
 public class PhysicalClimber extends NTSubsystem implements Climber {
-  // Motor stuff
+  // Motor Stuff
   private final TalonSRX rightMotor;
   private final TalonSRX leftMotor;
+
+  // Digital Inputs
   private final DigitalInput topLimitSwitch = new DigitalInput(Constants.CLIMBER_TOP_LIMIT_SWITCH_PORT);
   private final DigitalInput bottomLimitSwitch = new DigitalInput(Constants.CLIMBER_BOTTOM_LIMIT_SWITCH_PORT);
 
@@ -26,6 +28,7 @@ public class PhysicalClimber extends NTSubsystem implements Climber {
 
   @Override
   public void setClimbSpeed(double speed) { 
+    speed = speed * Constants.CLIMBER_REVERSED;
     if (topLimitSwitch.get() && speed < 0) {
       rightMotor.set(ControlMode.PercentOutput, 0);
     } else if (!bottomLimitSwitch.get() && speed > 0) { 

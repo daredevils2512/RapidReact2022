@@ -122,62 +122,52 @@ public class XboxController {
     stopRightRumble();
   }
 
-  /** @deprecated
-   * @return True if the DPad is being pressed on the top. */
+  /** @return True if the DPad is being pressed on the top. */
   public boolean getDPadTop() {
-    return getDPad() == 0;
+    return dPadUp.get();
   }
 
-  /** @deprecated
-   * @return True if the DPad is being pressed on the top right. */
+  /** @return True if the DPad is being pressed on the top right. */
   public boolean getDPadTopRight() {
-    return getDPad() == 45;
+    return dPadUpRight.get();
   }
 
-  /** @deprecated
-   * @return True if the DPad is being pressed on the right. */
+  /** @return True if the DPad is being pressed on the right. */
   public boolean getDPadRight() {
-    return getDPad() == 90;
+    return dPadRight.get();
   }
 
-  /** @deprecated
-   * @return True if the DPad is being pressed on the bottom right. */
+  /** @return True if the DPad is being pressed on the bottom right. */
   public boolean getDPadBottomRight() {
-    return getDPad() == 135;
+    return dPadDownRight.get();
   }
 
-  /** @deprecated
-   * @return True if the DPad is being pressed on the bottom. */
+  /** @return True if the DPad is being pressed on the bottom. */
   public boolean getDPadBottom() {
-    return getDPad() == 180;
+    return dPadDown.get();
   }
 
-  /** @deprecated
-   * @return True if the DPad is being pressed on the bottom left. */
+  /** @return True if the DPad is being pressed on the bottom left. */
   public boolean getDPadBottomLeft() {
-    return getDPad() == 225;
+    return dPadDownLeft.get();
   }
 
-  /** @deprecated
-   * @return True if the DPad is being pressed on the left. */
+  /** @return True if the DPad is being pressed on the left. */
   public boolean getDPadLeft() {
-    return getDPad() == 270;
+    return dPadLeft.get();
   }
 
-  /** @deprecated
-   * @return True if the DPad is being pressed on the top left. */
+  /** @return True if the DPad is being pressed on the top left. */
   public boolean getDPadTopLeft() {
-    return getDPad() == 315;
+    return dPadUpLeft.get();
   }
 
-  /** @deprecated
-   * @return True if the DPad is not being pressed. */
+  /** @return True if the DPad is not being pressed. */
   public boolean getDPadReleased() {
-    return getDPad() == -1;
+    return getDPad() == Constants.XBOX_POV_RELEASED_DEGREES;
   }
 
-  /** @deprecated
-   * @return The angle of the DPad in degrees.
+  /** @return The angle of the DPad in degrees.
    * The angle is represented in 8 degrees (right being 90, left being 270).
    * If none are being pressed, -1 is returned.
    */

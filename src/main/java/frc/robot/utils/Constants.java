@@ -13,8 +13,10 @@ import edu.wpi.first.wpilibj.GenericHID.RumbleType;
  */
 public final class Constants {
 
+  // Magazine
   public static final double TAKE_BALLS_SPEED = 1;
   public static final double MAG_SPEED = 1;
+  public static final int MAG_ID = 4;
 
   // Interfaces
   public static final boolean SHOOTER_ENABLED = true;
@@ -32,10 +34,16 @@ public final class Constants {
   public static final double AUTO_DRIVE_BACK_DISTANCE = 150; // Inches 
 
   // Drivetrain
+  public static final int DRIVETRAIN_LEFT_ID1 = 10; 
+  public static final int DRIVETRAIN_LEFT_ID2 = 11; 
+  public static final int DRIVETRAIN_RIGHT_ID1 = 2;
+  public static final int DRIVETRAIN_RIGHT_ID2 = 3;
   public static final int DRIVETRAIN_ENCODER_RESOLUTION = 1; // TODO find value
   public static final double DRIVETRAIN_RATELIM_VALUE = 15;
   public static final double DRIVETRAIN_MAX_SPEED = .75; 
   public static final double DRIVETRAIN_MAX_TURN = .75; 
+  public static final double DRIVETRAIN_MOVE_REVERSED = -1; // -1 for true, 1 for false
+  public static final double DRIVETRAIN_TURN_REVERSED = 1; // -1 for true, 1 for false
   public static final double DRIVETRAIN_GEAR_RATIO = 1; // TODO find value
   public static final double DRIVETRAIN_WHEEL_DIAMETER = 6;
   public static final double DRIVETRAIN_WHEEL_CIRCUMFERENCE =  DRIVETRAIN_WHEEL_DIAMETER * Math.PI;
@@ -50,29 +58,23 @@ public final class Constants {
   public static final double SHOOTER_RATELIM_VALUE = 0.5; // TODO find best value
   public static final double SHOOTER_FAST_SPEED = .75;
   public static final double SHOOTER_SLOW_SPEED = .25;
+  public static final int SHOOTER_ID = 9; 
   public static final double SHOOTER_P = 0; // TODO: Find value
   public static final double SHOOTER_I = 0; // TODO: Find value
   public static final double SHOOTER_D = 0; // TODO: Find value
   
-
   // Climber
   public static final double CLIMBER_SPEED = .85;
   public static final int CLIMBER_TOP_LIMIT_SWITCH_PORT = 7;
   public static final int CLIMBER_BOTTOM_LIMIT_SWITCH_PORT = 8;
-
-  // Motor IDs
-  public static final int DRIVETRAIN_LEFT_ID1 = 10; 
-  public static final int DRIVETRAIN_LEFT_ID2 = 11; 
-  public static final int DRIVETRAIN_RIGHT_ID1 = 2;
-  public static final int DRIVETRAIN_RIGHT_ID2 = 3;
-  public static final int INTAKE_1ID = 6; 
-  public static final int INTAKE_2ID = 5;
-
-
-  public static final int MAG_ID = 4;
   public static final int CLIMBER_1ID = 7;
   public static final int CLIMBER_2ID = 8;
-  public static final int SHOOTER_ID = 9; 
+  public static final int CLIMBER_REVERSED = 1; // -1 for true, 1 for false
+
+  // Intake
+  public static final int INTAKE_1ID = 6; 
+  public static final int INTAKE_2ID = 5;
+  public static final int INTAKE_REVERSED = 1; // -1 for true, 1 for false
 
   // Vision, Baby! 
   // how many degrees back is your limelight rotated from perfectly vertical? TODO:FIX THIS STUFF
@@ -126,6 +128,7 @@ public final class Constants {
   public static final int XBOX_POV_DOWN_LEFT_DEGREES = 225;
   public static final int XBOX_POV_LEFT_DEGREES = 270;
   public static final int XBOX_POV_UP_LEFT_DEGREES = 315;
+  public static final int XBOX_POV_RELEASED_DEGREES = -1;
   public static final RumbleType XBOX_LEFT_RUMBLE = RumbleType.kLeftRumble;
   public static final RumbleType XBOX_RIGHT_RUMBLE = RumbleType.kRightRumble;
 
