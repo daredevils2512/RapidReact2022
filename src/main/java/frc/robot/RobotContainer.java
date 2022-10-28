@@ -117,9 +117,9 @@ public class RobotContainer {
 
     // Commands
       // Autos
-    autoDrive = AutoCommands.autoDriveBack(drivetrain, Constants.DRIVE_AUTO_SPEED, Constants.AUTO_DRIVE_BACK_DISTANCE);
-    autoShoot = AutoCommands.autoShoot(shooter, magazine, Constants.SHOOT_AUTO_SPEED);
-    autoFull = AutoCommands.fullAuto(drivetrain, Constants.DRIVE_AUTO_SPEED, Constants.AUTO_DRIVE_BACK_DISTANCE, shooter, magazine, Constants.SHOOT_AUTO_SPEED);
+    autoDrive = AutoCommands.autoDriveBack(drivetrain, Constants.AUTO_DRIVE_SPEED, Constants.AUTO_DRIVE_BACK_DISTANCE);
+    autoShoot = AutoCommands.autoShoot(shooter, magazine, Constants.AUTO_SHOOT_SPEED);
+    autoFull = AutoCommands.fullAuto(drivetrain, Constants.AUTO_DRIVE_SPEED, Constants.AUTO_DRIVE_BACK_DISTANCE, shooter, magazine, Constants.AUTO_SHOOT_SPEED);
       // Compressor
     compressor.setClosedLoopControl(true);
       // Climber
