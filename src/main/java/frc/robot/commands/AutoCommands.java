@@ -28,6 +28,7 @@ public final class AutoCommands {
   * @return The command to be used when called.
   */
   public static Command autoShoot(Shooter shooter, Magazine mag, double shootSpeed) {
+    // TODO: Can this code be deleted?
     // return Commands.revShooter(shooter, shootSpeed)
     // .withTimeout(3)
     // .andThen(Commands.revShooter(shooter, shootSpeed))
