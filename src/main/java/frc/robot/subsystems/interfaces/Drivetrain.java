@@ -17,24 +17,16 @@ public interface Drivetrain extends Subsystem {
   /** Toggles the shifters */
   void toggleShifters();
 
-  /** 
-   * @return Left encoder
-  */
+  /** @return Left encoder */
   int getLeftEncoder();
 
-  /** 
-   * @return Right encoder
-  */
+  /** @return Right encoder */
   int getRightEncoder();
 
-  /** 
-   * @return Right distance
-   */
+  /** @return Right distance */
   double getRightDistance();
 
-  /** 
-   * @return Left distance
-   */
+  /** @return Left distance */
   double getLeftDistance();
 
   /** @return True if shifter are in low gear */

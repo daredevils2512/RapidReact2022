@@ -9,7 +9,7 @@ import frc.robot.subsystems.interfaces.Limelight;
 import frc.robot.subsystems.vision.LimelightLEDMode;
 
 public final class VisionCommands {
-  private VisionCommands() {}
+  private VisionCommands() { }
 
   /** Aims the robot left and right with the goal
    * @param drivetrain The drivetrain subsystem to use.

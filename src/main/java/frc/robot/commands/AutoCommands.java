@@ -8,7 +8,7 @@ import frc.robot.subsystems.interfaces.Magazine;
 import frc.robot.subsystems.interfaces.Shooter;
 
 public final class AutoCommands {
-  private AutoCommands() {}
+  private AutoCommands() { }
   
   /** Auto command that only drives back.
   * @param drivetrain The drivetrain subsystem to use
