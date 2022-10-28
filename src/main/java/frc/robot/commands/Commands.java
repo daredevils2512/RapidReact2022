@@ -2,6 +2,7 @@ package frc.robot.commands;
 
 import java.util.function.DoubleSupplier;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.FunctionalCommand;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import frc.robot.subsystems.interfaces.Climber;
@@ -28,7 +29,7 @@ public final class Commands {
    * @return The command to be used when called.
    */
   public static Command runIntake(Intake intake, DoubleSupplier speed) {
-    return new RunCommand(() -> intake.setIntake(speed.getAsDouble()), intake);
+    return new FunctionalCommand(() -> { }, () -> intake.setIntake(speed.getAsDouble()), (interrupted) -> intake.setIntake(0.0), () -> false, intake);
   }
 
   /** Toggles the climber shifters
@@ -45,7 +46,7 @@ public final class Commands {
    * @return The command to be used when called.
    */
   public static Command runClimber(Climber climber, double speed) {
-    return new RunCommand(() -> climber.setClimbSpeed(speed), climber);
+    return new FunctionalCommand(() -> { }, () -> climber.setClimbSpeed(speed), (interrupted) -> climber.setClimbSpeed(0.0), () -> false, climber);
   }
 
   /** Runs the driving shifters
@@ -63,7 +64,7 @@ public final class Commands {
    * @return The command to be used when called.
    */
   public static Command drive(Drivetrain drivetrain, DoubleSupplier move, DoubleSupplier turn) {
-    return new RunCommand(() -> drivetrain.arcadeDrive(move.getAsDouble(), turn.getAsDouble()), drivetrain);
+    return new FunctionalCommand(() -> { }, () -> drivetrain.arcadeDrive(move.getAsDouble(), turn.getAsDouble()), (interrupted) -> drivetrain.arcadeDrive(0.0, 0.0), () -> false, drivetrain);
   }
 
   /** Revs the shooter (and shoots balls)
@@ -72,7 +73,7 @@ public final class Commands {
    * @return The command to be used when called.
    */
   public static Command revShooter(Shooter shooter, double speed) {
-    return new RunCommand(() -> shooter.setRPMPID(speed), shooter);
+    return new FunctionalCommand(() -> { }, () -> shooter.spitBalls(speed), (interrupted) -> shooter.setRPM(0.0), () -> false, shooter);
   }
 
   /** Runs the magazine motors
@@ -81,7 +82,7 @@ public final class Commands {
    * @return The command to be used when called.
    */
   public static Command runMag(Magazine mag, DoubleSupplier speed) {
-    return new RunCommand(() -> mag.moveBalls(speed.getAsDouble()), mag);
+    return new FunctionalCommand(() -> { }, () -> mag.moveBalls(speed.getAsDouble()), (interrputed) -> mag.moveBalls(0.0), () -> false, mag);
   }
 
   /** Toggles the LEDs on and off
