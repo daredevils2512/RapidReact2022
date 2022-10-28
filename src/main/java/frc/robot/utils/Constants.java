@@ -2,9 +2,9 @@ package frc.robot.utils;
 
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 
-/**
- * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
+/** The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants. This class should not be used for any other purpose. All constants should be declared
  * globally (i.e. public static). Do not put anything functional in this class.
  *
@@ -12,58 +12,163 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-  public static final double DRIVE_AUTO_SPEED = 0.5; // TODO set value
-  public static final double AUTO_DRIVE_BACK_DISTANCE = 150; // TODO find value
+
+  // Magazine
+  public static final double TAKE_BALLS_SPEED = 1;
+  public static final double MAG_SPEED = 1;
+  public static final int MAG_ID = 4;
+
+  // Interfaces
+  public static final boolean SHOOTER_ENABLED = true;
+  public static final boolean MAGAZINE_ENABLED = true;
+  public static final boolean INTAKE_ENABLED = true;
+  public static final boolean CLIMBER_ENABLED = true;
+  public static final boolean DRIVETRAIN_ENABLED = true;
+  public static final boolean COMPRESSOR_ENABLED = true;
+  public static final boolean LIMELIGHT_ENABLED = false;
+  public static final boolean LED_ENABLED = false;
+
+  // Auto
+  public static final double DRIVE_AUTO_SPEED = 0.5; // TODO: Find value
+  public static final double SHOOT_AUTO_SPEED = .7; // TODO: Find value
+  public static final double AUTO_DRIVE_BACK_DISTANCE = 150; // Inches 
 
   // Drivetrain
-  public static final int drivetrainEncoderResolution = 1; // TODO find value
-  public static final double drivetrainRateLimNUM = 0.5; // TODO find best value
-  public static final double drivetrainMaxSpeed = 0.5; // TODO find best value
-  public static final double drivetrainMaxTurn = 0.5; // TODO find best value
-  public static final double drivetrainGearRatio = 1; // TODO find value
-  public static final double drivetrainWheelDiameter = 1; // TODO find value
-  public static final double drivetrainWheelCircumference =  drivetrainWheelDiameter * Math.PI;
-  public static final double drivetrainDistancePerPulse = drivetrainWheelCircumference / drivetrainGearRatio / drivetrainEncoderResolution;
+  public static final int DRIVETRAIN_LEFT_ID1 = 10; 
+  public static final int DRIVETRAIN_LEFT_ID2 = 11; 
+  public static final int DRIVETRAIN_RIGHT_ID1 = 2;
+  public static final int DRIVETRAIN_RIGHT_ID2 = 3;
+  public static final int DRIVETRAIN_ENCODER_RESOLUTION = 1; // TODO find value
+  public static final double DRIVETRAIN_RATELIM_VALUE = 15;
+  public static final double DRIVETRAIN_MAX_SPEED = .75; 
+  public static final double DRIVETRAIN_MAX_TURN = .75; 
+  public static final double DRIVETRAIN_MOVE_REVERSED = -1; // -1 for true, 1 for false
+  public static final double DRIVETRAIN_TURN_REVERSED = 1; // -1 for true, 1 for false
+  public static final double DRIVETRAIN_GEAR_RATIO = 1; // TODO find value
+  public static final double DRIVETRAIN_WHEEL_DIAMETER = 6;
+  public static final double DRIVETRAIN_WHEEL_CIRCUMFERENCE =  DRIVETRAIN_WHEEL_DIAMETER * Math.PI;
+  public static final double DRIVETRAIN_DISTANCE_PER_PULSE = DRIVETRAIN_WHEEL_CIRCUMFERENCE / DRIVETRAIN_GEAR_RATIO / DRIVETRAIN_ENCODER_RESOLUTION;
 
   // Shooter
-  public static final int shooterForwardChannel = 0; // TODO find value
-  public static final int shooterBackwardChannel = 1; // TODO find value
-  public static final double shooterRateLimNUM = 0.5; // TODO find best value
+  public static final int SHOOTER_ENCODER_RESOLUTION = 0; // TODO: find value
+  public static final int SHOOTER_ENCODER_CHANNEL_A = 0; // TODO: Find value
+  public static final int SHOOTER_ENCODER_CHANNEL_B = 1; // TODO: Find value
+  public static final int SHOOTER_K_S = 0; // TODO find value
+  public static final int SHOOTER_K_V = 1; // TODO find value
+  public static final double SHOOTER_RATELIM_VALUE = 0.5; // TODO find best value
+  public static final double SHOOTER_FAST_SPEED = .75;
+  public static final double SHOOTER_SLOW_SPEED = .25;
+  public static final int SHOOTER_ID = 9; 
+  public static final double SHOOTER_P = 0; // TODO: Find value
+  public static final double SHOOTER_I = 0; // TODO: Find value
+  public static final double SHOOTER_D = 0; // TODO: Find value
+  
+  // Climber
+  public static final double CLIMBER_SPEED = .85;
+  public static final int CLIMBER_TOP_LIMIT_SWITCH_PORT = 7;
+  public static final int CLIMBER_BOTTOM_LIMIT_SWITCH_PORT = 8;
+  public static final int CLIMBER_1ID = 7;
+  public static final int CLIMBER_2ID = 8;
+  public static final int CLIMBER_REVERSED = 1; // -1 for true, 1 for false
 
-  // Motor IDs
-  public static final int drivetrainLeft1ID = 0; // TODO find value
-  public static final int drivetrainLeft2ID = 1; // TODO find value
-  public static final int drivetrainRight1ID = 2; // TODO find value
-  public static final int drivetrainRight2ID = 3; // TODO find value
-  public static final int intake1ID = 4; // TODO find value
-  public static final int intake2ID = 5; // TODO find value
-  public static final int magID = 6; // TODO find value
-  public static final int climber1ID = 7; // TODO find value
-  public static final int climber2ID = 8; // TODO find value
-  public static final int shooterID = 9; // TODO find value
+  // Intake
+  public static final int INTAKE_1ID = 6; 
+  public static final int INTAKE_2ID = 5;
+  public static final int INTAKE_REVERSED = 1; // -1 for true, 1 for false
+
+  // Vision, Baby! 
+  // how many degrees back is your limelight rotated from perfectly vertical? TODO:FIX THIS STUFF
+  public static final double LIMELIGHT_MOUNT_ANGLE_DEGREES = 26.39;
+  // distance from the center of the Limelight lens to the floor TODO: THIS STUFF WACK
+  public static final double LIMELIGHT_LENS_HEIGHT = 26; // inches
+  // distance from the target to the floor
+  public static final double GOAL_HEIGHT = 104; // inches
+  //desired distance from the target
+  public static final double DESIRED_DISTANCE = 66;
+  public static final double K_P = 0.2;
 
   // Encoder IDs
-  public static final int drivetrainLeftEncoderChannelA = 0; // TODO find value
-  public static final int drivetrainLeftEncoderChannelB = 0; // TODO find value
-  public static final int drivetrainRightEncoderChannelA = 0; // TODO find value
-  public static final int drivetrainRightEncoderChannelB = 0; // TODO find value
-  public static final int shooterEncoderChannelA = 0; // TODO find value
-  public static final int shooterEncoderChannelB = 0; // TODO find value
+  public static final int DRIVETRAIN_LEFT_ENCODER_A = 1; 
+  public static final int DRIVETRAIN_LEFT_ENCODER_B = 2; 
+  public static final int DRIVETRAIN_RIGHT_ENCODER_A = 3;
+  public static final int DRIVETRAIN_RIGHT_ENCODER_B = 4;
 
   // Pneumatics
-  public static final int drivetrainLeftForwardChannel = 0; // TODO find value
-  public static final int drivetrainLeftBackwardChannel = 0; // TODO find value
-  public static final int drivetrainRightForwardChannel = 0; // TODO find value
-  public static final int drivetrainRightBackwardChannel = 0; // TODO find value
-  public static final int intakeShifter1ForwardID = 0; // TODO find value
-  public static final int intakeShifter1BackwardID = 0; // TODO find value
-  public static final int intakeShifter2ForwardID = 0; // TODO find value
-  public static final int intakeShifter2BackwardID = 0; // TODO find value
-  public static final Value intakeExtendedValue = Value.kForward; // TODO find value
-  public static final Value intakeRetractedValue = Value.kReverse; // TODO find value
-  public static final Value drivetrainLowGearValue = Value.kForward; // TODO find value
-  public static final Value drivetrainHighGearValue = Value.kReverse; // TODO find value
-  public static final PneumaticsModuleType pneumaticsModuleType = PneumaticsModuleType.CTREPCM;
+  public static final int DRIVETRAIN_LEFT_FORWARD_CHANNEL = 0; 
+  public static final int DRIVETRAIN_LEFT_BACKWARD_CHANNEL = 1; 
+  public static final int DRIVETRAIN_RIGHT_FORWARD_CHANNEL = 2; 
+  public static final int DRIVETRAIN_RIGHT_BACKWARD_CHANNEL = 3;
+  
+  public static final int INTAKE_SHIFTER_FORWARD_ID1 = 4; 
+  public static final int INTAKE_SHIFTER_BACKWARD_ID1 = 5;
+  public static final Value INTAKE_EXTENDED_VALUE = Value.kForward; 
+  public static final Value INTAKE_RETRACTED_VALUE = Value.kReverse;
+  public static final Value DRIVETRAIN_LOW_GEAR_VALUE = Value.kForward; 
+  public static final Value DRIVETRAIN_HIGH_GEAR_VALUE = Value.kReverse;
+
+  public static final PneumaticsModuleType PNEUMATICS_MODULE_TYPE = PneumaticsModuleType.CTREPCM;
+
+  // LEDs
+  public static final int LED_PORT = 0; // TODO: find value
+  public static final int LED_LENGTH = 15; // TODO: find value
+  public static final int LED_MIN_S = 0;
+  public static final int LED_MAX_S = 255;
+
+  // Control Board
+  public static final int XBOX_CONTROLLER_PORT = 0;
+  public static final int EXTREME_PORT = 1;
+  public static final int BUTTON_BOX_PORT = 2;
+
+  // Xbox Controller
+  public static final int XBOX_POV_UP_DEGREES = 0;
+  public static final int XBOX_POV_UP_RIGHT_DEGREES = 45;
+  public static final int XBOX_POV_RIGHT_DEGREES = 90;
+  public static final int XBOX_POV_DOWN_RIGHT_DEGREES = 135;
+  public static final int XBOX_POV_DOWN_DEGREES = 180;
+  public static final int XBOX_POV_DOWN_LEFT_DEGREES = 225;
+  public static final int XBOX_POV_LEFT_DEGREES = 270;
+  public static final int XBOX_POV_UP_LEFT_DEGREES = 315;
+  public static final int XBOX_POV_RELEASED_DEGREES = -1;
+  public static final RumbleType XBOX_LEFT_RUMBLE = RumbleType.kLeftRumble;
+  public static final RumbleType XBOX_RIGHT_RUMBLE = RumbleType.kRightRumble;
+
+  // Extreme
+  public static final int EXTREME_TRIGGER_PORT = 1;
+  public static final int EXTREME_SIDE_BUTTON_PORT = 2;
+  public static final int EXTREME_JOYSTICK_BOTTOM_LEFT_PORT = 3;
+  public static final int EXTREME_JOYSTICK_BOTTOM_RIGHT_PORT = 4;
+  public static final int EXTREME_JOYSTICK_TOP_LEFT_PORT = 5;
+  public static final int EXTREME_JOYSTICK_TOP_RIGHT_PORT = 6;
+  public static final int EXTREME_BASE_FRONT_LEFT_PORT = 7;
+  public static final int EXTREME_BASE_FRONT_RIGHT_PORT = 8;
+  public static final int EXTREME_BASE_MIDDLE_LEFT_PORT = 9;
+  public static final int EXTREME_BASE_MIDDLE_RIGHT_PORT = 10;
+  public static final int EXTREME_BASE_BACK_LEFT_PORT = 11;
+  public static final int EXTREME_BASE_BACK_RIGHT_PORT = 12;
+  public static final int EXTREME_STICK_X_AXIS_ID = 0;
+  public static final int EXTREME_STICK_Y_AXIS_ID = 1;
+  public static final int EXTREME_STICK_Z_AXIS_ID = 2;
+  public static final int EXTREME_SLIDER_AXIS_ID = 3;
+  public static final int EXTREME_POV_UP_DEGREES = 0;
+  public static final int EXTREME_POV_UP_RIGHT_DEGREES = 45;
+  public static final int EXTREME_POV_RIGHT_DEGREES = 90;
+  public static final int EXTREME_POV_DOWN_RIGHT_DEGREES = 135;
+  public static final int EXTREME_POV_DOWN_DEGREES = 180;
+  public static final int EXTREME_POV_DOWN_LEFT_DEGREES = 225;
+  public static final int EXTREME_POV_LEFT_DEGREES = 270;
+  public static final int EXTREME_POV_UP_LEFT_DEGREES = 315;
+
+  // Button Box
+  public static final int BUTTON_BOX_TOP_WHITE_PORT = 2;
+  public static final int BUTTON_BOX_BIG_WHITE_PORT = 3;
+  public static final int BUTTON_BOX_MIDDLE_RED_PORT = 4;
+  public static final int BUTTON_BOX_BOTTOM_WHITE_PORT = 5;
+  public static final int BUTTON_BOX_TOP_RED_PORT = 6;
+  public static final int BUTTON_BOX_GREEN_PORT = 7;
+  public static final int BUTTON_BOX_MIDDLE_WHITE_PORT = 8;
+  public static final int BUTTON_BOX_BIG_RED_PORT = 14;
+  public static final int BUTTON_BOX_YELLOW_PORT = 15;
+  public static final int BUTTON_BOX_BOTTOM_RED_PORT = 16;
 
   private Constants() { }
 }

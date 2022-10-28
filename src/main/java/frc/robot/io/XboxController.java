@@ -1,20 +1,12 @@
 package frc.robot.io;
 
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.Button;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.POVButton;
+import frc.robot.utils.Constants;
 
 public class XboxController {
   // Joystick
-  private final Joystick m_controller;
-
-  // Axis IDs
-  private final int k_xAxisLeftID = 0;
-  private final int k_yAxisLeftID = 1;
-  private final int k_xAxisRightID = 4;
-  private final int k_yAxisRightID = 5;
-  private final int k_leftTrigger = 2;
-  private final int k_rightTrigger = 3;
+  private final edu.wpi.first.wpilibj.XboxController controller;
 
   // Buttons 
   public final Button aButton;
@@ -27,52 +19,160 @@ public class XboxController {
   public final Button startArrow;
   public final Button leftStickButton;
   public final Button rightStickButton;
+  public final POVButton dPadUp;
+  public final POVButton dPadUpRight;
+  public final POVButton dPadRight;
+  public final POVButton dPadDownRight;
+  public final POVButton dPadDown;
+  public final POVButton dPadDownLeft;
+  public final POVButton dPadLeft;
+  public final POVButton dPadUpLeft;
   
   public XboxController(int port) {
     // Joystick 
-    m_controller = new Joystick(port);
+    controller = new edu.wpi.first.wpilibj.XboxController(port);
 
     // Buttons
-    aButton = new JoystickButton(m_controller, 1);
-    bButton = new JoystickButton(m_controller, 2);
-    xButton = new JoystickButton(m_controller, 3);
-    yButton = new JoystickButton(m_controller, 4);
-    leftBumper = new JoystickButton(m_controller, 5);
-    rightBumper = new JoystickButton(m_controller, 6);
-    backArrow = new JoystickButton(m_controller, 7);
-    startArrow = new JoystickButton(m_controller, 8);
-    leftStickButton = new JoystickButton(m_controller, 9);
-    rightStickButton = new JoystickButton(m_controller, 10);
+    aButton = new Button(controller::getAButton);
+    bButton = new Button(controller::getBButton);
+    xButton = new Button(controller::getXButton);
+    yButton = new Button(controller::getYButton);
+    leftBumper = new Button(controller::getLeftBumper);
+    rightBumper = new Button(controller::getRightBumper);
+    backArrow = new Button(controller::getBackButton);
+    startArrow = new Button(controller::getStartButton);
+    leftStickButton = new Button(controller::getLeftStickButton);
+    rightStickButton = new Button(controller::getRightStickButton);
+    dPadUp = new POVButton(controller, Constants.XBOX_POV_UP_DEGREES);
+    dPadUpRight = new POVButton(controller, Constants.XBOX_POV_UP_RIGHT_DEGREES);
+    dPadRight = new POVButton(controller, Constants.XBOX_POV_RIGHT_DEGREES);
+    dPadDownRight = new POVButton(controller, Constants.XBOX_POV_DOWN_RIGHT_DEGREES);
+    dPadDown = new POVButton(controller, Constants.XBOX_POV_DOWN_DEGREES);
+    dPadDownLeft = new POVButton(controller, Constants.XBOX_POV_DOWN_LEFT_DEGREES);
+    dPadLeft = new POVButton(controller, Constants.XBOX_POV_LEFT_DEGREES);
+    dPadUpLeft = new POVButton(controller, Constants.XBOX_POV_UP_LEFT_DEGREES);
   
   }
 
   /** @return XAxisLeft */
   public double getXAxisLeft() {
-    return m_controller.getRawAxis(k_xAxisLeftID);
+    return controller.getLeftX();
   }
 
   /** @return YAxisLeft */
   public double getYAxisLeft() {
-    return m_controller.getRawAxis(k_yAxisLeftID);
+    return controller.getLeftY();
   }
 
   /** @return XAxisRight */
   public double getXAxisRight() {
-    return m_controller.getRawAxis(k_xAxisRightID);
+    return controller.getRightX();
   }
 
   /** @return YAxisRight */
   public double getYAxisRight() {
-    return m_controller.getRawAxis(k_yAxisRightID);
+    return controller.getRightY();
   }
 
-  /** @retrun Left Trigger */
+  /** @return Left Trigger */
   public double getLeftTrigger() {
-    return m_controller.getRawAxis(k_leftTrigger);
+    return controller.getLeftTriggerAxis();
   }
 
   /** @return Right Trigger */
   public double getRightTrigger() {
-    return m_controller.getRawAxis(k_rightTrigger);
+    return controller.getRightTriggerAxis();
   }
+
+  /** Sets the left rumble
+   * @param amount The amount to rumble between 0 (inclusive) and 1 (inclusive)
+   */
+  public void setLeftRumble(double amount) {
+    controller.setRumble(Constants.XBOX_LEFT_RUMBLE, amount);
+  }
+
+  /** Sets the right rumble
+   * @param amount The amount to rumble between 0 (inclusive) and 1 (inclusive)
+   */
+  public void setRightRumble(double amount) {
+    controller.setRumble(Constants.XBOX_RIGHT_RUMBLE, amount);
+  }
+
+  /** Sets the right and left rumble
+   * @param amount The amount to rumble between 0 (inclusive) and 1 (inclusive)
+   */
+  public void setRumble(double amount) {
+    setLeftRumble(amount);
+    setRightRumble(amount);
+  }
+
+  /** Stops left rumble */
+  public void stopLeftRumble() {
+    controller.setRumble(Constants.XBOX_LEFT_RUMBLE, 0.0);
+  }
+
+  /** Stops right rumble */
+  public void stopRightRumble() {
+    controller.setRumble(Constants.XBOX_RIGHT_RUMBLE, 0.0);
+  }
+
+  /** Stops rumble */
+  public void stopRumble() {
+    stopLeftRumble();
+    stopRightRumble();
+  }
+
+  /** @return True if the DPad is being pressed on the top. */
+  public boolean getDPadTop() {
+    return dPadUp.get();
+  }
+
+  /** @return True if the DPad is being pressed on the top right. */
+  public boolean getDPadTopRight() {
+    return dPadUpRight.get();
+  }
+
+  /** @return True if the DPad is being pressed on the right. */
+  public boolean getDPadRight() {
+    return dPadRight.get();
+  }
+
+  /** @return True if the DPad is being pressed on the bottom right. */
+  public boolean getDPadBottomRight() {
+    return dPadDownRight.get();
+  }
+
+  /** @return True if the DPad is being pressed on the bottom. */
+  public boolean getDPadBottom() {
+    return dPadDown.get();
+  }
+
+  /** @return True if the DPad is being pressed on the bottom left. */
+  public boolean getDPadBottomLeft() {
+    return dPadDownLeft.get();
+  }
+
+  /** @return True if the DPad is being pressed on the left. */
+  public boolean getDPadLeft() {
+    return dPadLeft.get();
+  }
+
+  /** @return True if the DPad is being pressed on the top left. */
+  public boolean getDPadTopLeft() {
+    return dPadUpLeft.get();
+  }
+
+  /** @return True if the DPad is not being pressed. */
+  public boolean getDPadReleased() {
+    return getDPad() == Constants.XBOX_POV_RELEASED_DEGREES;
+  }
+
+  /** @return The angle of the DPad in degrees.
+   * The angle is represented in 8 degrees (right being 90, left being 270).
+   * If none are being pressed, -1 is returned.
+   */
+  public double getDPad() {
+    return controller.getPOV();
+  }
+
 }
