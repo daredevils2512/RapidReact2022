@@ -27,7 +27,8 @@ public final class Constants {
   public static final int CLIMBER_2ID = 8;
   public static final double CLIMBER_SPEED = .85;
 
-  // Compresser
+  // Compressor
+  public static final boolean COMPRESSOR_CLOSED_LOOP_CONTROL_ENABLED = true;
   public static final PneumaticsModuleType PNEUMATICS_MODULE_TYPE = PneumaticsModuleType.CTREPCM;
 
   // Drivetrain

@@ -121,7 +121,7 @@ public class RobotContainer {
     autoShoot = AutoCommands.autoShoot(shooter, magazine, Constants.AUTO_SHOOT_SPEED);
     autoFull = AutoCommands.fullAuto(drivetrain, Constants.AUTO_DRIVE_SPEED, Constants.AUTO_DRIVE_BACK_DISTANCE, shooter, magazine, Constants.AUTO_SHOOT_SPEED);
       // Compressor
-    compressor.setClosedLoopControl(true);
+    compressor.setClosedLoopControl(Constants.COMPRESSOR_CLOSED_LOOP_CONTROL_ENABLED);
       // Climber
     climberUp = Commands.runClimber(climber, -Constants.CLIMBER_SPEED);
     climberDown = Commands.runClimber(climber, Constants.CLIMBER_SPEED);
@@ -147,13 +147,14 @@ public class RobotContainer {
     limelightOff = VisionCommands.limelightOff(limelight);
 
     // Configure the button bindings
-    if (RobotBase.isSimulation()) logManager.robotLogger.setLevel(Level.FINER);
+    configureButtonBindings();
 
-    // start camera server
+    // Start camera server
     UsbCamera camera = CameraServer.startAutomaticCapture();
     camera.setResolution(640, 480);
     
-    configureButtonBindings();
+    // Logging
+    if (RobotBase.isSimulation()) logManager.robotLogger.setLevel(Level.FINER);
 
     // Network Table stuff
     NTButton.startConcurrentHandling();
@@ -161,7 +162,6 @@ public class RobotContainer {
     shooterSpeedEntry = NetworkTableInstance.getDefault().getEntry("Shooter set speed");
     useNTShooterControlEntry.setBoolean(false);
     shooterSpeedEntry.setDouble(0);
-
   }
 
   /**
@@ -188,7 +188,7 @@ public class RobotContainer {
     ControlBoard.extreme.joystickBottomLeft.whileHeld(aim);
     ControlBoard.extreme.joystickBottomLeft.whenReleased(limelightOff);
       // LEDs
-      ControlBoard.extreme.baseFrontLeft.whenPressed(LEDToggle);
+    ControlBoard.extreme.baseFrontLeft.whenPressed(LEDToggle);
       // Find Range
     ControlBoard.extreme.joystickBottomRight.whenPressed(limelightOn);
     ControlBoard.extreme.joystickBottomRight.whileHeld(FindRange);
