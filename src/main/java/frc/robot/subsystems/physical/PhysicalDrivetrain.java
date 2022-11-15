@@ -32,7 +32,7 @@ public class PhysicalDrivetrain extends NTSubsystem implements Drivetrain {
   private final NetworkTableEntry getLowGearEntry;
   private final Encoder leftEncoder; 
   private final Encoder rightEncoder;
-
+  
   // Shifting
   private final DoubleSolenoid leftShifter;
   private final DoubleSolenoid rightShifter;

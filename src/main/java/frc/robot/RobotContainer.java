@@ -175,8 +175,8 @@ public class RobotContainer {
   private void configureButtonBindings() {
     // Button Bindings
       // Climbers
-    ControlBoard.extreme.joystickTopLeft.whileHeld(climberUp);
-    ControlBoard.extreme.joystickTopRight.whileHeld(climberDown);
+    ControlBoard.extreme.joystickTopLeft.whileHeld(climberDown);
+    ControlBoard.extreme.joystickTopRight.whileHeld(climberUp);
       // Drive
     drivetrain.setDefaultCommand(drive);
     ControlBoard.xboxController.rightBumper.whenPressed(driveShift);

@@ -20,7 +20,7 @@ public final class Constants {
   public static final double AUTO_DRIVE_BACK_DISTANCE = 150; // Inches 
 
   // Climber
-  public static final int CLIMBER_BOTTOM_LIMIT_SWITCH_PORT = 8;
+  public static final int CLIMBER_BOTTOM_LIMIT_SWITCH_PORT = 6;
   public static final int CLIMBER_REVERSED = 1; // -1 for true, 1 for false
   public static final int CLIMBER_TOP_LIMIT_SWITCH_PORT = 7;
   public static final int CLIMBER_1ID = 7;
@@ -96,7 +96,7 @@ public final class Constants {
   public static final double SHOOTER_D = 0; // TODO: Find value
   public static final double SHOOTER_RATELIM_VALUE = 0.5; // TODO find best value
   public static final double SHOOTER_FAST_SPEED = .75;
-  public static final double SHOOTER_SLOW_SPEED = .25;
+  public static final double SHOOTER_SLOW_SPEED = .35;
 
   // Interfaces
   public static final boolean SHOOTER_ENABLED = true;

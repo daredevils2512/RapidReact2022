@@ -31,7 +31,7 @@ public class PhysicalClimber extends NTSubsystem implements Climber {
     speed = speed * Constants.CLIMBER_REVERSED;
     if (topLimitSwitch.get() && speed < 0) {
       rightMotor.set(ControlMode.PercentOutput, 0);
-    } else if (!bottomLimitSwitch.get() && speed > 0) { 
+    } else if (bottomLimitSwitch.get() && speed > 0) { 
       rightMotor.set(ControlMode.PercentOutput, 0);
     } else {
       rightMotor.set(ControlMode.PercentOutput, speed);
