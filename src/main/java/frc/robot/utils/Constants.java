@@ -48,7 +48,7 @@ public final class Constants {
   public static final double DRIVETRAIN_RATELIM_VALUE = 15;
   public static final double DRIVETRAIN_MAX_SPEED = .75; 
   public static final double DRIVETRAIN_MAX_TURN = .75; 
-  public static final double DRIVETRAIN_MOVE_REVERSED = -1; // -1 for true, 1 for false
+  public static final double DRIVETRAIN_MOVE_REVERSED = 1; // -1 for true, 1 for false
   public static final double DRIVETRAIN_TURN_REVERSED = 1; // -1 for true, 1 for false
   public static final double DRIVETRAIN_GEAR_RATIO = 1; // TODO find value
   public static final double DRIVETRAIN_WHEEL_DIAMETER = 6;

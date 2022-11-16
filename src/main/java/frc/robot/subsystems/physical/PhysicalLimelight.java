@@ -2,7 +2,6 @@ package frc.robot.subsystems.physical;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import frc.robot.subsystems.interfaces.Limelight;
@@ -35,7 +34,7 @@ public class PhysicalLimelight implements Limelight {
     return pipeline;
   }
 
-  //Limelight table getters
+  // Limelight table getters
 
   public void setPipeline(Pipeline pipeline) {
     table.getEntry("pipeline").setNumber(pipeline.getID());
